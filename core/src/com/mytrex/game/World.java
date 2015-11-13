@@ -10,6 +10,10 @@ public class World
 {
     private Player player;
 
+    private int Width; //max world x.
+    private int Height; //max world y.
+
+
     public World()
     {
         player = new Player();
@@ -23,6 +27,5 @@ public class World
     public void draw(SpriteBatch batch)
     {
         player.getSprite().draw(batch);
-
     }
 }
