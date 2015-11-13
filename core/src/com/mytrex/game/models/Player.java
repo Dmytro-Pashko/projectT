@@ -17,6 +17,20 @@ public class Player
         sprite = new Sprite(new Texture("badlogic.jpg"));
     }
 
+    public float Heigth()
+    {
+        return sprite.getHeight();
+    }
+    public void setPosition(float x,float y)
+    {
+        sprite.setPosition(x,y);
+    }
+
+    public float Width()
+    {
+        return sprite.getWidth();
+    }
+
     public float getX()
     {
         return sprite.getX();

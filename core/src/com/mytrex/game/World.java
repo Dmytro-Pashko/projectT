@@ -1,5 +1,6 @@
 package com.mytrex.game;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mytrex.game.models.Player;
 
 /**
@@ -7,8 +8,21 @@ import com.mytrex.game.models.Player;
  */
 public class World
 {
-    public Player player;
+    private Player player;
 
-    public World() {
+    public World()
+    {
+        player = new Player();
+    }
+
+    public Player getPlayer()
+    {
+        return player;
+    }
+    //world render.
+    public void draw(SpriteBatch batch)
+    {
+        player.getSprite().draw(batch);
+
     }
 }
