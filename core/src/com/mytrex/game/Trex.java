@@ -14,7 +14,7 @@ public class Trex extends ApplicationAdapter {
     public void create() {
         batch = new SpriteBatch();
         world = new World();
-
+        System.out.println("test");
     }
 
     @Override
