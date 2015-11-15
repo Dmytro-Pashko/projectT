@@ -6,58 +6,48 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 /**
  * Created by Goodvin1709 on 10.11.2015.
  */
-public class Player
-{
+public class Player {
     private Sprite sprite;
     private int score;
 
-    public Player()
-    {
+    public Player() {
         score = 0;
         sprite = new Sprite(new Texture("badlogic.jpg"));
     }
 
-    public float Heigth()
-    {
+    public float Heigth() {
         return sprite.getHeight();
     }
-    public void setPosition(float x,float y)
-    {
-        sprite.setPosition(x,y);
+
+    public void setPosition(float x, float y) {
+        sprite.setPosition(x, y);
     }
 
-    public float Width()
-    {
+    public float Width() {
         return sprite.getWidth();
     }
 
-    public float getX()
-    {
+    public float getX() {
         return sprite.getX();
     }
 
-    public float getY()
-    {
-        return  sprite.getY();
+    public float getY() {
+        return sprite.getY();
     }
 
-    public Sprite getSprite()
-    {
+    public Sprite getSprite() {
         return this.sprite;
     }
 
-    public int getScore()
-    {
+    public int getScore() {
         return score;
     }
 
-    public void setScore(int score)
-    {
+    public void setScore(int score) {
         this.score = score;
     }
 
-    public void rotate(float angle)
-    {
+    public void rotate(float angle) {
         sprite.setRotation(angle);
 
     }

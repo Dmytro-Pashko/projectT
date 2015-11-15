@@ -14,7 +14,7 @@ public class Trex extends ApplicationAdapter {
     public void create() {
         batch = new SpriteBatch();
         world = new World();
-        System.out.println("test");
+        //System.out.println("test");
     }
 
     @Override
@@ -23,12 +23,11 @@ public class Trex extends ApplicationAdapter {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
-            world.draw(batch);
+        world.draw(batch);
         batch.end();
     }
 
-    public void update()
-    {
+    public void update() {
 
         if (world.getPlayer().getX() + world.getPlayer().Width() <= Gdx.graphics.getWidth()) {
             //Право
@@ -53,7 +52,7 @@ public class Trex extends ApplicationAdapter {
         }
         if (world.getPlayer().getY() > 0) {
             if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-                world.getPlayer().setPosition(world.getPlayer().getX(),world.getPlayer().getY() - 10);
+                world.getPlayer().setPosition(world.getPlayer().getX(), world.getPlayer().getY() - 10);
                 world.getPlayer().rotate(270.0f);
             }
         }
