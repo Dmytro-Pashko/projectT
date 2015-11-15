@@ -12,9 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
-/**
- * Created by Goodvin1709 on 15.11.2015.
- */
 public class Menu implements Screen
 {
     Stage stage;
