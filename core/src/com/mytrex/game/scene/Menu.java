@@ -17,7 +17,6 @@ public class Menu implements Screen
 {
     Stage stage;
     Game game;
-    SpriteBatch batch;
     Label poslabel;
 
     public Menu(Game game)
