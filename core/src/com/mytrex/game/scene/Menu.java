@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -28,12 +29,12 @@ public class Menu implements Screen
     {
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
-        Image background = new Image(new Texture("background.jpg"));
+        Image background = new Image(new Texture("Textures/background.jpg"));
         stage.addActor(background);
-        Image play_button = new Image(new Texture("play_button.png"));
+        Image play_button = new Image(new Texture("Textures/play_button.png"));
         stage.addActor(play_button);
         play_button.setPosition(150,300);
-        BitmapFont labelfont= new BitmapFont(Gdx.files.internal("defaultfont.fnt"));
+        BitmapFont labelfont= new BitmapFont(Gdx.files.internal("Textures/defaultfont.fnt"));
         Label.LabelStyle labelStyle = new Label.LabelStyle(labelfont, Color.BLACK);
         poslabel = new Label("",labelStyle);
         poslabel.setPosition(8,Gdx.graphics.getHeight()-10);
