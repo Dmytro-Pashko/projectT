@@ -18,6 +18,8 @@ public class Menu implements Screen
     Stage stage;
     Game game;
     Label poslabel;
+    Image background;
+    float angle = 0f;
 
     public Menu(Game game)
     {
@@ -28,7 +30,7 @@ public class Menu implements Screen
     {
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
-        Image background = new Image(new Texture("Textures/background.jpg"));
+        background = new Image(new Texture("Textures/background.jpg"));
         stage.addActor(background);
         Image play_button = new Image(new Texture("Textures/play_button.png"));
         Image options_button = new Image(new Texture("Textures/options_button.png"));
@@ -41,7 +43,7 @@ public class Menu implements Screen
         play_button.setPosition(150,300);
         options_button.setPosition(150, 180);
         scores_button.setPosition(150, 60);
-        exit_button.setPosition(530, 35);
+        exit_button.setPosition(500, 15);
         BitmapFont labelfont= new BitmapFont(Gdx.files.internal("Textures/defaultfont.fnt"));
         Label.LabelStyle labelStyle = new Label.LabelStyle(labelfont, Color.BLACK);
         poslabel = new Label("",labelStyle);
@@ -57,6 +59,13 @@ public class Menu implements Screen
     @Override
     public void render(float delta)
     {
+        if (angle < 360f){
+            angle += 0.1;
+        }
+        else {
+            angle = 0f;
+        }
+        background.setRotation(angle);
         poslabel.setText(String.format("Mouse Position X=%d Y=%d",Gdx.input.getX(),Gdx.graphics.getHeight()-Gdx.input.getY()));
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
