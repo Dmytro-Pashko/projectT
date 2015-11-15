@@ -27,8 +27,9 @@ public class Menu implements Screen
     public void Create()
     {
         stage = new Stage();
-        batch = new SpriteBatch();
         Gdx.input.setInputProcessor(stage);
+        Image background = new Image(new Texture("background.jpg"));
+        stage.addActor(background);
         Image play_button = new Image(new Texture("play_button.png"));
         stage.addActor(play_button);
         play_button.setPosition(150,300);
@@ -48,7 +49,7 @@ public class Menu implements Screen
     public void render(float delta)
     {
         poslabel.setText(String.format("Mouse Position X=%d Y=%d",Gdx.input.getX(),Gdx.graphics.getHeight()-Gdx.input.getY()));
-        Gdx.gl.glClearColor(1, 0, 0, 1);
+        Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
