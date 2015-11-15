@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -18,7 +19,7 @@ public class Menu implements Screen
     Stage stage;
     Game game;
     Label poslabel;
-    Image background;
+    Sprite background;
     float angle = 0f;
 
     public Menu(Game game)
@@ -30,20 +31,25 @@ public class Menu implements Screen
     {
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
-        background = new Image(new Texture("Textures/background.jpg"));
-        stage.addActor(background);
+        background = new Sprite(new Texture("Textures/background.jpg"));
+        background.setCenter(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
+        background.setScale(1.53f, 1.53f);
+
         Image play_button = new Image(new Texture("Textures/play_button.png"));
         Image options_button = new Image(new Texture("Textures/options_button.png"));
         Image scores_button = new Image(new Texture("Textures/scores_button.png"));
         Image exit_button = new Image(new Texture("Textures/exit_button.png"));
+
         stage.addActor(play_button);
         stage.addActor(options_button);
         stage.addActor(scores_button);
         stage.addActor(exit_button);
+
         play_button.setPosition(150,300);
         options_button.setPosition(150, 180);
         scores_button.setPosition(150, 60);
         exit_button.setPosition(500, 15);
+
         BitmapFont labelfont= new BitmapFont(Gdx.files.internal("Textures/defaultfont.fnt"));
         Label.LabelStyle labelStyle = new Label.LabelStyle(labelfont, Color.BLACK);
         poslabel = new Label("",labelStyle);
@@ -60,7 +66,7 @@ public class Menu implements Screen
     public void render(float delta)
     {
         if (angle < 360f){
-            angle += 0.1;
+            angle += .5;
         }
         else {
             angle = 0f;
@@ -69,6 +75,9 @@ public class Menu implements Screen
         poslabel.setText(String.format("Mouse Position X=%d Y=%d",Gdx.input.getX(),Gdx.graphics.getHeight()-Gdx.input.getY()));
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        stage.getBatch().begin();
+        background.draw(stage.getBatch());
+        stage.getBatch().end();
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
     }
