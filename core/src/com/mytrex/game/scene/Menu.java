@@ -32,8 +32,17 @@ public class Menu implements Screen
         Image background = new Image(new Texture("Textures/background.jpg"));
         stage.addActor(background);
         Image play_button = new Image(new Texture("Textures/play_button.png"));
+        Image options_button = new Image(new Texture("Textures/options_button.png"));
+        Image scores_button = new Image(new Texture("Textures/scores_button.png"));
+        Image exit_button = new Image(new Texture("Textures/exit_button.png"));
         stage.addActor(play_button);
+        stage.addActor(options_button);
+        stage.addActor(scores_button);
+        stage.addActor(exit_button);
         play_button.setPosition(150,300);
+        options_button.setPosition(150, 180);
+        scores_button.setPosition(150, 60);
+        exit_button.setPosition(530, 35);
         BitmapFont labelfont= new BitmapFont(Gdx.files.internal("Textures/defaultfont.fnt"));
         Label.LabelStyle labelStyle = new Label.LabelStyle(labelfont, Color.BLACK);
         poslabel = new Label("",labelStyle);
