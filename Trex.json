@@ -1,0 +1,1 @@
+{"rigidBodies":[{"name":"Trex","imagePath":"trex.png","origin":{"x":0.5,"y":0.5},"polygons":[],"circles":[],"shapes":[{"type":"POLYGON","vertices":[{"x":-0.0025000572204589844,"y":0.002500005066394806},{"x":1,"y":0},{"x":1,"y":1},{"x":0,"y":1},{"x":0,"y":0}]}]}],"dynamicObjects":[]}
