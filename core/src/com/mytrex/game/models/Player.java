@@ -10,6 +10,7 @@ public class Player {
     private Sprite sprite;
     private int score;
 
+
     public Player() {
         score = 0;
         sprite = new Sprite(new Texture("badlogic.jpg"));
