@@ -7,7 +7,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.World;
 import com.mytrex.game.GameWorld;
 
 /**
@@ -16,17 +15,16 @@ import com.mytrex.game.GameWorld;
 public class GameScreen implements Screen
 {
     private Game game;
-    //private GameWorld world;
+    private GameWorld world;
     private OrthographicCamera camera;
     private Box2DDebugRenderer debuger;
-    private World world;
 
     public GameScreen(Game game)
     {
         debuger = new Box2DDebugRenderer();
         debuger.setDrawVelocities(true);
         debuger.setDrawContacts(true);
-        world = new GameWorld().getWorld();
+        world = new GameWorld();
         camera = new OrthographicCamera(10,10);
         this.game = game;
         camera.position.set(5,5,0);
@@ -41,16 +39,17 @@ public class GameScreen implements Screen
     @Override
     public void render(float delta)
     {
-        world.step(delta,5,5);
+        world.getWorld().step(delta,5,5);
         Gdx.gl20.glClearColor(0,0,0,1);
         Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         camera.update();
-        debuger.render(world,camera.combined);
+        debuger.render(world.getWorld(),camera.combined);
     }
 
     @Override
-    public void resize(int width, int height) {
-
+    public void resize(int width, int height)
+    {
+        world.getPlayer().body.applyLinearImpulse(3,2,0,0,false);
     }
 
     @Override
