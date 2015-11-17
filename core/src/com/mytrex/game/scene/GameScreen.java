@@ -19,14 +19,14 @@ public class GameScreen implements Screen
     //private GameWorld world;
     private OrthographicCamera camera;
     private Box2DDebugRenderer debuger;
-    private GameWorld world;
+    private World world;
 
     public GameScreen(Game game)
     {
         debuger = new Box2DDebugRenderer();
         debuger.setDrawVelocities(true);
         debuger.setDrawContacts(true);
-        world = new GameWorld();
+        world = new GameWorld().getWorld();
         camera = new OrthographicCamera(10,10);
         this.game = game;
         camera.position.set(5,5,0);
@@ -41,10 +41,11 @@ public class GameScreen implements Screen
     @Override
     public void render(float delta)
     {
+        world.step(delta,5,5);
         Gdx.gl20.glClearColor(0,0,0,1);
         Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         camera.update();
-        debuger.render(world.getWorld(),camera.combined);
+        debuger.render(world,camera.combined);
     }
 
     @Override
