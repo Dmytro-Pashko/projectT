@@ -1,21 +1,21 @@
 package com.mytrex.game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mytrex.game.Tools.BodyEditorLoader;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.mytrex.game.models.GroundBlock;
 import com.mytrex.game.models.Player;
 
+import java.util.ArrayList;
 
 
 public class GameWorld
 {
     public Player player;
     private World world;
-    private Rectangle rectangle = new Rectangle(3, 8 ,1.7f , 1.2f);
-
+    public ArrayList<Object> list = new ArrayList<>();
 
     public World getWorld()
     {
@@ -25,16 +25,12 @@ public class GameWorld
     public GameWorld()
     {
         world = new World(new Vector2(0, -9.8f), true);
-        for (int i = 0; i <50 ; i++)
+        for (int i = 0; i <10 ; i++)
         {
-            createGroundBlocks((float)i,40.0f);
+            list.add(new GroundBlock(createGroundBlocks(i, 0.0f)));
         }
-
-    }
-
-
-    public Rectangle getRect(){
-        return rectangle;
+        player = new Player(initPlayer(2,2));
+        list.add(player);
     }
 
     public Player getPlayer()
@@ -42,16 +38,7 @@ public class GameWorld
         return player;
     }
 
-    public void update(float delta){
-        Gdx.app.log("GameWorld", "update");
-        rectangle.x+= 0.2;
-        if (rectangle.x > 50){
-            rectangle.x = 0;
-        }
-    }
-
-
-    public void createGroundBlocks(float x,float y)
+    public Body createGroundBlocks(float x,float y)
     {
         BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("core/assets/ground.json"));
         BodyDef def = new BodyDef();
@@ -59,33 +46,27 @@ public class GameWorld
         Body body = world.createBody(def);
         loader.attachFixture(body,"wall",new FixtureDef(),1.0f);
         body.setTransform(x, y, 0);
-
+        return body;
     }
-    public void initBlock(float x, float y){
-        //BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("box.json"));
+    public Body initPlayer(float x, float y){
+        BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("core/assets/box.json"));
         BodyDef def = new BodyDef();
         def.type = BodyType.DynamicBody;
         Body body = world.createBody(def);
-        //loader.attachFixture(body,"box",new FixtureDef(),1.0f);
-
-        //PolygonShape poly = new PolygonShape();
-        //poly.setAsBox(0.50f, 0.50f);
-
-        CircleShape poly = new CircleShape();
-
-        FixtureDef fd= new FixtureDef();
-        fd.density = 1.0f; //Плотность.
-        fd.friction = 0.7f;//Трение.
-        fd.restitution = 0f;//Еластичность.
-        fd.shape = poly;//Форма.
-        body.createFixture(fd);
-
-        MassData data = new MassData();
-        data.I = 1f;
-        data.mass = 2f;
-        //data.center.add(body.getFixtureList().size / 2, body.getFixtureList().size / 2);
-        body.resetMassData();
-        body.setMassData(data);
-        body.setTransform(x, y, (float)Math.random()*100);
+        loader.attachFixture(body,"box",new FixtureDef(),1.0f);
+        body.setTransform(x, y,0);
+        return body;
+    }
+    public void update()
+    {
+        //System.out.println("Player X="+player.getBody().getPosition().x+" Player Y="+player.getBody().getPosition().y);
+        if (player.getLeftMove())
+        {
+            player.getBody().setTransform(player.getBody().getPosition().x-0.1f,player.getBody().getPosition().y,0);
+        }
+        if (player.getRightMove())
+        {
+            player.getBody().setTransform(player.getBody().getPosition().x+0.1f,player.getBody().getPosition().y,0);
+        }
     }
 }
