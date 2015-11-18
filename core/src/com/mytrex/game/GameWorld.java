@@ -1,6 +1,7 @@
 package com.mytrex.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mytrex.game.Tools.BodyEditorLoader;
@@ -8,10 +9,12 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.mytrex.game.models.Player;
 
 
+
 public class GameWorld
 {
-    private World world;
     public Player player;
+    private World world;
+    private Rectangle rectangle = new Rectangle(3, 100 ,17 , 12);
 
 
     public World getWorld()
@@ -30,9 +33,22 @@ public class GameWorld
 
     }
 
+
+    public Rectangle getRect(){
+        return rectangle;
+    }
+
     public Player getPlayer()
     {
         return player;
+    }
+
+    public void update(float delta){
+        Gdx.app.log("GameWorld", "update");
+        rectangle.x++;
+        if (rectangle.x > 137){
+            rectangle.x = 0;
+        }
     }
 
     public Body initPlayer(float x,float y)
@@ -52,6 +68,18 @@ public class GameWorld
 
         body.setMassData(data);
         return body;
+    }
+
+
+    public void createGroundBlocks(float x,float y)
+    {
+        BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("core/assets/ground.json"));
+        BodyDef def = new BodyDef();
+        def.type = BodyType.StaticBody;
+        Body body = world.createBody(def);
+        loader.attachFixture(body,"wall",new FixtureDef(),1.0f);
+        body.setTransform(x, y, 0);
+
     }
     public void initBlock(float x, float y){
         //BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("box.json"));
@@ -79,16 +107,5 @@ public class GameWorld
         body.resetMassData();
         body.setMassData(data);
         body.setTransform(x, y, (float)Math.random()*100);
-    }
-
-    public void createGroundBlocks(float x,float y)
-    {
-        BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("core/assets/ground.json"));
-        BodyDef def = new BodyDef();
-        def.type = BodyType.StaticBody;
-        Body body = world.createBody(def);
-        loader.attachFixture(body,"wall",new FixtureDef(),1.0f);
-        body.setTransform(x , y, 0);
-
     }
 }
