@@ -2,6 +2,8 @@ package com.mytrex.game.models;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 
@@ -10,12 +12,14 @@ import com.badlogic.gdx.physics.box2d.Body;
  */
 public class Player
 {
+    TextureRegion texture = new TextureRegion(new Texture("core/assets/wall.jpg"));
     private Vector2 position;
     private Vector2 velocity;
     private Vector2 acceleraion;
     float rotation;
     int width;
     int height;
+    SpriteBatch batch = new SpriteBatch();
 
     public Player(float x, float y, int width, int height){
         this.width = width;
@@ -23,6 +27,12 @@ public class Player
         position = new Vector2(x, y);
         velocity = new Vector2(0, 0);
         acceleraion = new Vector2(0, 460);
+    }
+
+    public void draw(){
+        batch.begin();
+        batch.draw(texture, position.x, position.y, width, height);
+        batch.end();
     }
 
     public void update(float delta){

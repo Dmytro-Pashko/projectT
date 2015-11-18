@@ -21,14 +21,12 @@ public class GameRenderer {
         myWorld = world;
         shapeRenderer = new ShapeRenderer();
         camera = new OrthographicCamera();
-        camera.setToOrtho(true, 50, 50);
+        camera.setToOrtho(true, 10, 10);
         //camera.position.set(5,5,0);
         shapeRenderer = new ShapeRenderer();
         shapeRenderer.setProjectionMatrix(camera.combined);
 
         debuger = new Box2DDebugRenderer();
-//        debuger.setDrawVelocities(true);
-//        debuger.setDrawContacts(true);
     }
     public void render(){
         Gdx.app.log("GameRenderer", "render");
@@ -46,5 +44,7 @@ public class GameRenderer {
         shapeRenderer.setColor(255 / 255.0f, 109 / 255.0f, 120 / 255.0f, 1);
         shapeRenderer.rect(myWorld.getRect().x, myWorld.getRect().y, myWorld.getRect().width, myWorld.getRect().height);
         shapeRenderer.end();
+
+        myWorld.player.draw();
     }
 }

@@ -14,7 +14,7 @@ public class GameWorld
 {
     public Player player;
     private World world;
-    private Rectangle rectangle = new Rectangle(3, 8 ,1.7f , 1.2f);
+    private Rectangle rectangle = new Rectangle(3, 7.5f ,0.5f , 0.5f);
 
 
     public World getWorld()
@@ -24,10 +24,11 @@ public class GameWorld
 
     public GameWorld()
     {
+        player = new Player(1, 1, 1, 1);
         world = new World(new Vector2(0, -9.8f), true);
-        for (int i = 0; i <50 ; i++)
+        for (int i = 0; i <10 ; i++)
         {
-            createGroundBlocks((float)i,40.0f);
+            createGroundBlocks((float)i,8.0f);
         }
 
     }
@@ -36,11 +37,10 @@ public class GameWorld
     public Rectangle getRect(){
         return rectangle;
     }
-
-    public Player getPlayer()
-    {
+    public Player getPlayer(){
         return player;
     }
+
 
     public void update(float delta){
         Gdx.app.log("GameWorld", "update");
@@ -60,32 +60,5 @@ public class GameWorld
         loader.attachFixture(body,"wall",new FixtureDef(),1.0f);
         body.setTransform(x, y, 0);
 
-    }
-    public void initBlock(float x, float y){
-        //BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("box.json"));
-        BodyDef def = new BodyDef();
-        def.type = BodyType.DynamicBody;
-        Body body = world.createBody(def);
-        //loader.attachFixture(body,"box",new FixtureDef(),1.0f);
-
-        //PolygonShape poly = new PolygonShape();
-        //poly.setAsBox(0.50f, 0.50f);
-
-        CircleShape poly = new CircleShape();
-
-        FixtureDef fd= new FixtureDef();
-        fd.density = 1.0f; //Плотность.
-        fd.friction = 0.7f;//Трение.
-        fd.restitution = 0f;//Еластичность.
-        fd.shape = poly;//Форма.
-        body.createFixture(fd);
-
-        MassData data = new MassData();
-        data.I = 1f;
-        data.mass = 2f;
-        //data.center.add(body.getFixtureList().size / 2, body.getFixtureList().size / 2);
-        body.resetMassData();
-        body.setMassData(data);
-        body.setTransform(x, y, (float)Math.random()*100);
     }
 }
