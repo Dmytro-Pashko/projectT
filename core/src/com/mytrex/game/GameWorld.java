@@ -37,7 +37,7 @@ public class GameWorld
 
     public Body initPlayer(float x,float y)
     {
-        BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("box.json"));
+        BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("core/assets/box.json"));
         BodyDef def = new BodyDef();
         def.type = BodyType.DynamicBody;
 
@@ -83,7 +83,7 @@ public class GameWorld
 
     public void createGroundBlocks(float x,float y)
     {
-        BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("ground.json"));
+        BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("core/assets/ground.json"));
         BodyDef def = new BodyDef();
         def.type = BodyType.StaticBody;
         Body body = world.createBody(def);
