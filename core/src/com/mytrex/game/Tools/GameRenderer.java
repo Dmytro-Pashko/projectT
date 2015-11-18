@@ -20,9 +20,9 @@ public class GameRenderer {
     public GameRenderer(GameWorld world){
         myWorld = world;
         shapeRenderer = new ShapeRenderer();
-        camera = new OrthographicCamera(10,10);
-        camera.setToOrtho(true, 136, 204);
-        camera.position.set(5,5,0);
+        camera = new OrthographicCamera();
+        camera.setToOrtho(true, 50, 50);
+        //camera.position.set(5,5,0);
         shapeRenderer = new ShapeRenderer();
         shapeRenderer.setProjectionMatrix(camera.combined);
 

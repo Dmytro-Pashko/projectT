@@ -14,7 +14,7 @@ public class GameWorld
 {
     public Player player;
     private World world;
-    private Rectangle rectangle = new Rectangle(3, 100 ,17 , 12);
+    private Rectangle rectangle = new Rectangle(3, 8 ,1.7f , 1.2f);
 
 
     public World getWorld()
@@ -29,7 +29,6 @@ public class GameWorld
         {
             createGroundBlocks((float)i,0.0f);
         }
-    player = new Player(initPlayer(1,1));
 
     }
 
@@ -45,29 +44,10 @@ public class GameWorld
 
     public void update(float delta){
         Gdx.app.log("GameWorld", "update");
-        rectangle.x++;
+        rectangle.x+= 0.2;
         if (rectangle.x > 137){
             rectangle.x = 0;
         }
-    }
-
-    public Body initPlayer(float x,float y)
-    {
-        BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("core/assets/box.json"));
-        BodyDef def = new BodyDef();
-        def.type = BodyType.DynamicBody;
-
-        Body body = world.createBody(def);
-        body.setSleepingAllowed(false);
-        loader.attachFixture(body,"box",new FixtureDef(),1.0f);
-        body.setTransform(x, y,0);
-
-        MassData data = new MassData();
-        data.I = 1f;
-        data.mass = 2f;
-
-        body.setMassData(data);
-        return body;
     }
 
 
