@@ -27,8 +27,8 @@ public class GameRenderer {
         shapeRenderer.setProjectionMatrix(camera.combined);
 
         debuger = new Box2DDebugRenderer();
-        debuger.setDrawVelocities(true);
-        debuger.setDrawContacts(true);
+//        debuger.setDrawVelocities(true);
+//        debuger.setDrawContacts(true);
     }
     public void render(){
         Gdx.app.log("GameRenderer", "render");

@@ -25,9 +25,9 @@ public class GameWorld
     public GameWorld()
     {
         world = new World(new Vector2(0, -9.8f), true);
-        for (int i = 0; i <10 ; i++)
+        for (int i = 0; i <50 ; i++)
         {
-            createGroundBlocks((float)i,0.0f);
+            createGroundBlocks((float)i,40.0f);
         }
 
     }
@@ -45,7 +45,7 @@ public class GameWorld
     public void update(float delta){
         Gdx.app.log("GameWorld", "update");
         rectangle.x+= 0.2;
-        if (rectangle.x > 137){
+        if (rectangle.x > 50){
             rectangle.x = 0;
         }
     }
