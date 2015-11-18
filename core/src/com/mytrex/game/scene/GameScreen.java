@@ -5,12 +5,12 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mytrex.game.GameWorld;
 import com.mytrex.game.Tools.GameRenderer;
+import com.mytrex.game.helpers.InputHandler;
 
 /**
  * Created by Goodvin1709 on 16.11.2015.
@@ -22,7 +22,6 @@ public class GameScreen implements Screen
     private World world;
     private GameRenderer renderer;
     private GameWorld gameWorld;
-    private ShapeRenderer shapeRenderer;
 
     public GameScreen(Game game)
     {
@@ -33,7 +32,7 @@ public class GameScreen implements Screen
         this.game = game;
         gameWorld = new GameWorld();
         renderer = new GameRenderer(gameWorld);
-
+        Gdx.input.setInputProcessor(new InputHandler(gameWorld.getPlayer()));
     }
 
     @Override
@@ -47,8 +46,6 @@ public class GameScreen implements Screen
         world.step(delta,5,5);
         Gdx.gl20.glClearColor(0,0,0,1);
         Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
-        //camera.update();
-        //debuger.render(world,camera.combined);
         gameWorld.update(delta);
         renderer.render();
     }
