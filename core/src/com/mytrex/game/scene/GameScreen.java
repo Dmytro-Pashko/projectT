@@ -5,12 +5,10 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.World;
 import com.mytrex.game.GameWorld;
-import com.mytrex.game.Tools.GameRenderer;
-import com.mytrex.game.helpers.InputHandler;
+import com.mytrex.game.PlayerInputProcessor;
 
 /**
  * Created by Goodvin1709 on 16.11.2015.
@@ -19,58 +17,44 @@ public class GameScreen implements Screen
 {
     private Game game;
     private Box2DDebugRenderer debuger;
-    private World world;
-    private GameRenderer renderer;
     private GameWorld gameWorld;
+    private OrthographicCamera camera;
 
     public GameScreen(Game game)
     {
+        camera = new OrthographicCamera(10,10);
+        camera.position.set(5,5,0);
         debuger = new Box2DDebugRenderer();
-        debuger.setDrawVelocities(true);
-        debuger.setDrawContacts(true);
-        world = new GameWorld().getWorld();
-        this.game = game;
         gameWorld = new GameWorld();
-        renderer = new GameRenderer(gameWorld);
-        Gdx.input.setInputProcessor(new InputHandler(gameWorld.getPlayer()));
+        Gdx.input.setInputProcessor(new PlayerInputProcessor(gameWorld));
     }
-
-    @Override
-    public void show() {
-
+    public void cameraUpdate()
+    {
+      if (camera.position.x+2 < gameWorld.getPlayer().getBody().getPosition().x) camera.position.set(camera.position.x+0.1f,camera.position.y,0);
+      if (camera.position.x-2 > gameWorld.getPlayer().getBody().getPosition().x) camera.position.set(camera.position.x-0.1f,camera.position.y,0);
     }
-
     @Override
     public void render(float delta)
     {
-        world.step(delta,5,5);
+        cameraUpdate();
+        gameWorld.getWorld().step(delta, 5, 5);
+        gameWorld.update();
+        camera.update();
         Gdx.gl20.glClearColor(0,0,0,1);
         Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
-        gameWorld.update(delta);
-        renderer.render();
+        debuger.render(gameWorld.getWorld(),camera.combined);
     }
 
     @Override
-    public void resize(int width, int height) {
-
-    }
-
+    public void resize(int width, int height) {}
     @Override
-    public void pause() {
-
-    }
-
+    public void show() {}
     @Override
-    public void resume() {
-
-    }
-
+    public void pause() {}
     @Override
-    public void hide() {
-
-    }
-
+    public void resume() {}
     @Override
-    public void dispose() {
-    }
+    public void hide() {}
+    @Override
+    public void dispose() {}
 }
