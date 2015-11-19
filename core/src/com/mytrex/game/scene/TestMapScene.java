@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
@@ -16,15 +17,22 @@ public class TestMapScene implements Screen
     TiledMap map;
     OrthographicCamera camera;
     TiledMapRenderer tiledMapRenderer;
+    TiledMapTileLayer layer;
 
     public TestMapScene()
     {
+        map = new TmxMapLoader().load("core/assets/map1.tmx");
         camera = new OrthographicCamera(10,10);
         camera.setToOrtho(false, 256, 256);
         camera.position.set(128,128,0);
-
-        map = new TmxMapLoader().load("core/assets/map1.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(map);
+
+        layer = (TiledMapTileLayer)map.getLayers().get(0);
+        System.out.println("Layer Heigth = "+layer.getHeight());
+        System.out.println("Layer Width = "+layer.getWidth());
+        System.out.println("Layer tile Heigth = "+layer.getTileHeight());
+        System.out.println("Layer tile Width = "+layer.getTileWidth());
+
     }
     @Override
     public void show()
