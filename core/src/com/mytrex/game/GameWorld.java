@@ -5,7 +5,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mytrex.game.Tools.BodyEditorLoader;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.mytrex.game.models.GameObject;
 import com.mytrex.game.models.GroundBlock;
 import com.mytrex.game.models.Player;
 
@@ -17,7 +16,7 @@ public class GameWorld
     public Player player;
     private World world;
 
-    public ArrayList<GroundBlock> list = new ArrayList<>();
+    public ArrayList<Object> list = new ArrayList<>();
 
     public World getWorld()
     {
@@ -27,11 +26,12 @@ public class GameWorld
     public GameWorld()
     {
         world = new World(new Vector2(0, -9.8f), true);
-        for (int i = 0; i <11 ; i++)
+        for (int i = 0; i <10 ; i++)
         {
             list.add(new GroundBlock(createGroundBlocks(i, 0.0f)));
         }
         player = new Player(initPlayer(2,2));
+        list.add(player);
     }
 
     public Player getPlayer()
@@ -64,7 +64,6 @@ public class GameWorld
         if (player.getLeftMove()) player.getBody().setTransform(player.getBody().getPosition().x - 0.1f, player.getBody().getPosition().y, 0);
 
         if (player.getRightMove()) player.getBody().setTransform(player.getBody().getPosition().x + 0.1f, player.getBody().getPosition().y, 0);
-
 
     }
 }

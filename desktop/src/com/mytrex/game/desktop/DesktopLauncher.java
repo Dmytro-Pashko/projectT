@@ -8,6 +8,8 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.title = "T-rex runner";
+		config.height=512;
+		config.width=512;
 		new LwjglApplication(new Trex(), config);
 	}
 }

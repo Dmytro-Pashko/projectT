@@ -3,9 +3,6 @@ package com.mytrex.game;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 
-/**
- * Created by Goodvin1709 on 18.11.2015.
- */
 public class PlayerInputProcessor implements InputProcessor
 {
     private GameWorld world;

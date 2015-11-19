@@ -32,9 +32,7 @@ public class Player extends GameObject
         return jump;
     }
 
-    public void setJump(Boolean jump) {
-        this.jump = jump;
-    }
+    public void setJump(Boolean jump) {this.jump = jump;}
 
     public Body getBody() {
         return body;
