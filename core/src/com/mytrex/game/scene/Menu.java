@@ -48,7 +48,7 @@ public class Menu implements Screen
         scores_button.setPosition(150, 60);
         exit_button.setPosition(500, 15);
 
-        BitmapFont labelfont= new BitmapFont(Gdx.files.internal("Textures/defaultfont.fnt"));
+        BitmapFont labelfont= new BitmapFont(Gdx.files.internal("core/assets/defaultfont.fnt"));
         Label.LabelStyle labelStyle = new Label.LabelStyle(labelfont, Color.BLACK);
         poslabel = new Label("",labelStyle);
         poslabel.setPosition(8,Gdx.graphics.getHeight()-10);
