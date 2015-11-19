@@ -2,6 +2,7 @@ package com.mytrex.game.models;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 
@@ -16,10 +17,15 @@ public class Player
 
     public Player(Body body)
     {
+        sprite = new Sprite(new Texture("core/assets/badlogic.jpg"));
         this.body = body;
         leftMove = false;
         rightMove = false;
         jump=false;
+    }
+
+    public Sprite getSprite(){
+        return sprite;
     }
 
     public Boolean getJump() {

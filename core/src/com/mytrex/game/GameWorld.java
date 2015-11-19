@@ -15,6 +15,7 @@ public class GameWorld
 {
     public Player player;
     private World world;
+
     public ArrayList<Object> list = new ArrayList<>();
 
     public World getWorld()
@@ -54,19 +55,16 @@ public class GameWorld
         def.type = BodyType.DynamicBody;
         Body body = world.createBody(def);
         loader.attachFixture(body,"box",new FixtureDef(),1.0f);
-        body.setTransform(x, y,0);
+        body.setTransform(x, y, 0);
         return body;
     }
     public void update()
     {
         //System.out.println("Player X="+player.getBody().getPosition().x+" Player Y="+player.getBody().getPosition().y);
-        if (player.getLeftMove())
-        {
-            player.getBody().setTransform(player.getBody().getPosition().x-0.1f,player.getBody().getPosition().y,0);
-        }
-        if (player.getRightMove())
-        {
-            player.getBody().setTransform(player.getBody().getPosition().x+0.1f,player.getBody().getPosition().y,0);
-        }
+        if (player.getLeftMove()) player.getBody().setTransform(player.getBody().getPosition().x - 0.1f, player.getBody().getPosition().y, 0);
+
+        if (player.getRightMove()) player.getBody().setTransform(player.getBody().getPosition().x + 0.1f, player.getBody().getPosition().y, 0);
+
+
     }
 }
