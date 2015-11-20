@@ -11,6 +11,8 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.mytrex.game.GameWorld;
+import com.mytrex.game.PlayerInputProcessor;
 import com.mytrex.game.Tools.BodyEditorLoader;
 import com.mytrex.game.models.Player;
 
@@ -22,10 +24,8 @@ public class TestMapScene implements Screen
     OrthographicCamera camera;
     TiledMapRenderer tiledMapRenderer;
     TiledMapTileLayer layer;
-
-    Player player;
-    World world;
     private Box2DDebugRenderer debuger;
+    private GameWorld gameWorld;
 
     public TestMapScene()
     {
@@ -41,29 +41,11 @@ public class TestMapScene implements Screen
         System.out.println("Layer tile Heigth = "+layer.getTileHeight());
         System.out.println("Layer tile Width = "+layer.getTileWidth());
 
-        world = new World(new Vector2(0, -9.8f), true);
-        player = new Player(initPlayer(128, 20));
         debuger = new Box2DDebugRenderer();
+        gameWorld = new GameWorld();
+        Gdx.input.setInputProcessor(new PlayerInputProcessor(gameWorld));
     }
 
-    public void update()
-    {
-        //System.out.println("Player X="+player.getBody().getPosition().x+" Player Y="+player.getBody().getPosition().y);
-        if (player.getLeftMove()) player.getBody().setTransform(player.getBody().getPosition().x - 0.1f, player.getBody().getPosition().y, 0);
-
-        if (player.getRightMove()) player.getBody().setTransform(player.getBody().getPosition().x + 0.1f, player.getBody().getPosition().y, 0);
-
-    }
-
-    public Body initPlayer(float x, float y){
-        BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("core/assets/box.json"));
-        BodyDef def = new BodyDef();
-        def.type = BodyDef.BodyType.DynamicBody;
-        Body body = world.createBody(def);
-        loader.attachFixture(body,"box",new FixtureDef(),1.0f);
-        body.setTransform(x, y, 0);
-        return body;
-    }
 
     @Override
     public void show()
@@ -81,9 +63,9 @@ public class TestMapScene implements Screen
         tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();
 
-        update();
-        world.step(delta, 5, 5);
-        debuger.render(world,camera.combined);
+        gameWorld.getWorld().step(delta, 5, 5);
+        gameWorld.update();
+        debuger.render(gameWorld.getWorld(),camera.combined);
     }
 
     @Override

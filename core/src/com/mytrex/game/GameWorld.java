@@ -28,9 +28,9 @@ public class GameWorld
         world = new World(new Vector2(0, -9.8f), true);
         for (int i = 0; i <10 ; i++)
         {
-            list.add(new GroundBlock(createGroundBlocks(i, 0.0f)));
+            list.add(new GroundBlock(createGroundBlocks(i*50, 0.0f)));
         }
-        player = new Player(initPlayer(2,2));
+        player = new Player(initPlayer(2,20));
         list.add(player);
     }
 
@@ -61,9 +61,9 @@ public class GameWorld
     public void update()
     {
         //System.out.println("Player X="+player.getBody().getPosition().x+" Player Y="+player.getBody().getPosition().y);
-        if (player.getLeftMove()) player.getBody().setTransform(player.getBody().getPosition().x - 0.1f, player.getBody().getPosition().y, 0);
+        if (player.getLeftMove()) player.getBody().setTransform(player.getBody().getPosition().x - 1f, player.getBody().getPosition().y, 0);
 
-        if (player.getRightMove()) player.getBody().setTransform(player.getBody().getPosition().x + 0.1f, player.getBody().getPosition().y, 0);
+        if (player.getRightMove()) player.getBody().setTransform(player.getBody().getPosition().x + 1f, player.getBody().getPosition().y, 0);
 
     }
 }

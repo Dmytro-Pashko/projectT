@@ -16,7 +16,6 @@ import com.mytrex.game.PlayerInputProcessor;
  */
 public class GameScreen implements Screen
 {
-    private Game game;
     private Box2DDebugRenderer debuger;
     private GameWorld gameWorld;
     private OrthographicCamera camera;
@@ -27,14 +26,14 @@ public class GameScreen implements Screen
     private float correction;
 
 
-    public GameScreen(Game game)
+    public GameScreen()
     {
         ppuX = (float) Gdx.graphics.getWidth() / 10;
         ppuY = (float) Gdx.graphics.getHeight() / 10;
         correction = 0f;
         batch = new SpriteBatch();
         camera = new OrthographicCamera(10,10);
-        camera.setToOrtho(false, 10, 10);
+        //camera.setToOrtho(false, 10, 10);
         camera.position.set(5,5,0);
         debuger = new Box2DDebugRenderer();
         gameWorld = new GameWorld();
@@ -42,16 +41,10 @@ public class GameScreen implements Screen
     }
     public void cameraUpdate()
     {
-      if (camera.position.x+2 < gameWorld.getPlayer().getBody().getPosition().x) {
-          camera.position.set(camera.position.x + 0.1f, camera.position.y, 0);
-          correction = 0.1f;
-      }
-      if (camera.position.x-2 > gameWorld.getPlayer().getBody().getPosition().x){
-          camera.position.set(camera.position.x-0.1f,camera.position.y,0);
-          correction = -0.1f;
-      }
-        //else correction = 0;
+      if (camera.position.x+2 < gameWorld.getPlayer().getBody().getPosition().x) camera.position.set(camera.position.x + 0.1f, camera.position.y, 0);
+      if (camera.position.x-2 > gameWorld.getPlayer().getBody().getPosition().x) camera.position.set(camera.position.x-0.1f,camera.position.y,0);
     }
+
     @Override
     public void render(float delta)
     {
