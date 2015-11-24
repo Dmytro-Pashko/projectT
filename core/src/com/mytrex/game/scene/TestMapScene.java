@@ -14,7 +14,10 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.mytrex.game.GameWorld;
 import com.mytrex.game.PlayerInputProcessor;
 import com.mytrex.game.Tools.BodyEditorLoader;
-import com.mytrex.game.models.Player;
+
+import java.util.TreeMap;
+
+import static com.mytrex.game.Tools.B2DVars.PPM;
 
 
 public class TestMapScene implements Screen
@@ -24,16 +27,32 @@ public class TestMapScene implements Screen
     OrthographicCamera camera;
     TiledMapRenderer tiledMapRenderer;
     TiledMapTileLayer layer;
+    TreeMap<Integer, Integer> tiledMap = new TreeMap<>();
     private Box2DDebugRenderer debuger;
     private GameWorld gameWorld;
 
     public TestMapScene()
     {
+
         map = new TmxMapLoader().load("core/assets/map1.tmx");
-        camera = new OrthographicCamera(10,10);
-        camera.setToOrtho(false, 256, 256);
-        camera.position.set(128,128,0);
+
+        //camera = new OrthographicCamera(10, 10);
+        //camera.setToOrtho(false, 256 / PPM, 256 / PPM);
+        //camera.position.set(256 / PPM, 256 / PPM, 0 / PPM);
+
+
+        camera = new OrthographicCamera(10, 10 );
+        camera.setToOrtho(false, 256 , 256 );
+        camera.position.set(128 , 128 , 0 );
         tiledMapRenderer = new OrthogonalTiledMapRenderer(map);
+
+        for (int i = 0; i < 16; i++) {
+            for (int j = 0; j < 16; j++) {
+                //if (layer.getCell(i, j).equals(layer.getCell(0, 15))){
+                    tiledMap.put(i, j);
+                //}
+            }
+        }
 
         layer = (TiledMapTileLayer)map.getLayers().get(0);
         System.out.println("Layer Heigth = "+layer.getHeight());
@@ -42,9 +61,13 @@ public class TestMapScene implements Screen
         System.out.println("Layer tile Width = "+layer.getTileWidth());
 
         debuger = new Box2DDebugRenderer();
-        gameWorld = new GameWorld();
+        gameWorld = new GameWorld(tiledMap);
         Gdx.input.setInputProcessor(new PlayerInputProcessor(gameWorld));
+
+
+
     }
+
 
 
     @Override
@@ -56,7 +79,7 @@ public class TestMapScene implements Screen
     @Override
     public void render(float delta)
     {
-        Gdx.gl.glClearColor(1, 0, 0, 1);
+        Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         camera.update();

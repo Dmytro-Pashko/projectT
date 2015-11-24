@@ -36,7 +36,7 @@ public class GameScreen implements Screen
         //camera.setToOrtho(false, 10, 10);
         camera.position.set(5,5,0);
         debuger = new Box2DDebugRenderer();
-        gameWorld = new GameWorld();
+        //gameWorld = new GameWorld();
         Gdx.input.setInputProcessor(new PlayerInputProcessor(gameWorld));
     }
     public void cameraUpdate()
@@ -49,7 +49,7 @@ public class GameScreen implements Screen
     public void render(float delta)
     {
         cameraUpdate();
-        gameWorld.getWorld().step(delta, 5, 5);
+        gameWorld.getWorld().step(delta, 6, 2);
         gameWorld.update();
         camera.update();
         Gdx.gl20.glClearColor(0,0,0,1);

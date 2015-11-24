@@ -7,14 +7,18 @@ import com.mytrex.game.Tools.BodyEditorLoader;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.mytrex.game.models.GroundBlock;
 import com.mytrex.game.models.Player;
+import static com.mytrex.game.Tools.B2DVars.PPM;
 
 import java.util.ArrayList;
+import java.util.TreeMap;
+import java.util.Map;
 
 
 public class GameWorld
 {
     public Player player;
     private World world;
+    private TreeMap<Integer, Integer> map;
 
     public ArrayList<Object> list = new ArrayList<>();
 
@@ -23,14 +27,12 @@ public class GameWorld
         return this.world;
     }
 
-    public GameWorld()
+    public GameWorld(TreeMap<Integer, Integer> map)
     {
+        this.map = map;
         world = new World(new Vector2(0, -9.8f), true);
-        for (int i = 0; i <10 ; i++)
-        {
-            list.add(new GroundBlock(createGroundBlocks(i*50, 0.0f)));
-        }
-        player = new Player(initPlayer(2,20));
+        createGroundBlocks();
+        player = new Player(initPlayer(2 , 20 ));
         list.add(player);
     }
 
@@ -39,23 +41,24 @@ public class GameWorld
         return player;
     }
 
-    public Body createGroundBlocks(float x,float y)
+    public void createGroundBlocks()
     {
-        BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("core/assets/ground.json"));
-        BodyDef def = new BodyDef();
-        def.type = BodyType.StaticBody;
-        Body body = world.createBody(def);
-        loader.attachFixture(body,"wall",new FixtureDef(),1.0f);
-        body.setTransform(x, y, 0);
-        return body;
+        for (Map.Entry<Integer, Integer> pair : map.entrySet()){
+            BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("core/assets/ground.json"));
+            BodyDef def = new BodyDef();
+            def.type = BodyType.StaticBody;
+            Body body = world.createBody(def);
+            loader.attachFixture(body,"wall",new FixtureDef(),1.0f );
+            body.setTransform(pair.getKey() * 16 , pair.getValue() * 16, 0);
+        }
     }
     public Body initPlayer(float x, float y){
         BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("core/assets/box.json"));
         BodyDef def = new BodyDef();
         def.type = BodyType.DynamicBody;
         Body body = world.createBody(def);
-        loader.attachFixture(body,"box",new FixtureDef(),1.0f);
-        body.setTransform(x, y, 0);
+        loader.attachFixture(body,"box",new FixtureDef(),1.0f );
+        body.setTransform(x , y, 0);
         return body;
     }
     public void update()
