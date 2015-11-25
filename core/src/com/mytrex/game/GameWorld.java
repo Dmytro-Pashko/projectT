@@ -27,13 +27,11 @@ public class GameWorld
         return this.world;
     }
 
-    public GameWorld(TreeMap<Integer, Integer> map)
+    public GameWorld()
     {
-        this.map = map;
         world = new World(new Vector2(0, -9.8f), true);
-        createGroundBlocks();
-        player = new Player(initPlayer(2 , 20 ));
-        list.add(player);
+        //player = new Player(initPlayer(2 , 20 ));
+        //list.add(player);
     }
 
     public Player getPlayer()
@@ -41,16 +39,22 @@ public class GameWorld
         return player;
     }
 
-    public void createGroundBlocks()
+    public void createGroundBlocks(float x, float y)
     {
-        for (Map.Entry<Integer, Integer> pair : map.entrySet()){
-            BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("core/assets/ground.json"));
+            //BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("core/assets/ground.json"));
             BodyDef def = new BodyDef();
+            //def.position.set(pair.getKey() * 16 , pair.getValue() * 16);
             def.type = BodyType.StaticBody;
             Body body = world.createBody(def);
-            loader.attachFixture(body,"wall",new FixtureDef(),1.0f );
-            body.setTransform(pair.getKey() * 16 , pair.getValue() * 16, 0);
-        }
+
+            PolygonShape polygonShape = new PolygonShape();
+            polygonShape.setAsBox(0.5f, 0.5f);
+
+            FixtureDef def1 = new FixtureDef();
+            def1.shape = polygonShape;
+            body.createFixture(def1);
+           body.setTransform(x + 0.5f, y + 0.5f, 0);
+
     }
     public Body initPlayer(float x, float y){
         BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("core/assets/box.json"));
@@ -61,12 +65,14 @@ public class GameWorld
         body.setTransform(x , y, 0);
         return body;
     }
+
     public void update()
     {
         //System.out.println("Player X="+player.getBody().getPosition().x+" Player Y="+player.getBody().getPosition().y);
-        if (player.getLeftMove()) player.getBody().setTransform(player.getBody().getPosition().x - 1f, player.getBody().getPosition().y, 0);
+        //if (player.getLeftMove()) player.getBody().setTransform(player.getBody().getPosition().x - 1f, player.getBody().getPosition().y, 0);
 
-        if (player.getRightMove()) player.getBody().setTransform(player.getBody().getPosition().x + 1f, player.getBody().getPosition().y, 0);
+        //if (player.getRightMove()) player.getBody().setTransform(player.getBody().getPosition().x + 1f, player.getBody().getPosition().y, 0);
 
     }
+
 }

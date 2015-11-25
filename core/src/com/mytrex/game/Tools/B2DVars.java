@@ -7,5 +7,5 @@ public class B2DVars {
     //Клас для того, щоб зберігати змінні.
 
     //pixels per meter
-    public static final float PPM = 100f;
+    public static final float PPM = 16f;
 }

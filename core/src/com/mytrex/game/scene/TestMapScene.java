@@ -15,24 +15,40 @@ import com.mytrex.game.GameWorld;
 import com.mytrex.game.PlayerInputProcessor;
 import com.mytrex.game.Tools.BodyEditorLoader;
 
+import java.util.ArrayList;
 import java.util.TreeMap;
 
 import static com.mytrex.game.Tools.B2DVars.PPM;
 
 
-public class TestMapScene implements Screen
-{
+public class TestMapScene implements Screen {
+
 
     TiledMap map;
     OrthographicCamera camera;
     TiledMapRenderer tiledMapRenderer;
     TiledMapTileLayer layer;
-    TreeMap<Integer, Integer> tiledMap = new TreeMap<>();
     private Box2DDebugRenderer debuger;
     private GameWorld gameWorld;
 
-    public TestMapScene()
-    {
+    public TestMapScene() {
+        ArrayList<Integer> noPassBlocks = new ArrayList<>();
+        noPassBlocks.add(136);
+        noPassBlocks.add(137);
+        noPassBlocks.add(138);
+        noPassBlocks.add(691);
+        noPassBlocks.add(692);
+        noPassBlocks.add(693);
+        noPassBlocks.add(694);
+        noPassBlocks.add(718);
+        noPassBlocks.add(719);
+        noPassBlocks.add(720);
+        noPassBlocks.add(721);
+        noPassBlocks.add(666);
+        noPassBlocks.add(667);
+        noPassBlocks.add(639);
+        noPassBlocks.add(640);
+        noPassBlocks.add(1);
 
         map = new TmxMapLoader().load("core/assets/map1.tmx");
 
@@ -41,44 +57,44 @@ public class TestMapScene implements Screen
         //camera.position.set(256 / PPM, 256 / PPM, 0 / PPM);
 
 
-        camera = new OrthographicCamera(10, 10 );
-        camera.setToOrtho(false, 256 , 256 );
-        camera.position.set(128 , 128 , 0 );
+        camera = new OrthographicCamera(16 / PPM, 16 / PPM);
+        camera.setToOrtho(false, 256 / PPM, 256 / PPM);
+        camera.position.set(128 / PPM, 128 / PPM, 0);
         tiledMapRenderer = new OrthogonalTiledMapRenderer(map);
+        layer = (TiledMapTileLayer) map.getLayers().get(0);
+        gameWorld = new GameWorld();
 
-        for (int i = 0; i < 16; i++) {
-            for (int j = 0; j < 16; j++) {
-                //if (layer.getCell(i, j).equals(layer.getCell(0, 15))){
-                    tiledMap.put(i, j);
-                //}
+
+        for (int i = 0; i < layer.getHeight(); i++) {
+            for (int j = 0; j < layer.getWidth(); j++) {
+                TiledMapTileLayer.Cell cell = layer.getCell(i, j);
+                if (noPassBlocks.contains(cell.getTile().getId())) {
+                    gameWorld.createGroundBlocks(i, j);
+                    System.out.println(i + " " + j);
+                }
             }
         }
+        System.out.println(layer.getCell(5, 9).equals(layer.getCell(5, 10)));
 
-        layer = (TiledMapTileLayer)map.getLayers().get(0);
-        System.out.println("Layer Heigth = "+layer.getHeight());
-        System.out.println("Layer Width = "+layer.getWidth());
-        System.out.println("Layer tile Heigth = "+layer.getTileHeight());
-        System.out.println("Layer tile Width = "+layer.getTileWidth());
+        System.out.println("Layer Heigth = " + layer.getHeight());
+        System.out.println("Layer Width = " + layer.getWidth());
+        System.out.println("Layer tile Heigth = " + layer.getTileHeight());
+        System.out.println("Layer tile Width = " + layer.getTileWidth());
 
         debuger = new Box2DDebugRenderer();
-        gameWorld = new GameWorld(tiledMap);
         Gdx.input.setInputProcessor(new PlayerInputProcessor(gameWorld));
 
 
-
     }
 
 
-
     @Override
-    public void show()
-    {
+    public void show() {
 
     }
 
     @Override
-    public void render(float delta)
-    {
+    public void render(float delta) {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -88,7 +104,7 @@ public class TestMapScene implements Screen
 
         gameWorld.getWorld().step(delta, 5, 5);
         gameWorld.update();
-        debuger.render(gameWorld.getWorld(),camera.combined);
+        debuger.render(gameWorld.getWorld(), camera.combined);
     }
 
     @Override
