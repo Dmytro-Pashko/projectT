@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -14,6 +15,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.mytrex.game.GameWorld;
 import com.mytrex.game.PlayerInputProcessor;
 import com.mytrex.game.Tools.BodyEditorLoader;
+import net.dermetfan.gdx.physics.box2d.Box2DMapObjectParser;
 
 import java.util.ArrayList;
 import java.util.TreeMap;
@@ -51,16 +53,10 @@ public class TestMapScene implements Screen {
         noPassBlocks.add(1);
 
         map = new TmxMapLoader().load("core/assets/map1.tmx");
-
-        //camera = new OrthographicCamera(10, 10);
-        //camera.setToOrtho(false, 256 / PPM, 256 / PPM);
-        //camera.position.set(256 / PPM, 256 / PPM, 0 / PPM);
-
-
         camera = new OrthographicCamera(16 / PPM, 16 / PPM);
         camera.setToOrtho(false, 256 / PPM, 256 / PPM);
         camera.position.set(128 / PPM, 128 / PPM, 0);
-        tiledMapRenderer = new OrthogonalTiledMapRenderer(map);
+        tiledMapRenderer = new OrthogonalTiledMapRenderer(map,  0.0625f);
         layer = (TiledMapTileLayer) map.getLayers().get(0);
         gameWorld = new GameWorld();
 
@@ -70,11 +66,9 @@ public class TestMapScene implements Screen {
                 TiledMapTileLayer.Cell cell = layer.getCell(i, j);
                 if (noPassBlocks.contains(cell.getTile().getId())) {
                     gameWorld.createGroundBlocks(i, j);
-                    System.out.println(i + " " + j);
                 }
             }
         }
-        System.out.println(layer.getCell(5, 9).equals(layer.getCell(5, 10)));
 
         System.out.println("Layer Heigth = " + layer.getHeight());
         System.out.println("Layer Width = " + layer.getWidth());

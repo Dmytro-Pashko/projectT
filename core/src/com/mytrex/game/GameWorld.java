@@ -41,9 +41,7 @@ public class GameWorld
 
     public void createGroundBlocks(float x, float y)
     {
-            //BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("core/assets/ground.json"));
             BodyDef def = new BodyDef();
-            //def.position.set(pair.getKey() * 16 , pair.getValue() * 16);
             def.type = BodyType.StaticBody;
             Body body = world.createBody(def);
 
