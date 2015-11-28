@@ -50,7 +50,7 @@ public class GameWorld
             FixtureDef def1 = new FixtureDef();
             def1.shape = polygonShape;
             body.createFixture(def1);
-        body.setTransform(x + 0.5f, y + 0.5f, 0);
+            body.setTransform(x + 0.5f, y + 0.5f, 0);
 
     }
 
@@ -60,6 +60,7 @@ public class GameWorld
 
     public Body initPlayer(float x, float y){
         BodyDef def = new BodyDef();
+        def.allowSleep=false;
         def.type = BodyType.DynamicBody;
         Body body = world.createBody(def);
 
@@ -75,7 +76,7 @@ public class GameWorld
 
     public void update()
     {
-        //System.out.println("Player X="+player.getBody().getPosition().x+" Player Y="+player.getBody().getPosition().y);
+        System.out.println("Player X="+player.getBody().getPosition().x+" Player Y="+player.getBody().getPosition().y);
         if (player.getLeftMove()){
             player.getBody().setTransform(player.getBody().getPosition().x - 0.1f, player.getBody().getPosition().y, 0);
         }

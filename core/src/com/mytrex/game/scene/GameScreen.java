@@ -33,7 +33,7 @@ public class GameScreen implements Screen
         correction = 0f;
         batch = new SpriteBatch();
         camera = new OrthographicCamera(10,10);
-        //camera.setToOrtho(false, 10, 10);
+        camera.setToOrtho(false, 512, 512);
         camera.position.set(5,5,0);
         debuger = new Box2DDebugRenderer();
         //gameWorld = new GameWorld();
@@ -49,7 +49,7 @@ public class GameScreen implements Screen
     public void render(float delta)
     {
         cameraUpdate();
-        gameWorld.getWorld().step(delta, 6, 2);
+        gameWorld.getWorld().step(delta, 5, 5);
         gameWorld.update();
         camera.update();
         Gdx.gl20.glClearColor(0,0,0,1);
