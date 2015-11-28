@@ -24,6 +24,7 @@ public class Player extends GameObject
         jump=false;
     }
 
+
     public Sprite getSprite(){
         return sprite;
     }

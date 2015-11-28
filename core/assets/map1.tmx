@@ -16,4 +16,9 @@
   <object id="5" x="97.5" y="96.5" width="12.5" height="13.5"/>
   <object id="6" gid="198" x="158" y="159" width="16" height="16"/>
  </objectgroup>
+ <layer name="Слой тайлов 2" width="16" height="16">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUDBaQS2f7ADOwAG4=
+  </data>
+ </layer>
 </map>

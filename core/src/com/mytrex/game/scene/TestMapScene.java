@@ -5,10 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
@@ -30,6 +27,7 @@ public class TestMapScene implements Screen {
     OrthographicCamera camera;
     TiledMapRenderer tiledMapRenderer;
     TiledMapTileLayer layer;
+    TiledMapTileLayer layer2;
     private Box2DDebugRenderer debuger;
     private GameWorld gameWorld;
 
@@ -58,17 +56,22 @@ public class TestMapScene implements Screen {
         camera.position.set(128 / PPM, 128 / PPM, 0);
         tiledMapRenderer = new OrthogonalTiledMapRenderer(map,  0.0625f);
         layer = (TiledMapTileLayer) map.getLayers().get(0);
+        layer2 = (TiledMapTileLayer) map.getLayers().get(2);
         gameWorld = new GameWorld();
 
 
         for (int i = 0; i < layer.getHeight(); i++) {
             for (int j = 0; j < layer.getWidth(); j++) {
                 TiledMapTileLayer.Cell cell = layer.getCell(i, j);
-                if (noPassBlocks.contains(cell.getTile().getId())) {
-                    gameWorld.createGroundBlocks(i, j);
+                TiledMapTileLayer.Cell cell2 = layer2.getCell(i, j);
+                if (noPassBlocks.contains(cell.getTile().getId())) gameWorld.createGroundBlocks(i, j);
+                try{
+                    if (cell2.getTile().getId() == 109) gameWorld.setPlayer(i, j);
                 }
+                catch (NullPointerException e){}
             }
         }
+
 
         System.out.println("Layer Heigth = " + layer.getHeight());
         System.out.println("Layer Width = " + layer.getWidth());
@@ -81,6 +84,22 @@ public class TestMapScene implements Screen {
 
     }
 
+    public void setTiledCoord(){
+        for (int i = 0; i < layer.getHeight(); i++) {
+            for (int j = 0; j < layer.getWidth(); j++) {
+                TiledMapTileLayer.Cell cell2 = layer2.getCell(i, j);
+                try{
+                    if (cell2.getTile().getId() == 109){
+                        cell2.getTile().setOffsetX(gameWorld.player.getBody().getPosition().x * PPM - 4.5f * PPM);
+                        cell2.getTile().setOffsetY(gameWorld.player.getBody().getPosition().y * PPM - 1.5f * PPM);
+                    }
+
+                }
+                catch (NullPointerException e){}
+            }
+        }
+    }
+
 
     @Override
     public void show() {
@@ -89,6 +108,7 @@ public class TestMapScene implements Screen {
 
     @Override
     public void render(float delta) {
+        setTiledCoord();
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);

@@ -30,8 +30,7 @@ public class GameWorld
     public GameWorld()
     {
         world = new World(new Vector2(0, -9.8f), true);
-        //player = new Player(initPlayer(2 , 20 ));
-        //list.add(player);
+        list.add(player);
     }
 
     public Player getPlayer()
@@ -51,25 +50,39 @@ public class GameWorld
             FixtureDef def1 = new FixtureDef();
             def1.shape = polygonShape;
             body.createFixture(def1);
-           body.setTransform(x + 0.5f, y + 0.5f, 0);
+        body.setTransform(x + 0.5f, y + 0.5f, 0);
 
     }
+
+    public void setPlayer(float x, float y){
+        player = new Player(initPlayer(x , y ));
+    }
+
     public Body initPlayer(float x, float y){
-        BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("core/assets/box.json"));
         BodyDef def = new BodyDef();
         def.type = BodyType.DynamicBody;
         Body body = world.createBody(def);
-        loader.attachFixture(body,"box",new FixtureDef(),1.0f );
-        body.setTransform(x , y, 0);
+
+        PolygonShape polygonShape = new PolygonShape();
+        polygonShape.setAsBox(0.5f, 0.5f);
+
+        FixtureDef def1 = new FixtureDef();
+        def1.shape = polygonShape;
+        body.createFixture(def1);
+        body.setTransform(x + 0.5f, y + 0.5f, 0);
         return body;
     }
 
     public void update()
     {
         //System.out.println("Player X="+player.getBody().getPosition().x+" Player Y="+player.getBody().getPosition().y);
-        //if (player.getLeftMove()) player.getBody().setTransform(player.getBody().getPosition().x - 1f, player.getBody().getPosition().y, 0);
+        if (player.getLeftMove()){
+            player.getBody().setTransform(player.getBody().getPosition().x - 0.1f, player.getBody().getPosition().y, 0);
+        }
 
-        //if (player.getRightMove()) player.getBody().setTransform(player.getBody().getPosition().x + 1f, player.getBody().getPosition().y, 0);
+        if (player.getRightMove()){
+            player.getBody().setTransform(player.getBody().getPosition().x + 0.1f, player.getBody().getPosition().y, 0);
+        }
 
     }
 
