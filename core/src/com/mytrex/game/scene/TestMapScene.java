@@ -2,20 +2,19 @@ package com.mytrex.game.scene;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.mytrex.game.GameWorld;
 import com.mytrex.game.PlayerInputProcessor;
-import com.mytrex.game.Tools.BodyEditorLoader;
-import net.dermetfan.gdx.physics.box2d.Box2DMapObjectParser;
 
 import java.util.ArrayList;
-import java.util.TreeMap;
 
 import static com.mytrex.game.Tools.B2DVars.PPM;
 
@@ -30,6 +29,7 @@ public class TestMapScene implements Screen {
     TiledMapTileLayer layer2;
     private Box2DDebugRenderer debuger;
     private GameWorld gameWorld;
+    Label poslabel;
 
     public TestMapScene() {
         ArrayList<Integer> noPassBlocks = new ArrayList<>();
@@ -49,22 +49,29 @@ public class TestMapScene implements Screen {
         noPassBlocks.add(639);
         noPassBlocks.add(640);
         noPassBlocks.add(1);
+        noPassBlocks.add(207);
+        noPassBlocks.add(208);
+        noPassBlocks.add(140);
+        noPassBlocks.add(190);
 
-        map = new TmxMapLoader().load("core/assets/map1.tmx");
-        camera = new OrthographicCamera(16 / PPM, 16 / PPM);
+        map = new TmxMapLoader().load("core/assets/map2.tmx");
+        camera = new OrthographicCamera(256 / PPM, 16 / PPM);
         camera.setToOrtho(false, 256 / PPM, 256 / PPM);
         camera.position.set(128 / PPM, 128 / PPM, 0);
         tiledMapRenderer = new OrthogonalTiledMapRenderer(map,  0.0625f);
         layer = (TiledMapTileLayer) map.getLayers().get(0);
-        layer2 = (TiledMapTileLayer) map.getLayers().get(2);
+        layer2 = (TiledMapTileLayer) map.getLayers().get(1);
         gameWorld = new GameWorld();
 
 
-        for (int i = 0; i < layer.getHeight(); i++) {
-            for (int j = 0; j < layer.getWidth(); j++) {
+        for (int i = 0; i < layer.getWidth(); i++) {
+            for (int j = 0; j < layer.getHeight(); j++) {
                 TiledMapTileLayer.Cell cell = layer.getCell(i, j);
                 TiledMapTileLayer.Cell cell2 = layer2.getCell(i, j);
-                if (noPassBlocks.contains(cell.getTile().getId())) gameWorld.createGroundBlocks(i, j);
+                try{
+                    if (noPassBlocks.contains(cell.getTile().getId())) gameWorld.createGroundBlocks(i, j);
+                }
+                catch (NullPointerException e){}
                 try{
                     if (cell2.getTile().getId() == 109) gameWorld.setPlayer(i, j);
                 }
@@ -81,17 +88,22 @@ public class TestMapScene implements Screen {
         debuger = new Box2DDebugRenderer();
         Gdx.input.setInputProcessor(new PlayerInputProcessor(gameWorld));
 
+    }
 
+    public void cameraUpdate()
+    {
+        if (camera.position.x+2 < gameWorld.getPlayer().getBody().getPosition().x) camera.position.set(camera.position.x + 0.1f, camera.position.y, 0);
+        if (camera.position.x-2 > gameWorld.getPlayer().getBody().getPosition().x) camera.position.set(camera.position.x-0.1f,camera.position.y,0);
     }
 
     public void setTiledCoord(){
-        for (int i = 0; i < layer.getHeight(); i++) {
-            for (int j = 0; j < layer.getWidth(); j++) {
+        for (int i = 0; i < layer.getWidth(); i++) {
+            for (int j = 0; j < layer.getHeight(); j++) {
                 TiledMapTileLayer.Cell cell2 = layer2.getCell(i, j);
                 try{
                     if (cell2.getTile().getId() == 109){
-                        cell2.getTile().setOffsetX(gameWorld.player.getBody().getPosition().x * PPM - 4.5f * PPM);
-                        cell2.getTile().setOffsetY(gameWorld.player.getBody().getPosition().y * PPM - 1.5f * PPM);
+                        cell2.getTile().setOffsetX(gameWorld.player.getBody().getPosition().x * PPM);
+                        cell2.getTile().setOffsetY(gameWorld.player.getBody().getPosition().y * PPM);
                     }
 
                 }
@@ -108,7 +120,6 @@ public class TestMapScene implements Screen {
 
     @Override
     public void render(float delta) {
-        setTiledCoord();
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -119,6 +130,10 @@ public class TestMapScene implements Screen {
         gameWorld.getWorld().step(delta, 5, 5);
         gameWorld.update();
         debuger.render(gameWorld.getWorld(), camera.combined);
+        setTiledCoord();
+        cameraUpdate();
+
+        System.out.println(1/delta);
     }
 
     @Override

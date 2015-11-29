@@ -17,10 +17,10 @@ public class PlayerInputProcessor implements InputProcessor
     {
         if (Input.Keys.LEFT == keycode) world.getPlayer().setLeftMove(true);
         if (Input.Keys.RIGHT == keycode) world.getPlayer().setRightMove(true);
-        if (Input.Keys.UP == keycode && (world.getPlayer().getBody().getPosition().y<1.516f))
+        if (Input.Keys.UP == keycode && (world.getPlayer().getBody().getPosition().y<2f))
         {
             world.player.setJump(true);
-            world.getPlayer().getBody().applyLinearImpulse(0f,10f,0.5f,0.5f,false);
+            world.getPlayer().getBody().applyLinearImpulse(0f, 100f, 0.5f, 0.5f, false);
         }
         return true;
     }
