@@ -7,11 +7,9 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.mytrex.game.GameWorld;
 import com.mytrex.game.PlayerInputProcessor;
 
-import java.util.ArrayList;
 
 import static com.mytrex.game.Tools.B2DVars.PPM;
 import static com.mytrex.game.Tools.B2DVars.noPassBlocks;

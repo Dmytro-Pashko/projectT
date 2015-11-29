@@ -1,25 +1,19 @@
 package com.mytrex.game;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.scenes.scene2d.ui.List;
-import com.mytrex.game.Tools.BodyEditorLoader;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.mytrex.game.models.GroundBlock;
 import com.mytrex.game.models.Player;
 
 import static com.mytrex.game.Tools.B2DVars.PPM;
 
 import java.util.ArrayList;
-import java.util.TreeMap;
 import com.badlogic.gdx.utils.Array;
 
 
 public class GameWorld {
     public Player player;
     private World world;
-    private TreeMap<Integer, Integer> map;
 
     public ArrayList<Object> list = new ArrayList<>();
 
