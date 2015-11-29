@@ -23,7 +23,6 @@ public class TestMapScene implements Screen {
     OrthographicCamera camera;
     TiledMapRenderer tiledMapRenderer;
     TiledMapTileLayer layer;
-    TiledMapTileLayer layer2;
     private Box2DDebugRenderer debuger;
     private GameWorld gameWorld;
     private SpriteBatch batch;
@@ -36,21 +35,16 @@ public class TestMapScene implements Screen {
         camera.position.set(128 / PPM, 128 / PPM, 0);
         tiledMapRenderer = new OrthogonalTiledMapRenderer(map,  0.0625f);
         layer = (TiledMapTileLayer) map.getLayers().get(0);
-        layer2 = (TiledMapTileLayer) map.getLayers().get(1);
         gameWorld = new GameWorld();
         batch = new SpriteBatch();
+        gameWorld.setPlayer(1, 1);
 
 
         for (int i = 0; i < layer.getWidth(); i++) {
             for (int j = 0; j < layer.getHeight(); j++) {
                 TiledMapTileLayer.Cell cell = layer.getCell(i, j);
-                TiledMapTileLayer.Cell cell2 = layer2.getCell(i, j);
                 try{
                     if (noPassBlocks.contains(cell.getTile().getId())) gameWorld.createGroundBlocks(i, j);
-                }
-                catch (NullPointerException e){}
-                try{
-                    if (cell2.getTile().getId() == 109) gameWorld.setPlayer(i, j);
                 }
                 catch (NullPointerException e){}
             }
@@ -73,26 +67,6 @@ public class TestMapScene implements Screen {
         if (camera.position.x-2 > gameWorld.getPlayer().getBody().getPosition().x) camera.position.set(camera.position.x-0.1f,camera.position.y,0);
     }
 
-//    public void setTiledCoord(){
-//        for (int i = 0; i < layer.getWidth(); i++) {
-//            for (int j = 0; j < layer.getHeight(); j++) {
-//                TiledMapTileLayer.Cell cell2 = layer2.getCell(i, j);
-//                try{
-//                    if (cell2.getTile().getId() == 109){
-//                        cell2.getTile().setOffsetX(gameWorld.player.getBody().getPosition().x * PPM - 1.5f * PPM);
-//                        cell2.getTile().setOffsetY(gameWorld.player.getBody().getPosition().y * PPM - 1.5f * PPM);
-//                    }
-//
-//                }
-//                catch (NullPointerException e){}
-//            }
-//        }
-//    }
-
-
-
-
-
     @Override
     public void show() {
 
@@ -109,9 +83,9 @@ public class TestMapScene implements Screen {
 
         gameWorld.getWorld().step(delta, 5, 5);
         gameWorld.update();
-        debuger.render(gameWorld.getWorld(), camera.combined);
+        //debuger.render(gameWorld.getWorld(), camera.combined);
         stateTime += delta;
-        gameWorld.player.setSpriteCoord(gameWorld.player.getCurrentFrame(stateTime), gameWorld.player.getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, gameWorld.player.getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
+        gameWorld.player.spriteDraw(stateTime, gameWorld.player.getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, gameWorld.player.getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
         cameraUpdate();
 
 

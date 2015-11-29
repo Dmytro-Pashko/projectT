@@ -74,6 +74,7 @@ public class GameWorld {
     public void update() {
         if (player.getLeftMove()) player.getBody().setTransform(player.getBody().getPosition().x - 0.1f, player.getBody().getPosition().y, 0);
         if (player.getRightMove()) player.getBody().setTransform(player.getBody().getPosition().x + 0.1f, player.getBody().getPosition().y, 0);
+        isPlayerGrounded();
     }
 
     public boolean isPlayerGrounded() {
@@ -83,9 +84,11 @@ public class GameWorld {
             Contact contact = contactList.get(i);
             if (contact.isTouching() && (contact.getFixtureA() == this.getPlayer().playerSensorFixture ||
                     contact.getFixtureB() == this.getPlayer().playerSensorFixture)) {
+                player.setJump(false);
                 return true;
             }
         }
+        player.setJump(true);
         return false;
     }
 
