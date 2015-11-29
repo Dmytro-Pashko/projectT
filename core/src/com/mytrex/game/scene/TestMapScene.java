@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.physics.box2d.*;
@@ -25,6 +26,8 @@ public class TestMapScene implements Screen {
     TiledMapTileLayer layer2;
     private Box2DDebugRenderer debuger;
     private GameWorld gameWorld;
+    private SpriteBatch batch;
+    private float stateTime = 0f;
 
     public TestMapScene() {
         map = new TmxMapLoader().load("core/assets/map2.tmx");
@@ -35,6 +38,7 @@ public class TestMapScene implements Screen {
         layer = (TiledMapTileLayer) map.getLayers().get(0);
         layer2 = (TiledMapTileLayer) map.getLayers().get(1);
         gameWorld = new GameWorld();
+        batch = new SpriteBatch();
 
 
         for (int i = 0; i < layer.getWidth(); i++) {
@@ -69,21 +73,24 @@ public class TestMapScene implements Screen {
         if (camera.position.x-2 > gameWorld.getPlayer().getBody().getPosition().x) camera.position.set(camera.position.x-0.1f,camera.position.y,0);
     }
 
-    public void setTiledCoord(){
-        for (int i = 0; i < layer.getWidth(); i++) {
-            for (int j = 0; j < layer.getHeight(); j++) {
-                TiledMapTileLayer.Cell cell2 = layer2.getCell(i, j);
-                try{
-                    if (cell2.getTile().getId() == 109){
-                        cell2.getTile().setOffsetX(gameWorld.player.getBody().getPosition().x * PPM - 1.5f * PPM);
-                        cell2.getTile().setOffsetY(gameWorld.player.getBody().getPosition().y * PPM - 1.5f * PPM);
-                    }
+//    public void setTiledCoord(){
+//        for (int i = 0; i < layer.getWidth(); i++) {
+//            for (int j = 0; j < layer.getHeight(); j++) {
+//                TiledMapTileLayer.Cell cell2 = layer2.getCell(i, j);
+//                try{
+//                    if (cell2.getTile().getId() == 109){
+//                        cell2.getTile().setOffsetX(gameWorld.player.getBody().getPosition().x * PPM - 1.5f * PPM);
+//                        cell2.getTile().setOffsetY(gameWorld.player.getBody().getPosition().y * PPM - 1.5f * PPM);
+//                    }
+//
+//                }
+//                catch (NullPointerException e){}
+//            }
+//        }
+//    }
 
-                }
-                catch (NullPointerException e){}
-            }
-        }
-    }
+
+
 
 
     @Override
@@ -103,8 +110,10 @@ public class TestMapScene implements Screen {
         gameWorld.getWorld().step(delta, 5, 5);
         gameWorld.update();
         debuger.render(gameWorld.getWorld(), camera.combined);
-        setTiledCoord();
+        stateTime += delta;
+        gameWorld.player.setSpriteCoord(gameWorld.player.getCurrentFrame(stateTime), gameWorld.player.getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, gameWorld.player.getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
         cameraUpdate();
+
 
         System.out.println(1/delta);
     }
