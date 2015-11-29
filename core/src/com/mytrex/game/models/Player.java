@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.CircleShape;
 
 /**
  * Created by Goodvin1709 on 10.11.2015.
@@ -14,6 +15,8 @@ public class Player extends GameObject
     private Body body;
     private Sprite sprite;
     private Boolean leftMove,rightMove,jump;
+    public com.badlogic.gdx.physics.box2d.Fixture playerPhysicsFixture;
+    public com.badlogic.gdx.physics.box2d.Fixture playerSensorFixture;
 
     public Player(Body body)
     {
@@ -22,6 +25,10 @@ public class Player extends GameObject
         leftMove = false;
         rightMove = false;
         jump=false;
+        CircleShape circle = new CircleShape();
+        circle.setRadius(0.5f);
+        circle.setPosition(new Vector2(0, -0.05f));
+        playerSensorFixture = body.createFixture(circle, 0);
     }
 
 

@@ -3,6 +3,7 @@ package com.mytrex.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.mytrex.game.Tools.BodyEditorLoader;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.mytrex.game.models.GroundBlock;
@@ -12,7 +13,7 @@ import static com.mytrex.game.Tools.B2DVars.PPM;
 
 import java.util.ArrayList;
 import java.util.TreeMap;
-import java.util.Map;
+import com.badlogic.gdx.utils.Array;
 
 
 public class GameWorld {
@@ -77,15 +78,21 @@ public class GameWorld {
     }
 
     public void update() {
-        //System.out.println("Player X="+player.getBody().getPosition().x+" Player Y="+player.getBody().getPosition().y);
-        if (player.getLeftMove()) {
-            player.getBody().setTransform(player.getBody().getPosition().x - 0.1f, player.getBody().getPosition().y, 0);
-        }
+        if (player.getLeftMove()) player.getBody().setTransform(player.getBody().getPosition().x - 0.1f, player.getBody().getPosition().y, 0);
+        if (player.getRightMove()) player.getBody().setTransform(player.getBody().getPosition().x + 0.1f, player.getBody().getPosition().y, 0);
+    }
 
-        if (player.getRightMove()) {
-            player.getBody().setTransform(player.getBody().getPosition().x + 0.1f, player.getBody().getPosition().y, 0);
-        }
+    public boolean isPlayerGrounded() {
+        Array<Contact> contactList = this.getWorld().getContactList();
 
+        for (int i = 0; i < contactList.size; i++) {
+            Contact contact = contactList.get(i);
+            if (contact.isTouching() && (contact.getFixtureA() == this.getPlayer().playerSensorFixture ||
+                    contact.getFixtureB() == this.getPlayer().playerSensorFixture)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
