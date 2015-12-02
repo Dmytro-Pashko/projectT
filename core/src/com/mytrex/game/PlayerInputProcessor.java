@@ -19,7 +19,7 @@ public class PlayerInputProcessor implements InputProcessor
         if (Input.Keys.RIGHT == keycode) world.getPlayer().setRightMove(true);
         if (Input.Keys.UP == keycode && (world.isPlayerGrounded()))
         {
-            world.player.setJump(true);
+            world.getPlayer().setJump(true);
             world.getPlayer().getBody().applyLinearImpulse(0f, 100f, 0.5f, 0.5f, false);
         }
         return true;

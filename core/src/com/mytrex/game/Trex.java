@@ -8,7 +8,6 @@ public class Trex extends Game {
     @Override
     public void create() {
         //setScreen(new Menu(this));
-        //setScreen(new GameScreen());
         setScreen(new TestMapScene());
     }
 }

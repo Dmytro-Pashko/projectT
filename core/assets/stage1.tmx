@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="left-down" width="256" height="16" tilewidth="16" tileheight="16" nextobjectid="119">
+ <tileset firstgid="1" name="tiledmap" tilewidth="16" tileheight="16" spacing="2" tilecount="810">
+  <image source="tiledmap.png" trans="ffffff" width="485" height="546"/>
+  <tile id="1">
+   <animation>
+    <frame tileid="1" duration="250"/>
+    <frame tileid="2" duration="250"/>
+    <frame tileid="3" duration="250"/>
+   </animation>
+  </tile>
+  <tile id="29">
+   <animation>
+    <frame tileid="29" duration="200"/>
+    <frame tileid="56" duration="200"/>
+    <frame tileid="83" duration="300"/>
+   </animation>
+  </tile>
+  <tile id="30">
+   <animation>
+    <frame tileid="30" duration="200"/>
+    <frame tileid="57" duration="200"/>
+    <frame tileid="84" duration="200"/>
+   </animation>
+  </tile>
+  <tile id="31">
+   <animation>
+    <frame tileid="31" duration="200"/>
+    <frame tileid="58" duration="200"/>
+    <frame tileid="85" duration="200"/>
+   </animation>
+  </tile>
+  <tile id="111">
+   <objectgroup draworder="index">
+    <object id="0" x="0" y="0" width="16" height="16"/>
+   </objectgroup>
+   <animation>
+    <frame tileid="111" duration="100"/>
+    <frame tileid="112" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="163">
+   <animation>
+    <frame tileid="163" duration="400"/>
+    <frame tileid="190" duration="400"/>
+    <frame tileid="217" duration="400"/>
+   </animation>
+  </tile>
+  <tile id="164">
+   <animation>
+    <frame tileid="164" duration="400"/>
+    <frame tileid="191" duration="400"/>
+    <frame tileid="218" duration="400"/>
+    <frame tileid="245" duration="400"/>
+   </animation>
+  </tile>
+  <tile id="165">
+   <animation>
+    <frame tileid="165" duration="400"/>
+    <frame tileid="192" duration="400"/>
+    <frame tileid="219" duration="400"/>
+    <frame tileid="246" duration="400"/>
+   </animation>
+  </tile>
+  <tile id="166">
+   <animation>
+    <frame tileid="166" duration="400"/>
+    <frame tileid="193" duration="400"/>
+    <frame tileid="220" duration="400"/>
+    <frame tileid="247" duration="400"/>
+   </animation>
+  </tile>
+  <tile id="195">
+   <animation>
+    <frame tileid="197" duration="333"/>
+    <frame tileid="196" duration="333"/>
+    <frame tileid="195" duration="333"/>
+   </animation>
+  </tile>
+ </tileset>
+ <layer name="all" width="256" height="16">
+  <data encoding="base64" compression="zlib">
+   eJzt2cdy00Acx3HZdLjwAKRQL6HdSAg1YagPkMBMzNCHZ6AklAMwPkMKJTMEuAIplAMHzhAnlCNnenkEvppoyY7YlWSrx3v4TGJL/u9f6/1JttxlWVaXYRiG8c8IHuAhHsU81vLCjKSP75M0dho9GP7vUVJrMI/95K0/Vb92BlsKM9LuJ21Jv39JjjfijNGS4XOt6DFsf7XWyVt+syJr85ZmP1Gt4bDuR1RnOGQOX6NbkvbaMIy860An9jhU+7zyeL2d6WHnM996bMBGbMLmwux2Ie3jNbKt22VFxNI+vjSVHXLm5ewf1bwuSP73Yh/24wAO4pDJvhGTgkS1rehQba9HZUudf/l/3WuD5P8YjuMETuIUTuOMs/1sxvNfzEAPaSgEIO/fqtgexdzV6/wnoWzp89+DkqW/9tu88m87xyI4jwu4iF704RIu4wquJpj/wxmYc9kRR9p9GPXHnf048n+TbN9CPwYwiCHcxh3cxb2MXf/9zhFx3l98XPxf2vNhzD2q7MeR/ydk+ylGMYZxTOAZnuMFXuYs/0Z+mXt++uzHkf83ZPstJlHBFKbxDu/xAR8zkn/xPVPkX3x/lf+m3WNcvO6Zha3rfm6LQ3d/wP2c32PdOH7H6rdf2edxkNeHraF7j2pdj17Zl/Nv/40i/59p8gu+4hu+4wd+4hd+40/E+Refm3vRV8Pn52qu/w2OaurX2ldS9eYy92+Iuu9yuuwGzW85ghphdCr4ZV/Of48VTf6LrMt5mI8FWIhFWIwlWIplEa/dfuoNYBBDrtri+KIayyt7HRqiL9V7VEtvFUzFtI7yTpX3bo/t9nN+2fXLrztT1dYIez6311BJqlNS9OSV/6DXfptf/hsYvxFNaMZKrMJqrMFarIs4/6PUG8M4JhT5lzWiCc2Kbap93fuJ7HnVdedbdV4KQ/RQzbEIbWiXHoc9N8o9RHFs1dZr0+yrOw+4ufMgj++Va132vfKvq+FeH2LdBZ2zkkPUCZp9W48V/Novjsdreyvjt2Er2rEN27EDO7ELuyPO/yT1KpjCtFP7Gq7XsRvW7G+NQq1zoqoVpt5cZs+VfL/RzFE6/gI1NcK/
+  </data>
+ </layer>
+ <objectgroup name="ground">
+  <object id="67" name="0" x="0" y="240">
+   <polygon points="0,0 1040,0 1040,16 0,16"/>
+  </object>
+  <object id="68" name="1" x="352" y="240">
+   <polygon points="0,0 0,-32 32,-32 32,0"/>
+  </object>
+  <object id="69" name="2" x="560" y="240">
+   <polygon points="0,0 0,-48 32,-48 32,0"/>
+  </object>
+  <object id="71" name="3" x="880" y="240">
+   <polygon points="0,0 0,-48 32,-48 32,0"/>
+  </object>
+  <object id="73" name="4" x="1104" y="240">
+   <polygon points="0,0 0,16 240,16 240,0"/>
+  </object>
+  <object id="75" name="5" x="1424" y="240">
+   <polygon points="0,0 0,16 1120,16 1120,0"/>
+  </object>
+  <object id="80" name="6" x="2208" y="224">
+   <polygon points="0,0 0,16 64,16 64,0"/>
+  </object>
+  <object id="81" name="7" x="2224" y="208">
+   <polygon points="0,0 0,16 48,16 48,0"/>
+  </object>
+  <object id="82" name="8" x="2240" y="192">
+   <polygon points="0,0 0,16 32,16 32,0"/>
+  </object>
+  <object id="83" name="9" x="2256" y="176">
+   <polygon points="0,0 0,16 16,16 16,0"/>
+  </object>
+  <object id="84" name="10" x="2320" y="176">
+   <polygon points="0,0 0,64 16,64 16,0"/>
+  </object>
+  <object id="85" name="11" x="2336" y="192">
+   <polygon points="0,0 16,0 16,48 0,48"/>
+  </object>
+  <object id="86" name="12" x="2352" y="208">
+   <polygon points="0,0 16,0 16,32 0,32"/>
+  </object>
+  <object id="87" name="13" x="2368" y="224">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="90" name="15" x="2512" y="176">
+   <polygon points="0,0 32,0 32,64 0,64"/>
+  </object>
+  <object id="91" name="16" x="2592" y="176">
+   <polygon points="0,0 0,64 16,64 16,0"/>
+  </object>
+  <object id="92" name="17" x="2608" y="192">
+   <polygon points="0,0 16,0 16,48 0,48"/>
+  </object>
+  <object id="93" name="18" x="2624" y="208">
+   <polygon points="0,0 16,0 16,32 0,32"/>
+  </object>
+  <object id="94" name="19" x="2640" y="224">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="95" name="20" x="2592" y="240">
+   <polygon points="0,0 832,0 832,16 0,16"/>
+  </object>
+  <object id="96" name="21" x="2736" y="240">
+   <polygon points="0,0 0,-32 32,-32 32,0"/>
+  </object>
+  <object id="97" name="22" x="3024" y="240">
+   <polygon points="0,0 0,-32 32,-32 32,0"/>
+  </object>
+  <object id="98" name="23" x="3232" y="80">
+   <polygon points="0,0 -32,0 -32,160 0,160"/>
+  </object>
+  <object id="99" name="24" x="3184" y="96">
+   <polygon points="0,0 0,144 16,144 16,0"/>
+  </object>
+  <object id="100" name="25" x="3168" y="112">
+   <polygon points="0,0 0,128 16,128 16,0"/>
+  </object>
+  <object id="101" name="26" x="3152" y="128">
+   <polygon points="0,0 0,112 16,112 16,0"/>
+  </object>
+  <object id="102" name="27" x="3136" y="144">
+   <polygon points="0,0 0,96 16,96 16,0"/>
+  </object>
+  <object id="103" name="28" x="3120" y="160">
+   <polygon points="0,0 0,80 16,80 16,0"/>
+  </object>
+  <object id="104" name="29" x="3104" y="176">
+   <polygon points="0,0 0,64 16,64 16,0"/>
+  </object>
+  <object id="105" name="30" x="3088" y="192">
+   <polygon points="0,0 0,48 16,48 16,0"/>
+  </object>
+  <object id="106" name="31" x="3072" y="208">
+   <polygon points="0,0 0,32 16,32 16,0"/>
+  </object>
+  <object id="107" name="32" x="3056" y="224">
+   <polygon points="0,0 0,16 16,16 16,0"/>
+  </object>
+  <object id="108" name="33" x="3424" y="224">
+   <polygon points="0,0 0,16 16,16 16,0"/>
+  </object>
+  <object id="109" name="finish" x="3424" y="224">
+   <polygon points="0,0 0,-224 16,-224 16,0"/>
+  </object>
+  <object id="110" name="start" x="16" y="240">
+   <polygon points="0,0 0,-240 -16,-240 -16,0"/>
+  </object>
+  <object id="112" name="34" x="2512" y="192">
+   <polygon points="0,0 -16,0 -16,48 0,48"/>
+  </object>
+  <object id="113" name="35" x="2496" y="208">
+   <polygon points="0,0 -16,0 -16,32 0,32"/>
+  </object>
+  <object id="114" name="36" x="2464" y="224">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="118" name="skyblock" x="3424" y="0">
+   <polygon points="0,0 0,16 -3408,16 -3408,0"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="blocks">
+  <object id="16" name="block_0" type="block" x="208" y="176">
+   <polygon points="0,0 0,16 16,16 16,0"/>
+  </object>
+  <object id="17" name="block_1" type="block" x="240" y="176">
+   <polygon points="0,0 0,16 16,16 16,0"/>
+  </object>
+  <object id="18" name="block_2" type="block" x="272" y="176">
+   <polygon points="0,0 0,16 16,16 16,0"/>
+  </object>
+  <object id="19" name="block_3" type="block" x="1152" y="176">
+   <polygon points="0,0 0,16 48,16 48,0"/>
+  </object>
+  <object id="20" name="block_4" type="block" x="1232" y="112">
+   <polygon points="0,0 0,16 144,16 144,0"/>
+  </object>
+  <object id="21" name="block_5" type="block" x="1440" y="112">
+   <polygon points="0,0 0,16 64,16 64,0"/>
+  </object>
+  <object id="22" name="block_6" type="block" x="1504" y="176">
+   <polygon points="0,0 0,16 16,16 16,0"/>
+  </object>
+  <object id="23" name="block_7" type="block" x="1616" y="176">
+   <polygon points="0,0 0,16 16,16 16,0"/>
+  </object>
+  <object id="24" name="block_8" type="block" x="1920" y="176">
+   <polygon points="0,0 0,16 16,16 16,0"/>
+  </object>
+  <object id="25" name="block_9" type="block" x="1968" y="96">
+   <polygon points="0,0 0,16 48,16 48,0"/>
+  </object>
+  <object id="26" name="block_10" type="block" x="2080" y="96">
+   <polygon points="0,0 0,16 16,16 16,0"/>
+  </object>
+  <object id="27" name="block_11" type="block" x="2128" y="96">
+   <polygon points="0,0 0,16 16,16 16,0"/>
+  </object>
+  <object id="28" name="block_12" type="block" x="2096" y="176">
+   <polygon points="0,0 0,16 32,16 32,0"/>
+  </object>
+  <object id="29" name="block_13" type="block" x="2832" y="176">
+   <polygon points="0,0 0,16 48,16 48,0"/>
+  </object>
+  <object id="30" name="block_14" type="block" x="2896" y="176">
+   <polygon points="0,0 0,16 16,16 16,0"/>
+  </object>
+  <object id="31" name="block_15" type="block" x="3552" y="240">
+   <polygon points="0,0 0,-96 32,-96 32,-144 48,-144 48,-176 112,-176 112,-144 128,-144 128,-96 160,-96 160,0"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="mover"/>
+</map>
