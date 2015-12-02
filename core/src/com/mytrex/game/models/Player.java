@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 
 import static com.mytrex.game.Tools.B2DVars.PPM;
@@ -54,9 +55,23 @@ public class Player extends GameObject {
         batch.end();
     }
 
-    public Boolean getJump() {
-        return jump;
+    public void moving(){
+        if (leftMove)
+        {
+            Vector2 vector = body.getLinearVelocity();//ѕолучаем вектор линейной скорости.
+            body.setLinearVelocity(-5, vector.y);//»змен€ем вектор линейной скорости по X на -5.
+        }
+        if (rightMove)
+        {
+            Vector2 vector = body.getLinearVelocity();//ѕолучаем вектор линейной скорости.
+            body.setLinearVelocity(5, vector.y);//»змен€ем вектор линейной скорости по X на +5.
+        }
+        if(!leftMove && !rightMove){
+            Vector2 vector = body.getLinearVelocity();
+            body.setLinearVelocity(0, vector.y);
+        }
     }
+
 
     public void setIsLeft(Boolean isLeft) {
         this.isLeft = isLeft;
@@ -78,11 +93,4 @@ public class Player extends GameObject {
         this.rightMove = rightMove;
     }
 
-    public Boolean getLeftMove() {
-        return leftMove;
-    }
-
-    public Boolean getRightMove() {
-        return rightMove;
-    }
 }

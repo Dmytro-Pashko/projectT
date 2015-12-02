@@ -9,16 +9,8 @@ public class GameWorld {
     private Player player;
     private World world;
 
-    public World getWorld() {
-        return this.world;
-    }
-
     public GameWorld() {
         world = new World(new Vector2(0, -20f), true);
-    }
-
-    public Player getPlayer() {
-        return player;
     }
 
     public void setPlayer(float x, float y) {
@@ -31,7 +23,7 @@ public class GameWorld {
         def.allowSleep = false;
         Body body = world.createBody(def);
         PolygonShape polygonShape = new PolygonShape();
-        polygonShape.setAsBox(0.5f, 0.5f);
+        polygonShape.setAsBox(0.3f, 0.5f);
         FixtureDef def1 = new FixtureDef();
         def1.shape = polygonShape;
         def1.friction = 0;
@@ -47,23 +39,8 @@ public class GameWorld {
 
     public void update()
     {
-        if (player.getLeftMove())
-        {
-            Vector2 vector = getPlayer().getBody().getLinearVelocity();//ѕолучаем вектор линейной скорости.
-            player.getBody().setLinearVelocity(-5, vector.y);//»змен€ем вектор линейной скорости по X на -5.
-        }
-        if (player.getRightMove())
-        {
-            Vector2 vector = getPlayer().getBody().getLinearVelocity();//ѕолучаем вектор линейной скорости.
-            player.getBody().setLinearVelocity(5, vector.y);//»змен€ем вектор линейной скорости по X на +5.
-
-        }
-        if(!player.getJump() && !player.getLeftMove() && !player.getRightMove()){
-            Vector2 vector = getPlayer().getBody().getLinearVelocity();
-            player.getBody().setLinearVelocity(0, vector.y);
-        }
+        player.moving();
         isPlayerGrounded();
-
     }
 
     public boolean isPlayerGrounded() {
@@ -74,6 +51,13 @@ public class GameWorld {
             }
         player.setJump(true);
         return false;
+    }
+
+    public World getWorld() {
+        return this.world;
+    }
+    public Player getPlayer() {
+        return player;
     }
 
 }
