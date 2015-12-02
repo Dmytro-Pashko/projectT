@@ -10,17 +10,6 @@ import com.badlogic.gdx.physics.box2d.Body;
 import static com.mytrex.game.Tools.B2DVars.PPM;
 
 public class Player extends GameObject {
-    private Body body;
-    private Boolean leftMove = false;
-    private Boolean rightMove = false;
-    private Boolean jump = false;
-    private Boolean isLeft = false;
-    private SpriteBatch batch;
-
-    private TextureRegion[] walkFramesRight, walkFramesLeft;
-    private Texture spriteStay, spriteStayLeft, spriteJumpRigth, spriteJumpLeft, walkSheet;
-    private Animation walkAnimation, walkAnimationLeft;
-
 
     public Player(Body body) {
         spriteStay = new Texture("core/assets/player_stay_right.png");
@@ -72,25 +61,5 @@ public class Player extends GameObject {
         }
     }
 
-
-    public void setIsLeft(Boolean isLeft) {
-        this.isLeft = isLeft;
-    }
-
-    public void setJump(Boolean jump) {
-        this.jump = jump;
-    }
-
-    public Body getBody() {
-        return body;
-    }
-
-    public void setLeftMove(Boolean leftMove) {
-        this.leftMove = leftMove;
-    }
-
-    public void setRightMove(Boolean rightMove) {
-        this.rightMove = rightMove;
-    }
 
 }
