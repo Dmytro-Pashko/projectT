@@ -31,7 +31,7 @@ public class GameWorld {
         def.allowSleep = false;
         Body body = world.createBody(def);
         PolygonShape polygonShape = new PolygonShape();
-        polygonShape.setAsBox(0.3f, 0.5f);
+        polygonShape.setAsBox(0.5f, 0.5f);
         FixtureDef def1 = new FixtureDef();
         def1.shape = polygonShape;
         body.createFixture(def1);
@@ -39,16 +39,26 @@ public class GameWorld {
         MassData data = new MassData();
         data.mass = 7.5f;
         body.setMassData(data);
+        body.setBullet(true);
         return body;
+
     }
 
-    public void update() {
-
+    public void update()
+    {
         if (player.getLeftMove())
-            player.getBody().setTransform(player.getBody().getPosition().x - 0.1f, player.getBody().getPosition().y, 0);
+        {
+            Vector2 vector = getPlayer().getBody().getLinearVelocity();//ѕолучаем вектор линейной скорости.
+            player.getBody().setLinearVelocity(-5, vector.y);//»змен€ем вектор линейной скорости по X на -5.
+        }
         if (player.getRightMove())
-            player.getBody().setTransform(player.getBody().getPosition().x + 0.1f, player.getBody().getPosition().y, 0);
+        {
+            Vector2 vector = getPlayer().getBody().getLinearVelocity();//ѕолучаем вектор линейной скорости.
+            player.getBody().setLinearVelocity(5, vector.y);//»змен€ем вектор линейной скорости по X на +5.
+
+        }
         isPlayerGrounded();
+
     }
 
     public boolean isPlayerGrounded() {

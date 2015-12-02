@@ -25,15 +25,16 @@ public class TestMapScene implements Screen {
     private float stateTime = 0f;
 
     public TestMapScene() {
-        debuger = new Box2DDebugRenderer();
+        debuger = new Box2DDebugRenderer(true,true,true,true,true,true);
+        ;
         map = new TmxMapLoader().load("core/assets/stage1.tmx");
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Gdx.graphics.getWidth() * 0.5f / PPM, Gdx.graphics.getHeight() * 0.5f / PPM);
         camera.position.set(128 / PPM, 128 / PPM, 0);
         tiledMapRenderer = new OrthogonalTiledMapRenderer(map, 0.0625f);
         gameWorld = new GameWorld();
-        gameWorld.setPlayer(180, 1);
-        camera.position.set(180, 8, 0);
+        gameWorld.setPlayer(2, 1);
+        camera.position.set(2, 8, 0);
 
         //Layer = 1 Земля.Точнее полигоны земли.
         for (MapObject object : map.getLayers().get(1).getObjects()) {

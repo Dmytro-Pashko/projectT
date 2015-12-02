@@ -25,7 +25,7 @@ public class Player extends GameObject {
 
 
     public Player(Body body) {
-        spriteStay = new Texture("core/assets/player_stay.png");
+        spriteStay = new Texture("core/assets/player_stay_right.png");
         spriteStayLeft = new Texture("core/assets/player_stay_left.png");
         spriteJumpRigth = new Texture("core/assets/player_jump_right.png");
         spriteJumpLeft = new Texture("core/assets/player_jump_left.png");
@@ -46,15 +46,19 @@ public class Player extends GameObject {
 
     public void Draw(float stateTime, float x, float y) {
         batch.begin();
-        if ((rightMove) && !(jump))
-            batch.draw(walkAnimation.getKeyFrame(stateTime, true), x * 2 - PPM, y * 2 - PPM, 25, 36);
-        else if ((leftMove) && !(jump))
-            batch.draw(walkAnimationLeft.getKeyFrame(stateTime, true), x * 2 - PPM, y * 2 - PPM, 25, 36);
+        if ((rightMove) && !(jump)) batch.draw(walkAnimation.getKeyFrame(stateTime, true), x * 2 - PPM, y * 2 - PPM, 25, 36);
+        else if ((leftMove) && !(jump)) batch.draw(walkAnimationLeft.getKeyFrame(stateTime, true), x * 2 - PPM, y * 2 - PPM, 25, 36);
         else if (jump && rightMove) batch.draw(spriteJumpRigth, x * 2 - PPM, y * 2 - PPM, 25, 36);
         else if (jump && leftMove) batch.draw(spriteJumpLeft, x * 2 - PPM, y * 2 - PPM, 25, 36);
+        else if (jump && isLeft) batch.draw(spriteJumpLeft, x * 2 - PPM, y * 2 - PPM, 25, 36);
+        else if (jump && !isLeft) batch.draw(spriteJumpRigth, x * 2 - PPM, y * 2 - PPM, 25, 36);
         else if (isLeft) batch.draw(spriteStayLeft, x * 2 - PPM, y * 2 - PPM, 25, 36);
         else if (!isLeft) batch.draw(spriteStay, x * 2 - PPM, y * 2 - PPM, 25, 36);
         batch.end();
+    }
+
+    public Boolean getJump() {
+        return jump;
     }
 
     public void setIsLeft(Boolean isLeft) {
