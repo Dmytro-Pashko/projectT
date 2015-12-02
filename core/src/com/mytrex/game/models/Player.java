@@ -16,23 +16,21 @@ public class Player extends GameObject {
     private Boolean leftMove = false;
     private Boolean rightMove = false;
     private Boolean jump = false;
+    private Boolean isLeft = false;
     private SpriteBatch batch;
-    public Fixture playerSensorFixture;
 
     private TextureRegion[] walkFramesRight, walkFramesLeft;
-    private Texture spriteStay, spriteJump, walkSheet;
+    private Texture spriteStay, spriteStayLeft, spriteJumpRigth, spriteJumpLeft, walkSheet;
     private Animation walkAnimation, walkAnimationLeft;
 
 
     public Player(Body body) {
         spriteStay = new Texture("core/assets/player_stay.png");
-        spriteJump = new Texture("core/assets/player_jump.png");
+        spriteStayLeft = new Texture("core/assets/player_stay_left.png");
+        spriteJumpRigth = new Texture("core/assets/player_jump_right.png");
+        spriteJumpLeft = new Texture("core/assets/player_jump_left.png");
         batch = new SpriteBatch();
         this.body = body;
-        //CircleShape circle = new CircleShape();
-        //circle.setRadius(0.5f);
-        //circle.setPosition(new Vector2(0, -0.05f));
-        //playerSensorFixture = body.createFixture(circle, 0);
 
         walkSheet = new Texture("core/assets/player_walk.png");
         walkFramesRight = new TextureRegion[5];
@@ -52,9 +50,15 @@ public class Player extends GameObject {
             batch.draw(walkAnimation.getKeyFrame(stateTime, true), x * 2 - PPM, y * 2 - PPM, 25, 36);
         else if ((leftMove) && !(jump))
             batch.draw(walkAnimationLeft.getKeyFrame(stateTime, true), x * 2 - PPM, y * 2 - PPM, 25, 36);
-        else if (jump) batch.draw(spriteJump, x * 2 - PPM, y * 2 - PPM, 25, 36);
-        else batch.draw(spriteStay, x * 2 - PPM, y * 2 - PPM, 25, 36);
+        else if (jump && rightMove) batch.draw(spriteJumpRigth, x * 2 - PPM, y * 2 - PPM, 25, 36);
+        else if (jump && leftMove) batch.draw(spriteJumpLeft, x * 2 - PPM, y * 2 - PPM, 25, 36);
+        else if (isLeft) batch.draw(spriteStayLeft, x * 2 - PPM, y * 2 - PPM, 25, 36);
+        else if (!isLeft) batch.draw(spriteStay, x * 2 - PPM, y * 2 - PPM, 25, 36);
         batch.end();
+    }
+
+    public void setIsLeft(Boolean isLeft) {
+        this.isLeft = isLeft;
     }
 
     public void setJump(Boolean jump) {

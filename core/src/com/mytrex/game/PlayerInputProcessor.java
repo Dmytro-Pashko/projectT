@@ -15,8 +15,14 @@ public class PlayerInputProcessor implements InputProcessor
     @Override
     public boolean keyDown(int keycode)
     {
-        if (Input.Keys.LEFT == keycode) world.getPlayer().setLeftMove(true);
-        if (Input.Keys.RIGHT == keycode) world.getPlayer().setRightMove(true);
+        if (Input.Keys.LEFT == keycode) {
+            world.getPlayer().setLeftMove(true);
+            world.getPlayer().setIsLeft(true);
+        }
+        if (Input.Keys.RIGHT == keycode) {
+            world.getPlayer().setRightMove(true);
+            world.getPlayer().setIsLeft(false);
+        }
         if (Input.Keys.UP == keycode && (world.isPlayerGrounded()))
         {
             world.getPlayer().setJump(true);

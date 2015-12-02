@@ -32,7 +32,8 @@ public class TestMapScene implements Screen {
         camera.position.set(128 / PPM, 128 / PPM, 0);
         tiledMapRenderer = new OrthogonalTiledMapRenderer(map, 0.0625f);
         gameWorld = new GameWorld();
-        gameWorld.setPlayer(1, 1);
+        gameWorld.setPlayer(180, 1);
+        camera.position.set(180, 8, 0);
 
         //Layer = 1 Земля.Точнее полигоны земли.
         for (MapObject object : map.getLayers().get(1).getObjects()) {

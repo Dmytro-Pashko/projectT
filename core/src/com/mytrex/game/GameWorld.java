@@ -31,7 +31,7 @@ public class GameWorld {
         def.allowSleep = false;
         Body body = world.createBody(def);
         PolygonShape polygonShape = new PolygonShape();
-        polygonShape.setAsBox(0.5f, 0.5f);
+        polygonShape.setAsBox(0.3f, 0.5f);
         FixtureDef def1 = new FixtureDef();
         def1.shape = polygonShape;
         body.createFixture(def1);
