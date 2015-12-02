@@ -34,6 +34,7 @@ public class GameWorld {
         polygonShape.setAsBox(0.5f, 0.5f);
         FixtureDef def1 = new FixtureDef();
         def1.shape = polygonShape;
+        def1.friction = 0;
         body.createFixture(def1);
         body.setTransform(x+0.5f, y+0.5f, 0);
         MassData data = new MassData();
@@ -56,6 +57,10 @@ public class GameWorld {
             Vector2 vector = getPlayer().getBody().getLinearVelocity();//ѕолучаем вектор линейной скорости.
             player.getBody().setLinearVelocity(5, vector.y);//»змен€ем вектор линейной скорости по X на +5.
 
+        }
+        if(!player.getJump() && !player.getLeftMove() && !player.getRightMove()){
+            Vector2 vector = getPlayer().getBody().getLinearVelocity();
+            player.getBody().setLinearVelocity(0, vector.y);
         }
         isPlayerGrounded();
 
