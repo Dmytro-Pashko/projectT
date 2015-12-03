@@ -10,6 +10,7 @@ import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mytrex.game.GameWorld;
+import com.mytrex.game.MyContactListener;
 import com.mytrex.game.PlayerInputProcessor;
 import static com.mytrex.game.Tools.B2DVars.PPM;
 
@@ -34,15 +35,24 @@ public class TestMapScene implements Screen {
         tiledMapRenderer = new OrthogonalTiledMapRenderer(map, 0.0625f);
         gameWorld = new GameWorld();
         gameWorld.setPlayer(2, 1);
+        gameWorld.setMob(5, 1);
         camera.position.set(8, 8, 0);
 
         //Layer = 1 Земля.Точнее полигоны земли.
-        for (MapObject object : map.getLayers().get(1).getObjects()) {
+        for (MapObject object : map.getLayers().get(2).getObjects()) {
             Shape shape = getPolygon((PolygonMapObject) object);
             BodyDef bd = new BodyDef();
             bd.type = BodyDef.BodyType.StaticBody;
             Body body = gameWorld.getWorld().createBody(bd);
             body.createFixture(shape,1);
+            shape.dispose();//Удаляем шейп.
+        }
+        for (MapObject object : map.getLayers().get(1).getObjects()) {
+            Shape shape = getPolygon((PolygonMapObject) object);
+            BodyDef bd = new BodyDef();
+            bd.type = BodyDef.BodyType.StaticBody;
+            Body body = gameWorld.getWorld().createBody(bd);
+            body.createFixture(shape,1).setUserData("obstacle");
             shape.dispose();//Удаляем шейп.
         }
         Gdx.input.setInputProcessor(new PlayerInputProcessor(gameWorld));
@@ -79,6 +89,7 @@ public class TestMapScene implements Screen {
         tiledMapRenderer.render();
         debuger.render(gameWorld.getWorld(), camera.combined);
         gameWorld.getPlayer().Draw(stateTime, gameWorld.getPlayer().getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, gameWorld.getPlayer().getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
+        gameWorld.getMob().Draw(stateTime, gameWorld.getMob().getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, gameWorld.getMob().getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
     }
 
     @Override

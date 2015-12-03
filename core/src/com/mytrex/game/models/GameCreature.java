@@ -10,7 +10,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 /**
  * Created by Antilamer on 19.11.2015.
  */
-public class GameObject {
+public class GameCreature {
     Body body;
     Boolean leftMove = false;
     Boolean rightMove = false;
