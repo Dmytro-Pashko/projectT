@@ -1,10 +1,10 @@
 package com.mytrex.game;
 
-import aurelienribon.bodyeditor.BodyEditorLoader;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.mytrex.game.Tools.BodyEditorLoader;
 import com.mytrex.game.models.OrdinaryMob;
 import com.mytrex.game.models.Player;
 
@@ -33,18 +33,21 @@ public class GameWorld {
         def.type = BodyType.DynamicBody;
         def.allowSleep = false;
         Body body = world.createBody(def);
-        PolygonShape polygonShape = new PolygonShape();
-        polygonShape.setAsBox(0.3f, 0.5f);
+        //PolygonShape polygonShape = new PolygonShape();
+        //polygonShape.setAsBox(0.3f, 0.5f);
         FixtureDef def1 = new FixtureDef();
-        def1.shape = polygonShape;
+        //def1.shape = polygonShape;
         def1.friction = 0;
-        body.createFixture(def1);
-        body.setTransform(x+0.5f, y+0.5f, 0);
+       // body.createFixture(def1);
         MassData data = new MassData();
         data.mass = 7.5f;
         body.setMassData(data);
         body.setBullet(true);
-        body.createFixture(def1).setUserData("player");
+        body.setUserData("player");
+        body.setTransform(x, y, 0);
+        loader.attachFixture(body, "PlayerBodyBox", def1, 1);
+        loader.attachFixture(body, "PlayerBodyUpSensor", new FixtureDef(), 1);
+        loader.attachFixture(body, "PlayerBodyDownSensor", new FixtureDef(), 1);
         return body;
 
     }
@@ -100,7 +103,6 @@ public class GameWorld {
     public Player getPlayer() {
         return player;
     }
-
     public OrdinaryMob getMob() {
         return mob;
     }

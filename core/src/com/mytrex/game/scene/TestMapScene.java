@@ -88,7 +88,7 @@ public class TestMapScene implements Screen {
         tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();
         debuger.render(gameWorld.getWorld(), camera.combined);
-        gameWorld.getPlayer().Draw(stateTime, gameWorld.getPlayer().getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, gameWorld.getPlayer().getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
+        gameWorld.getPlayer().Draw(stateTime, (gameWorld.getPlayer().getBody().getPosition().x + 0.5f) * PPM - (camera.position.x - 8) * PPM, (gameWorld.getPlayer().getBody().getPosition().y + 0.5f) * PPM - (camera.position.y - 8) * PPM);
         gameWorld.getMob().Draw(stateTime, gameWorld.getMob().getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, gameWorld.getMob().getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
     }
 
