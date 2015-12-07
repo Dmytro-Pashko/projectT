@@ -16,7 +16,8 @@ public class B2DVars {
     public static boolean flagMove = true;
     public static final HashMap<String, Vector2> map = new HashMap<>();
     static {
-        map.put("mob1", new Vector2(5, 1));
+        map.put("mob1", new Vector2(1, 1));
+        map.put("mob1", new Vector2(4, 1));
     }
 
 }

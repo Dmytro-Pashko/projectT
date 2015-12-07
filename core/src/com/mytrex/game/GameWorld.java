@@ -1,5 +1,7 @@
 package com.mytrex.game;
 
+import aurelienribon.bodyeditor.BodyEditorLoader;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
@@ -13,6 +15,7 @@ import static com.mytrex.game.Tools.B2DVars.map;
 public class GameWorld {
     private Player player;
     private OrdinaryMob mob;
+    private OrdinaryMob mob2;
     private World world;
 
     public GameWorld() {
@@ -25,6 +28,7 @@ public class GameWorld {
     }
 
     private Body initPlayer(float x, float y) {
+        BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("core/assets/PlayerBody.ptb"));
         BodyDef def = new BodyDef();
         def.type = BodyType.DynamicBody;
         def.allowSleep = false;
@@ -46,9 +50,11 @@ public class GameWorld {
     }
 
     public void setMob(float x, float y) {
-        for (HashMap.Entry<String, Vector2> pair : map.entrySet()){
-            mob = new OrdinaryMob(initMob(pair.getValue().x, pair.getValue().y));
-        }
+//        for (HashMap.Entry<String, Vector2> pair : map.entrySet()){
+//            mob = new OrdinaryMob(initMob(pair.getValue().x, pair.getValue().y));
+//        }
+        mob = new OrdinaryMob(initMob(3,1));
+        mob = new OrdinaryMob(initMob(5,1));
     }
 
     private Body initMob(float x, float y) {

@@ -59,7 +59,7 @@ public class TestMapScene implements Screen {
     }
 
 
-    private static PolygonShape getPolygon(PolygonMapObject polygonObject) {
+    private  PolygonShape getPolygon(PolygonMapObject polygonObject) {
         PolygonShape polygon = new PolygonShape();
         float[] vertices = polygonObject.getPolygon().getTransformedVertices();
         float[] worldVertices = new float[vertices.length];
