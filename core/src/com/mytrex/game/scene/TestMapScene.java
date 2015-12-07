@@ -4,10 +4,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.PolygonMapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mytrex.game.GameWorld;
 import com.mytrex.game.MyContactListener;
@@ -47,6 +51,7 @@ public class TestMapScene implements Screen {
             body.createFixture(shape,1);
             shape.dispose();//Удаляем шейп.
         }
+
         for (MapObject object : map.getLayers().get(1).getObjects()) {
             Shape shape = getPolygon((PolygonMapObject) object);
             BodyDef bd = new BodyDef();
@@ -55,6 +60,14 @@ public class TestMapScene implements Screen {
             body.createFixture(shape,1).setUserData("obstacle");
             shape.dispose();//Удаляем шейп.
         }
+
+        for (MapObject object : map.getLayers().get(4).getObjects())
+        {
+            RectangleMapObject rectObject = (RectangleMapObject)object;
+            gameWorld.setMob(rectObject.getRectangle().getX()/PPM,rectObject.getRectangle().getY()/PPM);
+        }
+
+
         Gdx.input.setInputProcessor(new PlayerInputProcessor(gameWorld));
     }
 

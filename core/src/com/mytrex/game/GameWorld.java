@@ -52,12 +52,9 @@ public class GameWorld {
 
     }
 
-    public void setMob(float x, float y) {
-//        for (HashMap.Entry<String, Vector2> pair : map.entrySet()){
-//            mob = new OrdinaryMob(initMob(pair.getValue().x, pair.getValue().y));
-//        }
-        mob = new OrdinaryMob(initMob(3,1));
-        mob = new OrdinaryMob(initMob(5,1));
+    public void setMob(float x, float y)
+    {
+        mob = new OrdinaryMob(initMob(x,y));
     }
 
     private Body initMob(float x, float y) {
