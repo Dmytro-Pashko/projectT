@@ -8,9 +8,8 @@ import com.mytrex.game.Tools.BodyEditorLoader;
 import com.mytrex.game.models.OrdinaryMob;
 import com.mytrex.game.models.Player;
 
-import java.util.HashMap;
 
-import static com.mytrex.game.Tools.B2DVars.map;
+import static com.mytrex.game.Tools.B2DVars.listMobs;
 
 public class GameWorld {
     private Player player;
@@ -54,7 +53,7 @@ public class GameWorld {
 
     public void setMob(float x, float y)
     {
-        mob = new OrdinaryMob(initMob(x,y));
+        listMobs.add(new OrdinaryMob(initMob(x,y)));
     }
 
     private Body initMob(float x, float y) {
@@ -80,13 +79,14 @@ public class GameWorld {
     public void update()
     {
         player.moving();
+        for (OrdinaryMob mob: listMobs)
         mob.moving();
         isPlayerGrounded();
     }
 
     public boolean isPlayerGrounded() {
         for (int i = 0; i < getWorld().getContactList().size; i++)
-            if (getWorld().getContactList().get(i).isTouching() && (getWorld().getContactList().get(i).getFixtureA() == this.getPlayer().getBody().getFixtureList().get(0))) {
+            if (getWorld().getContactList().get(i).isTouching() && (getWorld().getContactList().get(i).getFixtureA() == this.getPlayer().getBody().getFixtureList().get(2))) {
                 player.setJump(false);
                 return true;
             }

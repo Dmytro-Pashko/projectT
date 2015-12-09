@@ -1,6 +1,7 @@
 package com.mytrex.game.Tools;
 
 import com.badlogic.gdx.math.Vector2;
+import com.mytrex.game.models.OrdinaryMob;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,10 +15,8 @@ public class B2DVars {
     //pixels per meter
     public static final float PPM = 16f;
     public static boolean flagMove = true;
-    public static final HashMap<String, Vector2> map = new HashMap<>();
+    public static ArrayList<OrdinaryMob> listMobs = new ArrayList<>();
     static {
-        map.put("mob1", new Vector2(1, 1));
-        map.put("mob1", new Vector2(4, 1));
     }
 
 }
