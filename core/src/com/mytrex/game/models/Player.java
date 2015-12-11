@@ -9,9 +9,11 @@ import com.badlogic.gdx.physics.box2d.Body;
 
 import static com.mytrex.game.Tools.B2DVars.PPM;
 
-public class Player extends GameCreature {
+public class Player extends GameCreature
+{
 
-    public Player(Body body) {
+    public Player(Body body)
+    {
         spriteStay = new Texture("core/assets/player_stay_right.png");
         spriteStayLeft = new Texture("core/assets/player_stay_left.png");
         spriteJumpRigth = new Texture("core/assets/player_jump_right.png");

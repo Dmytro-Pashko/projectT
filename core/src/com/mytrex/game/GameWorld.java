@@ -4,26 +4,33 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.utils.Array;
 import com.mytrex.game.Tools.BodyEditorLoader;
 import com.mytrex.game.models.OrdinaryMob;
 import com.mytrex.game.models.Player;
 
+import java.util.ArrayList;
 
-import static com.mytrex.game.Tools.B2DVars.listMobs;
 
 public class GameWorld {
     private Player player;
-    private OrdinaryMob mob;
-    private OrdinaryMob mob2;
     private World world;
+    private ArrayList<OrdinaryMob> mobs = new ArrayList<>();
+    private MyContactListener listner;
 
-    public GameWorld() {
+
+    public GameWorld()
+    {
         world = new World(new Vector2(0, -20f), true);
-        world.setContactListener(new MyContactListener(world));
+        listner = new MyContactListener();
+        world.setContactListener(listner);
     }
 
-    public void setPlayer(float x, float y) {
+    public void setPlayer(float x, float y)
+    {
+
         player = new Player(initPlayer(x, y));
+        listner.setPlayer(player);
     }
 
     private Body initPlayer(float x, float y) {
@@ -32,12 +39,8 @@ public class GameWorld {
         def.type = BodyType.DynamicBody;
         def.allowSleep = false;
         Body body = world.createBody(def);
-        //PolygonShape polygonShape = new PolygonShape();
-        //polygonShape.setAsBox(0.3f, 0.5f);
         FixtureDef def1 = new FixtureDef();
-        //def1.shape = polygonShape;
         def1.friction = 0;
-       // body.createFixture(def1);
         MassData data = new MassData();
         data.mass = 7.5f;
         body.setMassData(data);
@@ -53,10 +56,11 @@ public class GameWorld {
 
     public void setMob(float x, float y)
     {
-        listMobs.add(new OrdinaryMob(initMob(x,y)));
+        mobs.add(new OrdinaryMob(initMob(x,y)));
     }
 
-    private Body initMob(float x, float y) {
+    private Body initMob(float x, float y)
+    {
         BodyDef BodyDef = new BodyDef();
         BodyDef.type = BodyType.DynamicBody;
         BodyDef.allowSleep = false;
@@ -79,28 +83,23 @@ public class GameWorld {
     public void update()
     {
         player.moving();
-        for (OrdinaryMob mob: listMobs)
-        mob.moving();
-        isPlayerGrounded();
+
+       for (int i = 0; i < world.getBodyCount(); i++)
+        {
+            Array<Body> bodys =  new Array<>();
+            world.getBodies(bodys);
+
+            for (Body b:bodys)
+                if (b.getUserData() == "del") world.destroyBody(b);
+        }
     }
 
-    public boolean isPlayerGrounded() {
-        for (int i = 0; i < getWorld().getContactList().size; i++)
-            if (getWorld().getContactList().get(i).isTouching() && (getWorld().getContactList().get(i).getFixtureA() == this.getPlayer().getBody().getFixtureList().get(2))) {
-                player.setJump(false);
-                return true;
-            }
-        player.setJump(true);
-        return false;
-    }
-
-    public World getWorld() {
+    public World getWorld()
+    {
         return this.world;
     }
-    public Player getPlayer() {
+    public Player getPlayer()
+    {
         return player;
-    }
-    public OrdinaryMob getMob() {
-        return mob;
     }
 }

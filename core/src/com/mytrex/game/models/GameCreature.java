@@ -33,6 +33,10 @@ public class GameCreature {
         this.jump = jump;
     }
 
+    public Boolean getJump() {
+        return jump;
+    }
+
     public void setLeftMove(Boolean leftMove) {
         this.leftMove = leftMove;
     }

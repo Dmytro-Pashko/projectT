@@ -3,49 +3,49 @@ package com.mytrex.game;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mytrex.game.models.Player;
 
-import static com.mytrex.game.Tools.B2DVars.flagMove;
-
 /**
  * Created by Antilamer on 03.12.2015.
  */
-public class MyContactListener implements ContactListener {
-    World world;
+public class MyContactListener implements ContactListener
+{
+    private Player player;
 
-    public MyContactListener(World world){
-        super();
-        this.world = world;
+
+    public void setPlayer(Player player)
+    {
+        this.player = player;
     }
 
     @Override
-    public void beginContact(Contact contact) {
-        Fixture a = contact.getFixtureA();
-        Fixture b = contact.getFixtureB();
-        if (a == null || b == null) return;
-        if (a.getUserData() == null || b.getUserData() == null) return;
+    public void beginContact(Contact contact)
+    {
 
-        if (a.getUserData().equals("mob") || b.getUserData().equals("mob")){
-            if (flagMove) flagMove = false;
-            else flagMove = true;
+        //Смотрим сенсор нахождения на земле.
+        if (contact.getFixtureA() == player.getBody().getFixtureList().get(2))
+        {
+            player.setJump(false);
+        }
+
+        //Смотрим если мы напрыгнули на моба то ставим ему метку del,если попытаемся
+        //удалить его тело в этом цикле, то выдаст Exception так как работают два разных потока.
+        if (contact.getFixtureA() == player.getBody().getFixtureList().get(2) && contact.getFixtureB().getUserData()=="mob")
+        {
+          contact.getFixtureB().getBody().setUserData("del");
+            //Делаем прижок как в марио.
+          player.getBody().applyLinearImpulse(0f, 150f, 0.0f, 0.0f, true);
         }
 
     }
 
     @Override
-    public void endContact(Contact contact) {
-
+    public void endContact(Contact contact)
+    {
     }
 
     @Override
-    public void preSolve(Contact contact, Manifold oldManifold) {
-
-    }
+    public void preSolve(Contact contact, Manifold oldManifold) {}
 
     @Override
-    public void postSolve(Contact contact, ContactImpulse impulse) {
+    public void postSolve(Contact contact, ContactImpulse impulse) {}
 
-    }
-
-    public boolean isPlayerContact(Fixture a, Fixture b ){
-        return a.getUserData() instanceof Player || b.getUserData() instanceof Player;
-    }
 }
