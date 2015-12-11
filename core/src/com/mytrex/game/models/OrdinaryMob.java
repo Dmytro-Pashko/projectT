@@ -11,7 +11,8 @@ import static com.mytrex.game.Tools.B2DVars.flagMove;
 
 public class OrdinaryMob extends GameCreature
 {
-    public OrdinaryMob(Body body) {
+    public OrdinaryMob(Body body)
+    {
         batch = new SpriteBatch();
         this.body = body;
         walkSheet = new Texture("core/assets/player_walk.png");

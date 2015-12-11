@@ -82,15 +82,17 @@ public class GameWorld {
 
     public void update()
     {
-        player.moving();
+        player.moving();//Ету хуету нужно сделать в PlayerInputProcessor
 
        for (int i = 0; i < world.getBodyCount(); i++)
         {
-            Array<Body> bodys =  new Array<>();
-            world.getBodies(bodys);
-
-            for (Body b:bodys)
-                if (b.getUserData() == "del") world.destroyBody(b);
+            Array<Body> bodies =  new Array<>();
+            world.getBodies(bodies);
+            for (Body b:bodies)
+            {
+                if (b.getUserData() == "del") world.destroyBody(b); //Если стоит метка на удаление.
+                if (b.getPosition().y<-2) world.destroyBody(b); //Если тело упало под карту.
+            }
         }
     }
 
