@@ -10,6 +10,7 @@ import com.mytrex.game.models.OrdinaryMob;
 import com.mytrex.game.models.Player;
 
 import java.util.ArrayList;
+import static com.mytrex.game.Tools.B2DVars.listMobs;
 
 
 public class GameWorld {
@@ -54,29 +55,27 @@ public class GameWorld {
 
     }
 
-    public void setMob(float x, float y)
-    {
-        mobs.add(new OrdinaryMob(initMob(x,y)));
+    public void setMob(float x, float y) {
+        listMobs.add(new OrdinaryMob(initMob(x,y)));
     }
 
-    private Body initMob(float x, float y)
-    {
+    private Body initMob(float x, float y){
+        BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("core/assets/MobBody.ptb"));
         BodyDef BodyDef = new BodyDef();
         BodyDef.type = BodyType.DynamicBody;
         BodyDef.allowSleep = false;
         Body body = world.createBody(BodyDef);
-        PolygonShape polygonShape = new PolygonShape();
-        polygonShape.setAsBox(0.5f, 0.5f);
         FixtureDef fixtureDef = new FixtureDef();
-        fixtureDef.shape = polygonShape;
         fixtureDef.friction = 1;
-        body.createFixture(fixtureDef);
-        body.setTransform(x+0.5f, y+0.5f, 0);
         MassData data = new MassData();
         data.mass = 7.5f;
         body.setMassData(data);
         body.setBullet(true);
-        body.createFixture(fixtureDef).setUserData("mob");
+        body.setUserData("mob");
+        body.setTransform(x, y, 0);
+        loader.attachFixture(body, "MobBodyBox", fixtureDef, 1);
+        loader.attachFixture(body, "MobBodyLeftSensor", new FixtureDef(), 1);
+        loader.attachFixture(body, "MobBodyRightSensor", new FixtureDef(), 1);
         return body;
     }
 

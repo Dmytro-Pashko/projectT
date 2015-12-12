@@ -16,7 +16,4 @@ public class B2DVars {
     public static final float PPM = 16f;
     public static boolean flagMove = true;
     public static ArrayList<OrdinaryMob> listMobs = new ArrayList<>();
-    static {
-    }
-
 }

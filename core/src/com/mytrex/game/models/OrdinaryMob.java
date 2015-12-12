@@ -27,7 +27,7 @@ public class OrdinaryMob extends GameCreature
         walkAnimationLeft = new Animation(0.1f, walkFramesLeft);
     }
 
-    public void Draw(float stateTime, float x, float y)
+    public void draw(float stateTime, float x, float y)
     {
         batch.begin();
         batch.draw(walkAnimation.getKeyFrame(stateTime, true), x * 2 - PPM, y * 2 - PPM, 25, 36);
@@ -36,7 +36,7 @@ public class OrdinaryMob extends GameCreature
 
     public void moving()
     {
-        if (flagMove) body.setLinearVelocity(3, 0);
+        if (!flagMove) body.setLinearVelocity(3, 0);
         else body.setLinearVelocity(-3, 0);
     }
 
