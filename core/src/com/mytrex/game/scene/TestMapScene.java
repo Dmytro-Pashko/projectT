@@ -102,6 +102,7 @@ public class TestMapScene implements Screen {
         gameWorld.getPlayer().Draw(stateTime, gameWorld.getPlayer().getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, gameWorld.getPlayer().getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
         for (OrdinaryMob mob : listMobs){
             mob.moving();
+            //mob.draw();
         }
     }
 
