@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="left-down" width="256" height="16" tilewidth="16" tileheight="16" nextobjectid="172">
+<map version="1.0" orientation="orthogonal" renderorder="left-down" width="256" height="16" tilewidth="16" tileheight="16" nextobjectid="215">
  <tileset firstgid="1" name="tiledmap" tilewidth="16" tileheight="16" spacing="2" tilecount="810">
   <image source="tiledmap.png" trans="ffffff" width="485" height="546"/>
   <tile id="1">
@@ -205,108 +205,39 @@
   </object>
  </objectgroup>
  <objectgroup name="blocks">
-  <object id="16" name="block_0" type="block" x="208" y="176">
-   <polygon points="0,0 0,16 16,16 16,0"/>
-  </object>
-  <object id="17" name="block_1" type="block" x="240" y="176">
-   <polygon points="0,0 0,16 16,16 16,0"/>
-  </object>
-  <object id="18" name="block_2" type="block" x="272" y="176">
-   <polygon points="0,0 0,16 16,16 16,0"/>
-  </object>
-  <object id="22" name="block_19" type="block" x="1504" y="176">
-   <polygon points="0,0 0,16 16,16 16,0"/>
-  </object>
-  <object id="23" name="block_20" type="block" x="1616" y="176">
-   <polygon points="0,0 0,16 16,16 16,0"/>
-  </object>
-  <object id="24" name="block_21" type="block" x="1920" y="176">
-   <polygon points="0,0 0,16 16,16 16,0"/>
-  </object>
-  <object id="26" name="block_25" type="block" x="2080" y="96">
-   <polygon points="0,0 0,16 16,16 16,0"/>
-  </object>
-  <object id="27" name="block_28" type="block" x="2128" y="96">
-   <polygon points="0,0 0,16 16,16 16,0"/>
-  </object>
-  <object id="30" name="block32" type="block" x="2896" y="176">
-   <polygon points="0,0 0,16 16,16 16,0"/>
-  </object>
-  <object id="31" type="block" x="3552" y="240">
-   <polygon points="0,0 0,-96 32,-96 32,-144 48,-144 48,-176 112,-176 112,-144 128,-144 128,-96 160,-96 160,0"/>
-  </object>
-  <object id="148" name="block_3" type="block" x="1152" y="176">
-   <polygon points="0,0 0,16 16,16 16,0"/>
-  </object>
-  <object id="149" name="block_4" type="block" x="1168" y="176">
-   <polygon points="0,0 16,0 16,16 0,16"/>
-  </object>
-  <object id="150" name="block_5" type="block" x="1184" y="176">
-   <polygon points="0,0 16,0 16,16 0,16"/>
-  </object>
-  <object id="151" name="block_6" type="block" x="1232" y="112">
-   <polygon points="0,0 0,16 16,16 16,0"/>
-  </object>
-  <object id="152" name="block_7" type="block" x="1248" y="112">
-   <polygon points="0,0 16,0 16,16 0,16"/>
-  </object>
-  <object id="153" name="block_8" type="block" x="1264" y="112">
-   <polygon points="0,0 16,0 16,16 0,16"/>
-  </object>
-  <object id="154" name="block_9" type="block" x="1280" y="112">
-   <polygon points="0,0 16,0 16,16 0,16"/>
-  </object>
-  <object id="155" name="block_10" type="block" x="1296" y="112">
-   <polygon points="0,0 16,0 16,16 0,16"/>
-  </object>
-  <object id="156" name="block_11" type="block" x="1312" y="112">
-   <polygon points="0,0 16,0 16,16 0,16"/>
-  </object>
-  <object id="157" name="block_12" type="block" x="1328" y="112">
-   <polygon points="0,0 16,0 16,16 0,16"/>
-  </object>
-  <object id="158" name="block_13" type="block" x="1344" y="112">
-   <polygon points="0,0 16,0 16,16 0,16"/>
-  </object>
-  <object id="159" name="block_14" type="block" x="1360" y="112">
-   <polygon points="0,0 16,0 16,16 0,16"/>
-  </object>
-  <object id="160" name="block_15" type="block" x="1440" y="112">
-   <polygon points="0,0 16,0 16,16 0,16"/>
-  </object>
-  <object id="161" name="block_16" type="block" x="1456" y="112">
-   <polygon points="0,0 16,0 16,16 0,16"/>
-  </object>
-  <object id="162" name="block_17" type="block" x="1472" y="112">
-   <polygon points="0,0 16,0 16,16 0,16"/>
-  </object>
-  <object id="163" name="block_18" type="block" x="1488" y="112">
-   <polygon points="0,0 16,0 16,16 0,16"/>
-  </object>
-  <object id="164" name="block_22" type="block" x="1968" y="96">
-   <polygon points="0,0 16,0 16,16 0,16"/>
-  </object>
-  <object id="165" name="block_23" type="block" x="1984" y="96">
-   <polygon points="0,0 16,0 16,16 0,16"/>
-  </object>
-  <object id="166" name="block_24" type="block" x="2000" y="96">
-   <polygon points="0,0 16,0 16,16 0,16"/>
-  </object>
-  <object id="167" name="block_26" type="block" x="2096" y="176">
-   <polygon points="0,0 16,0 16,16 0,16"/>
-  </object>
-  <object id="168" name="block_27" type="block" x="2112" y="176">
-   <polygon points="0,0 16,0 16,16 0,16"/>
-  </object>
-  <object id="169" name="block_29" type="block" x="2832" y="176">
-   <polygon points="0,0 16,0 16,16 0,16"/>
-  </object>
-  <object id="170" name="block_30" type="block" x="2848" y="176">
-   <polygon points="0,0 16,0 16,16 0,16"/>
-  </object>
-  <object id="171" name="block_31" type="block" x="2864" y="176">
-   <polygon points="0,0 16,0 16,16 0,16"/>
-  </object>
+  <object id="174" x="208" y="176" width="16" height="16"/>
+  <object id="175" x="240" y="176" width="16" height="16"/>
+  <object id="176" x="272" y="176" width="16" height="16"/>
+  <object id="177" x="1152" y="176" width="16" height="16"/>
+  <object id="178" x="1168" y="176" width="16" height="16"/>
+  <object id="180" x="1184" y="176" width="16" height="16"/>
+  <object id="181" x="1232" y="112" width="16" height="16"/>
+  <object id="182" x="1248" y="112" width="16" height="16"/>
+  <object id="183" x="1264" y="112" width="16" height="16"/>
+  <object id="186" x="1280" y="112" width="16" height="16"/>
+  <object id="187" x="1296" y="112" width="16" height="16"/>
+  <object id="188" x="1312" y="112" width="16" height="16"/>
+  <object id="189" x="1328" y="112" width="16" height="16"/>
+  <object id="190" x="1344" y="112" width="16" height="16"/>
+  <object id="193" x="1360" y="112" width="16" height="16"/>
+  <object id="194" x="1440" y="112" width="16" height="16"/>
+  <object id="195" x="1456" y="112" width="16" height="16"/>
+  <object id="197" x="1472" y="112" width="16" height="16"/>
+  <object id="198" x="1488" y="112" width="16" height="16"/>
+  <object id="199" x="1504" y="176" width="16" height="16"/>
+  <object id="200" x="1616" y="176" width="16" height="16"/>
+  <object id="201" x="1920" y="176" width="16" height="16"/>
+  <object id="202" x="1968" y="96" width="16" height="16"/>
+  <object id="203" x="1984" y="96" width="16" height="16"/>
+  <object id="204" x="2000" y="96" width="16" height="16"/>
+  <object id="206" x="2080" y="96" width="16" height="16"/>
+  <object id="207" x="2128" y="96" width="16" height="16"/>
+  <object id="208" x="2096" y="176" width="16" height="16"/>
+  <object id="210" x="2112" y="176" width="16" height="16"/>
+  <object id="211" x="2864" y="176" width="16" height="16"/>
+  <object id="212" x="2848" y="176" width="16" height="16"/>
+  <object id="213" x="2832" y="176" width="16" height="16"/>
+  <object id="214" x="2896" y="176" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Mobs">
   <object id="127" name="0" x="304" y="224" width="16" height="16"/>
