@@ -77,7 +77,7 @@ public class GameWorld {
     }
 
     public void setBrick(float x, float y) {
-        listBricks.add(new Brick(initBrick(x,y)));
+        listBricks.add(new Brick(initBrick(x, y)));
     }
 
     private Body initBrick(float x, float y)
@@ -90,7 +90,7 @@ public class GameWorld {
         shape.setAsBox(0.5f,0.5f);
         fixtureDef.shape = shape;
         body.setUserData("brick");
-        body.setTransform(x, y, 0);
+        body.setTransform(x + 0.5f, y + 0.5f, 0);
         body.createFixture(fixtureDef);
         return body;
     }
