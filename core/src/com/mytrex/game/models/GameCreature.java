@@ -16,6 +16,7 @@ public class GameCreature {
     Boolean rightMove = false;
     Boolean jump = false;
     Boolean isLeft = false;
+    Boolean flagMove = false;
     SpriteBatch batch;
     TextureRegion[] walkFramesRight, walkFramesLeft;
     Texture spriteStay, spriteStayLeft, spriteJumpRigth, spriteJumpLeft, walkSheet;
@@ -43,5 +44,13 @@ public class GameCreature {
 
     public void setRightMove(Boolean rightMove) {
         this.rightMove = rightMove;
+    }
+
+    public Boolean getFlagMove() {
+        return flagMove;
+    }
+
+    public void setFlagMove(Boolean flagMove) {
+        this.flagMove = flagMove;
     }
 }

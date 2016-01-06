@@ -89,7 +89,12 @@ public class TestMapScene implements Screen {
     public void render(float delta)
     {
         gameWorld.update();
-        gameWorld.getWorld().step(delta, 1, 1);
+        try {
+            gameWorld.getWorld().step(delta, 1, 1);
+        }
+        catch (Exception e){
+            System.out.println("You loose!");
+        }
         cameraUpdate();
         camera.update();
         stateTime += delta;
@@ -102,7 +107,7 @@ public class TestMapScene implements Screen {
         gameWorld.getPlayer().Draw(stateTime, gameWorld.getPlayer().getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, gameWorld.getPlayer().getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
         for (OrdinaryMob mob : listMobs){
             mob.moving();
-            //mob.draw();
+            mob.draw(delta, mob.getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, mob.getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
         }
     }
 

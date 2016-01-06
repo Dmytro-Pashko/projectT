@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Body;
 
 import static com.mytrex.game.Tools.B2DVars.PPM;
-import static com.mytrex.game.Tools.B2DVars.flagMove;
 
 public class OrdinaryMob extends GameCreature
 {
@@ -29,9 +28,11 @@ public class OrdinaryMob extends GameCreature
 
     public void draw(float stateTime, float x, float y)
     {
-        batch.begin();
-        batch.draw(walkAnimation.getKeyFrame(stateTime, true), x * 2 - PPM, y * 2 - PPM, 25, 36);
-        batch.end();
+        if (true) {
+            batch.begin();
+            batch.draw(walkAnimation.getKeyFrame(stateTime, true), x * 2, y * 2, 25, 36);
+            batch.end();
+        }
     }
 
     public void moving()
@@ -39,5 +40,7 @@ public class OrdinaryMob extends GameCreature
         if (!flagMove) body.setLinearVelocity(3, 0);
         else body.setLinearVelocity(-3, 0);
     }
+
+
 
 }

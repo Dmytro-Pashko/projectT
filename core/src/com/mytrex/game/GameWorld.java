@@ -52,7 +52,6 @@ public class GameWorld {
         loader.attachFixture(body, "PlayerBodyUpSensor", new FixtureDef(), 1);
         loader.attachFixture(body, "PlayerBodyDownSensor", new FixtureDef(), 1);
         return body;
-
     }
 
     public void setMob(float x, float y) {
@@ -89,8 +88,10 @@ public class GameWorld {
             world.getBodies(bodies);
             for (Body b:bodies)
             {
+
                 if (b.getUserData() == "del") world.destroyBody(b); //Если стоит метка на удаление.
-                if (b.getPosition().y<-2) world.destroyBody(b); //Если тело упало под карту.
+                if (b.getPosition().y < -2) world.destroyBody(b); //Если тело упало под карту.
+
             }
         }
     }
