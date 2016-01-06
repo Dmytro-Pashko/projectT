@@ -12,9 +12,11 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mytrex.game.GameWorld;
 import com.mytrex.game.PlayerInputProcessor;
+import com.mytrex.game.models.Brick;
 import com.mytrex.game.models.OrdinaryMob;
 
 import static com.mytrex.game.Tools.B2DVars.PPM;
+import static com.mytrex.game.Tools.B2DVars.listBricks;
 import static com.mytrex.game.Tools.B2DVars.listMobs;
 
 
@@ -104,7 +106,10 @@ public class TestMapScene implements Screen {
         gameWorld.getPlayer().Draw(stateTime, gameWorld.getPlayer().getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, gameWorld.getPlayer().getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
         for (OrdinaryMob mob : listMobs){
             mob.moving();
-            mob.draw(delta, mob.getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, mob.getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
+            mob.draw(stateTime, mob.getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, mob.getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
+        }
+        for (Brick brick : listBricks){
+            brick.draw(brick.getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, brick.getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
         }
     }
 

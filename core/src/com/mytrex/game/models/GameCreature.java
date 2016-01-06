@@ -18,7 +18,7 @@ public class GameCreature {
     Boolean isLeft = false;
     Boolean flagMove = false;
     SpriteBatch batch;
-    TextureRegion[] walkFramesRight, walkFramesLeft;
+    TextureRegion[] walkFramesRight, walkFramesLeft, walkFrames;
     Texture spriteStay, spriteStayLeft, spriteJumpRigth, spriteJumpLeft, walkSheet;
     Animation walkAnimation, walkAnimationLeft;
 

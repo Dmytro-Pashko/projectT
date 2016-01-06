@@ -14,25 +14,19 @@ public class OrdinaryMob extends GameCreature
     {
         batch = new SpriteBatch();
         this.body = body;
-        walkSheet = new Texture("core/assets/player_walk.png");
-        walkFramesRight = new TextureRegion[5];
-        walkFramesLeft = new TextureRegion[5];
-        for (int i = 0; i < 5; i++) {
-            walkFramesRight[i] = new TextureRegion(walkSheet, 25 * i, 0, 25, 36);
-            walkFramesLeft[i] = new TextureRegion(walkSheet, 25 * i, 0, 25, 36);
-            walkFramesLeft[i].flip(true, false);
+        walkSheet = new Texture("core/assets/mob_1.png");
+        walkFrames = new TextureRegion[2];
+        for (int i = 0; i < 2; i++) {
+            walkFrames[i] = new TextureRegion(walkSheet, 16 * i, 0, 16, 16);
         }
-        walkAnimation = new Animation(0.1f, walkFramesRight);
-        walkAnimationLeft = new Animation(0.1f, walkFramesLeft);
+        walkAnimation = new Animation(0.25f, walkFrames);
     }
 
     public void draw(float stateTime, float x, float y)
     {
-        if (true) {
             batch.begin();
-            batch.draw(walkAnimation.getKeyFrame(stateTime, true), x * 2, y * 2, 25, 36);
+            batch.draw(walkAnimation.getKeyFrame(stateTime, true), x * 2 - PPM, y * 2 - PPM, 32, 32);
             batch.end();
-        }
     }
 
     public void moving()

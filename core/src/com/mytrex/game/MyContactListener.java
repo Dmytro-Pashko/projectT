@@ -29,6 +29,7 @@ public class MyContactListener implements ContactListener {
         if (contact.getFixtureA() == player.getBody().getFixtureList().get(2) && contact.getFixtureB().getBody().getUserData() == "mob") {
             contact.getFixtureB().getBody().setUserData("del");
             player.getBody().applyLinearImpulse(0f, 150f, 0.0f, 0.0f, true);
+            player.setJump(true);
             for (OrdinaryMob mob : listMobs) {
                 if (mob.getBody() == contact.getFixtureB().getBody()){
                     listMobs.remove(mob);
