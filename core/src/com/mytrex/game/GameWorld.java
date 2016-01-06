@@ -8,15 +8,12 @@ import com.badlogic.gdx.utils.Array;
 import com.mytrex.game.Tools.BodyEditorLoader;
 import com.mytrex.game.models.OrdinaryMob;
 import com.mytrex.game.models.Player;
-
-import java.util.ArrayList;
 import static com.mytrex.game.Tools.B2DVars.listMobs;
 
 
 public class GameWorld {
     private Player player;
     private World world;
-    private ArrayList<OrdinaryMob> mobs = new ArrayList<>();
     private MyContactListener listner;
 
 
@@ -73,8 +70,8 @@ public class GameWorld {
         body.setUserData("mob");
         body.setTransform(x, y, 0);
         loader.attachFixture(body, "MobBodyBox", fixtureDef, 1);
-        loader.attachFixture(body, "MobBodyLeftSensor", new FixtureDef(), 1);
-        loader.attachFixture(body, "MobBodyRightSensor", new FixtureDef(), 1);
+        //loader.attachFixture(body, "MobBodyLeftSensor", new FixtureDef(), 1);
+        //loader.attachFixture(body, "MobBodyRightSensor", new FixtureDef(), 1);
         return body;
     }
 
