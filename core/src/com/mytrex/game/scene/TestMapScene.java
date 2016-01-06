@@ -37,8 +37,8 @@ public class TestMapScene implements Screen {
         camera.position.set(128 / PPM, 128 / PPM, 0);
         tiledMapRenderer = new OrthogonalTiledMapRenderer(map, 0.0625f);
         gameWorld = new GameWorld();
-        gameWorld.setPlayer(82, 1);
-        camera.position.set(82, 8, 0);
+        gameWorld.setPlayer(1, 1);
+        camera.position.set(8, 8, 0);
 
         //Layer = 1 Земля.Точнее полигоны земли.
         for (MapObject object : map.getLayers().get(2).getObjects()) {
@@ -90,8 +90,8 @@ public class TestMapScene implements Screen {
     @Override
     public void render(float delta)
     {
-        gameWorld.update();
         gameWorld.getWorld().step(delta, 1, 1);
+        gameWorld.update();
         cameraUpdate();
         camera.update();
         stateTime += delta;

@@ -55,23 +55,22 @@ public class GameWorld {
         listMobs.add(new OrdinaryMob(initMob(x,y)));
     }
 
-    private Body initMob(float x, float y){
-        BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("core/assets/MobBody.ptb"));
+    private Body initMob(float x, float y)
+    {
         BodyDef BodyDef = new BodyDef();
         BodyDef.type = BodyType.DynamicBody;
         BodyDef.allowSleep = false;
         Body body = world.createBody(BodyDef);
         FixtureDef fixtureDef = new FixtureDef();
-        fixtureDef.friction = 1;
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(0.5f,0.5f);
+        fixtureDef.shape = shape;
         MassData data = new MassData();
         data.mass = 7.5f;
         body.setMassData(data);
-        body.setBullet(true);
         body.setUserData("mob");
         body.setTransform(x, y, 0);
-        loader.attachFixture(body, "MobBodyBox", fixtureDef, 1);
-        //loader.attachFixture(body, "MobBodyLeftSensor", new FixtureDef(), 1);
-        //loader.attachFixture(body, "MobBodyRightSensor", new FixtureDef(), 1);
+        body.createFixture(fixtureDef);
         return body;
     }
 
