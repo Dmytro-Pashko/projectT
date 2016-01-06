@@ -32,7 +32,6 @@ public class TestMapScene implements Screen {
 
     public TestMapScene() {
         debuger = new Box2DDebugRenderer(true,true,true,true,true,true);
-        ;
         map = new TmxMapLoader().load("core/assets/stage1.tmx");
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Gdx.graphics.getWidth() * 0.5f / PPM, Gdx.graphics.getHeight() * 0.5f / PPM);
@@ -69,6 +68,13 @@ public class TestMapScene implements Screen {
             gameWorld.setMob(rectObject.getRectangle().getX()/PPM,rectObject.getRectangle().getY()/PPM);
         }
 
+
+        for (MapObject object : map.getLayers().get(3).getObjects())
+        {
+            RectangleMapObject rectObject = (RectangleMapObject)object;
+            gameWorld.setBrick(rectObject.getRectangle().getX() / PPM, rectObject.getRectangle().getY() / PPM);
+        }
+
         Gdx.input.setInputProcessor(new PlayerInputProcessor(gameWorld));
     }
 
@@ -87,6 +93,7 @@ public class TestMapScene implements Screen {
             camera.position.set(camera.position.x + 0.1f, camera.position.y, 0);
         if (camera.position.x - 2 > gameWorld.getPlayer().getBody().getPosition().x && camera.position.x >= 8.0)
             camera.position.set(camera.position.x - 0.1f, camera.position.y, 0);
+            //camera.position.set(gameWorld.getPlayer().getBody().getPosition().x , camera.position.y, 0);
     }
 
     @Override

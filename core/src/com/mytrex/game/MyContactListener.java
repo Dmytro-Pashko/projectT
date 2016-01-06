@@ -1,6 +1,7 @@
 package com.mytrex.game;
 
 import com.badlogic.gdx.physics.box2d.*;
+import com.mytrex.game.models.Brick;
 import com.mytrex.game.models.OrdinaryMob;
 import com.mytrex.game.models.Player;
 import static com.mytrex.game.Tools.B2DVars.*;
@@ -40,6 +41,18 @@ public class MyContactListener implements ContactListener {
 
         if (contact.getFixtureA() == player.getBody().getFixtureList().get(0) && contact.getFixtureB().getBody().getUserData() == "mob" || player.getBody().getPosition().y < 0) {
             System.out.println("You loose");
+        }
+
+        //bloks destroing
+
+        if (contact.getFixtureA() == player.getBody().getFixtureList().get(1) && contact.getFixtureB().getBody().getUserData() == "brick") {
+            contact.getFixtureB().getBody().setUserData("del");
+            for (Brick brick : listBricks) {
+                if (brick.getBody() == contact.getFixtureB().getBody()){
+                    listBricks.remove(brick);
+                    break;
+                }
+            }
         }
 
 
