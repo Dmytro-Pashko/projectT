@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="left-down" width="256" height="16" tilewidth="16" tileheight="16" nextobjectid="148">
+<map version="1.0" orientation="orthogonal" renderorder="left-down" width="256" height="16" tilewidth="16" tileheight="16" nextobjectid="172">
  <tileset firstgid="1" name="tiledmap" tilewidth="16" tileheight="16" spacing="2" tilecount="810">
   <image source="tiledmap.png" trans="ffffff" width="485" height="546"/>
   <tile id="1">
@@ -80,7 +80,7 @@
  </tileset>
  <layer name="all" width="256" height="16">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <objectgroup name="world">
@@ -214,44 +214,98 @@
   <object id="18" name="block_2" type="block" x="272" y="176">
    <polygon points="0,0 0,16 16,16 16,0"/>
   </object>
-  <object id="19" name="block_3" type="block" x="1152" y="176">
-   <polygon points="0,0 0,16 48,16 48,0"/>
-  </object>
-  <object id="20" name="block_4" type="block" x="1232" y="112">
-   <polygon points="0,0 0,16 144,16 144,0"/>
-  </object>
-  <object id="21" name="block_5" type="block" x="1440" y="112">
-   <polygon points="0,0 0,16 64,16 64,0"/>
-  </object>
-  <object id="22" name="block_6" type="block" x="1504" y="176">
+  <object id="22" name="block_19" type="block" x="1504" y="176">
    <polygon points="0,0 0,16 16,16 16,0"/>
   </object>
-  <object id="23" name="block_7" type="block" x="1616" y="176">
+  <object id="23" name="block_20" type="block" x="1616" y="176">
    <polygon points="0,0 0,16 16,16 16,0"/>
   </object>
-  <object id="24" name="block_8" type="block" x="1920" y="176">
+  <object id="24" name="block_21" type="block" x="1920" y="176">
    <polygon points="0,0 0,16 16,16 16,0"/>
   </object>
-  <object id="25" name="block_9" type="block" x="1968" y="96">
-   <polygon points="0,0 0,16 48,16 48,0"/>
-  </object>
-  <object id="26" name="block_10" type="block" x="2080" y="96">
+  <object id="26" name="block_25" type="block" x="2080" y="96">
    <polygon points="0,0 0,16 16,16 16,0"/>
   </object>
-  <object id="27" name="block_11" type="block" x="2128" y="96">
+  <object id="27" name="block_28" type="block" x="2128" y="96">
    <polygon points="0,0 0,16 16,16 16,0"/>
   </object>
-  <object id="28" name="block_12" type="block" x="2096" y="176">
-   <polygon points="0,0 0,16 32,16 32,0"/>
-  </object>
-  <object id="29" name="block_13" type="block" x="2832" y="176">
-   <polygon points="0,0 0,16 48,16 48,0"/>
-  </object>
-  <object id="30" name="block_14" type="block" x="2896" y="176">
+  <object id="30" name="block32" type="block" x="2896" y="176">
    <polygon points="0,0 0,16 16,16 16,0"/>
   </object>
-  <object id="31" name="block_15" type="block" x="3552" y="240">
+  <object id="31" type="block" x="3552" y="240">
    <polygon points="0,0 0,-96 32,-96 32,-144 48,-144 48,-176 112,-176 112,-144 128,-144 128,-96 160,-96 160,0"/>
+  </object>
+  <object id="148" name="block_3" type="block" x="1152" y="176">
+   <polygon points="0,0 0,16 16,16 16,0"/>
+  </object>
+  <object id="149" name="block_4" type="block" x="1168" y="176">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="150" name="block_5" type="block" x="1184" y="176">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="151" name="block_6" type="block" x="1232" y="112">
+   <polygon points="0,0 0,16 16,16 16,0"/>
+  </object>
+  <object id="152" name="block_7" type="block" x="1248" y="112">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="153" name="block_8" type="block" x="1264" y="112">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="154" name="block_9" type="block" x="1280" y="112">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="155" name="block_10" type="block" x="1296" y="112">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="156" name="block_11" type="block" x="1312" y="112">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="157" name="block_12" type="block" x="1328" y="112">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="158" name="block_13" type="block" x="1344" y="112">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="159" name="block_14" type="block" x="1360" y="112">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="160" name="block_15" type="block" x="1440" y="112">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="161" name="block_16" type="block" x="1456" y="112">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="162" name="block_17" type="block" x="1472" y="112">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="163" name="block_18" type="block" x="1488" y="112">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="164" name="block_22" type="block" x="1968" y="96">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="165" name="block_23" type="block" x="1984" y="96">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="166" name="block_24" type="block" x="2000" y="96">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="167" name="block_26" type="block" x="2096" y="176">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="168" name="block_27" type="block" x="2112" y="176">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="169" name="block_29" type="block" x="2832" y="176">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="170" name="block_30" type="block" x="2848" y="176">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="171" name="block_31" type="block" x="2864" y="176">
+   <polygon points="0,0 16,0 16,16 0,16"/>
   </object>
  </objectgroup>
  <objectgroup name="Mobs">
