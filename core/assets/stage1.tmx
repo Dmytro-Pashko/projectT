@@ -257,7 +257,7 @@
  <objectgroup name="Mobs">
   <object id="127" name="0" x="288" y="224" width="16" height="16"/>
   <object id="128" name="1" x="496" y="224" width="16" height="16"/>
-  <object id="129" name="2" x="816" y="224" width="16" height="16"/>
+  <object id="129" name="2" x="800" y="224" width="16" height="16"/>
   <object id="130" name="3" x="832" y="224" width="16" height="16"/>
   <object id="131" name="4" x="1264" y="96" width="16" height="16"/>
   <object id="137" name="5" x="1360" y="96" width="16" height="16"/>
