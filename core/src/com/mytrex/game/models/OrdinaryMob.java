@@ -24,9 +24,9 @@ public class OrdinaryMob extends GameCreature
 
     public void draw(float stateTime, float x, float y)
     {
-            batch.begin();
-            batch.draw(walkAnimation.getKeyFrame(stateTime, true), x * 2 - PPM, y * 2 - PPM, 32, 32);
-            batch.end();
+        batch.begin();
+        batch.draw(walkAnimation.getKeyFrame(stateTime, true), x * 2 - PPM, y * 2 - PPM, 32, 32);
+        batch.end();
     }
 
     public void moving()

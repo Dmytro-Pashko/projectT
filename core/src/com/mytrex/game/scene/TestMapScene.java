@@ -13,11 +13,10 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.mytrex.game.GameWorld;
 import com.mytrex.game.PlayerInputProcessor;
 import com.mytrex.game.models.Brick;
+import com.mytrex.game.models.Coin;
 import com.mytrex.game.models.OrdinaryMob;
 
-import static com.mytrex.game.Tools.B2DVars.PPM;
-import static com.mytrex.game.Tools.B2DVars.listBricks;
-import static com.mytrex.game.Tools.B2DVars.listMobs;
+import static com.mytrex.game.Tools.B2DVars.*;
 
 
 public class TestMapScene implements Screen {
@@ -68,11 +67,16 @@ public class TestMapScene implements Screen {
             gameWorld.setMob(rectObject.getRectangle().getX()/PPM,rectObject.getRectangle().getY()/PPM);
         }
 
-
         for (MapObject object : map.getLayers().get(3).getObjects())
         {
             RectangleMapObject rectObject = (RectangleMapObject)object;
             gameWorld.setBrick(rectObject.getRectangle().getX() / PPM, rectObject.getRectangle().getY() / PPM);
+        }
+
+        for (MapObject object : map.getLayers().get(5).getObjects())
+        {
+            RectangleMapObject rectObject = (RectangleMapObject)object;
+            gameWorld.setCoin(rectObject.getRectangle().getX() / PPM, rectObject.getRectangle().getY() / PPM);
         }
 
         Gdx.input.setInputProcessor(new PlayerInputProcessor(gameWorld));
@@ -117,6 +121,9 @@ public class TestMapScene implements Screen {
         }
         for (Brick brick : listBricks){
             brick.draw(brick.getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, brick.getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
+        }
+        for (Coin coin : listCoins){
+            coin.draw(stateTime,coin.getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, coin.getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
         }
     }
 

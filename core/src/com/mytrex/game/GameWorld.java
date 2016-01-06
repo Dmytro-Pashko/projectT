@@ -7,8 +7,11 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.utils.Array;
 import com.mytrex.game.Tools.BodyEditorLoader;
 import com.mytrex.game.models.Brick;
+import com.mytrex.game.models.Coin;
 import com.mytrex.game.models.OrdinaryMob;
 import com.mytrex.game.models.Player;
+
+import static com.mytrex.game.Tools.B2DVars.listCoins;
 import static com.mytrex.game.Tools.B2DVars.listMobs;
 import static com.mytrex.game.Tools.B2DVars.listBricks;
 
@@ -90,6 +93,25 @@ public class GameWorld {
         shape.setAsBox(0.5f,0.5f);
         fixtureDef.shape = shape;
         body.setUserData("brick");
+        body.setTransform(x + 0.5f, y + 0.5f, 0);
+        body.createFixture(fixtureDef);
+        return body;
+    }
+
+    public void setCoin(float x, float y) {
+        listCoins.add(new Coin(initCoin(x, y)));
+    }
+
+    private Body initCoin(float x, float y)
+    {
+        BodyDef BodyDef = new BodyDef();
+        BodyDef.type = BodyType.StaticBody;
+        Body body = world.createBody(BodyDef);
+        FixtureDef fixtureDef = new FixtureDef();
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(0.5f,0.5f);
+        fixtureDef.shape = shape;
+        body.setUserData("coin");
         body.setTransform(x + 0.5f, y + 0.5f, 0);
         body.createFixture(fixtureDef);
         return body;

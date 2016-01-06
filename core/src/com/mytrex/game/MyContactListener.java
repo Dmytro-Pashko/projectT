@@ -2,6 +2,7 @@ package com.mytrex.game;
 
 import com.badlogic.gdx.physics.box2d.*;
 import com.mytrex.game.models.Brick;
+import com.mytrex.game.models.Coin;
 import com.mytrex.game.models.OrdinaryMob;
 import com.mytrex.game.models.Player;
 import static com.mytrex.game.Tools.B2DVars.*;
@@ -50,6 +51,19 @@ public class MyContactListener implements ContactListener {
             for (Brick brick : listBricks) {
                 if (brick.getBody() == contact.getFixtureB().getBody()){
                     listBricks.remove(brick);
+                    break;
+                }
+            }
+        }
+
+        //coins
+
+        if (contact.getFixtureA().getBody() == player.getBody() && contact.getFixtureB().getBody().getUserData() == "coin") {
+            contact.getFixtureB().getBody().setUserData("del");
+            for (Coin coin : listCoins) {
+                if (coin.getBody() == contact.getFixtureB().getBody())
+                {
+                    listCoins.remove(coin);
                     break;
                 }
             }
