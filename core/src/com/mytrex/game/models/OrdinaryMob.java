@@ -37,8 +37,8 @@ public class OrdinaryMob extends GameCreature
 
     public void moving()
     {
-        if (!flagMove) body.setLinearVelocity(3, 0);
-        else body.setLinearVelocity(-3, 0);
+        if (!flagMove) body.setLinearVelocity(3, body.getLinearVelocity().y);
+        else body.setLinearVelocity(-3, body.getLinearVelocity().y);
 
     }
 

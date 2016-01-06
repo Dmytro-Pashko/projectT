@@ -38,7 +38,7 @@ public class MyContactListener implements ContactListener {
         }
 
         if (contact.getFixtureA() == player.getBody().getFixtureList().get(0) && contact.getFixtureB().getBody().getUserData() == "mob" || player.getBody().getPosition().y < 0) {
-            contact.getFixtureA().getBody().setUserData("del");
+            System.out.println("You loose");
         }
 
 
