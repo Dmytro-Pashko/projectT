@@ -29,6 +29,12 @@ public class MyContactListener implements ContactListener {
         if (contact.getFixtureA() == player.getBody().getFixtureList().get(2) && contact.getFixtureB().getBody().getUserData() == "mob") {
             contact.getFixtureB().getBody().setUserData("del");
             player.getBody().applyLinearImpulse(0f, 150f, 0.0f, 0.0f, true);
+            for (OrdinaryMob mob : listMobs) {
+                if (mob.getBody() == contact.getFixtureB().getBody()){
+                    listMobs.remove(mob);
+                    break;
+                }
+            }
         }
 
         if (contact.getFixtureA() == player.getBody().getFixtureList().get(0) && contact.getFixtureB().getBody().getUserData() == "mob" || player.getBody().getPosition().y < 0) {
@@ -37,15 +43,13 @@ public class MyContactListener implements ContactListener {
 
 
 
-        //Цей код ще не робить, ідея полягає в тому, щоб відрізняти моба по хеш-коду і міняти конкретного моба.
-        if (contact.getFixtureA().getBody().getUserData() == "mob"){
-            int hashMob, hashObj;
+        //velocity of mob.
+        if (contact.getFixtureB().getBody().getUserData() == "mob" && contact.getFixtureA().getBody().getUserData() == "obstacle"){
             for (OrdinaryMob mob : listMobs) {
-                hashMob = mob.getBody().hashCode();
-                hashObj = contact.getFixtureA().getBody().hashCode();
-                if (hashMob == hashObj){
+                if (mob.getBody() == contact.getFixtureB().getBody()){
                     if (mob.getFlagMove()) mob.setFlagMove(false);
                     else mob.setFlagMove(true);
+                    break;
                 }
             }
         }

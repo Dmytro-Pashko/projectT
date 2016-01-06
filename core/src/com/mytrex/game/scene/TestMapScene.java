@@ -46,7 +46,8 @@ public class TestMapScene implements Screen {
             BodyDef bd = new BodyDef();
             bd.type = BodyDef.BodyType.StaticBody;
             Body body = gameWorld.getWorld().createBody(bd);
-            body.createFixture(shape,1).setUserData("ground");
+            body.createFixture(shape,1);
+            body.setUserData("ground");
             shape.dispose();//Удаляем шейп.
         }
 
@@ -55,7 +56,8 @@ public class TestMapScene implements Screen {
             BodyDef bd = new BodyDef();
             bd.type = BodyDef.BodyType.StaticBody;
             Body body = gameWorld.getWorld().createBody(bd);
-            body.createFixture(shape,1).setUserData("obstacle");
+            body.createFixture(shape,1);
+            body.setUserData("obstacle");
             shape.dispose();//Удаляем шейп.
         }
 
