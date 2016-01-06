@@ -47,9 +47,23 @@ public class MyContactListener implements ContactListener {
         if (contact.getFixtureB().getBody().getUserData() == "mob" && contact.getFixtureA().getBody().getUserData() == "obstacle"){
             for (OrdinaryMob mob : listMobs) {
                 if (mob.getBody() == contact.getFixtureB().getBody()){
-                    if (mob.getFlagMove()) mob.setFlagMove(false);
-                    else mob.setFlagMove(true);
+                    mob.setFlagMove(!mob.getFlagMove());
                     break;
+                }
+            }
+        }
+        if (contact.getFixtureA().getBody().getUserData() == "mob" && contact.getFixtureB().getBody().getUserData() == "mob")
+        {
+            for (OrdinaryMob mob:listMobs)
+            {
+                if (contact.getFixtureB().getBody() == mob.getBody())
+                {
+                    mob.setFlagMove(!mob.getFlagMove());
+                }
+
+                if (contact.getFixtureA().getBody() == mob.getBody())
+                {
+                    mob.setFlagMove(!mob.getFlagMove());
                 }
             }
         }
