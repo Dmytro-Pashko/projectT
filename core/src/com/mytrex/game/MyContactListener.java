@@ -1,10 +1,8 @@
 package com.mytrex.game;
 
 import com.badlogic.gdx.physics.box2d.*;
-import com.mytrex.game.models.Brick;
-import com.mytrex.game.models.Coin;
-import com.mytrex.game.models.OrdinaryMob;
-import com.mytrex.game.models.Player;
+import com.mytrex.game.models.*;
+
 import static com.mytrex.game.Tools.B2DVars.*;
 
 /**
@@ -12,7 +10,6 @@ import static com.mytrex.game.Tools.B2DVars.*;
  */
 public class MyContactListener implements ContactListener {
     private Player player;
-
 
     public void setPlayer(Player player) {
         this.player = player;
@@ -49,7 +46,11 @@ public class MyContactListener implements ContactListener {
         if (contact.getFixtureA() == player.getBody().getFixtureList().get(1) && contact.getFixtureB().getBody().getUserData() == "brick") {
             contact.getFixtureB().getBody().setUserData("del");
             for (Brick brick : listBricks) {
-                if (brick.getBody() == contact.getFixtureB().getBody()){
+                if (brick.getBody() == contact.getFixtureB().getBody())
+                {
+                    animation.startAnimation(contact.getFixtureB().getBody().getPosition().x,contact.getFixtureB().getBody().getPosition().y);
+                    animation.setStart(true);
+                    brick.setFlag();
                     listBricks.remove(brick);
                     break;
                 }
@@ -69,7 +70,18 @@ public class MyContactListener implements ContactListener {
             }
         }
 
+        //secretBox
 
+        if (contact.getFixtureA() == player.getBody().getFixtureList().get(1) && contact.getFixtureB().getBody().getUserData() == "secretBox")
+        {
+            for (SecretBox box : listSecretBox) {
+                if (box.getBody() == contact.getFixtureB().getBody() && !box.isFlag())
+                {
+                    box.setFlag(!box.isFlag());
+                    break;
+                }
+            }
+        }
 
         //velocity of mob.
         if (contact.getFixtureB().getBody().getUserData() == "mob" && contact.getFixtureA().getBody().getUserData() == "obstacle"){

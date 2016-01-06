@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="left-down" width="256" height="16" tilewidth="16" tileheight="16" nextobjectid="242">
+<map version="1.0" orientation="orthogonal" renderorder="left-down" width="256" height="16" tilewidth="16" tileheight="16" nextobjectid="273">
  <tileset firstgid="1" name="tiledmap" tilewidth="16" tileheight="16" spacing="2" tilecount="810">
   <image source="tiledmap.png" trans="ffffff" width="485" height="546"/>
   <tile id="1">
@@ -80,7 +80,7 @@
  </tileset>
  <layer name="all" width="256" height="16">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <objectgroup name="world">
@@ -186,45 +186,6 @@
   <object id="122" name="6" x="2208" y="224">
    <polygon points="0,0 0,16 16,16 16,0 0,0"/>
   </object>
-  <object id="228" x="144" y="176">
-   <polygon points="0,0 0,16 16,16 16,0 0,0"/>
-  </object>
-  <object id="229" x="224" y="176">
-   <polygon points="0,0 0,16 16,16 16,0 0,0"/>
-  </object>
-  <object id="230" x="256" y="176">
-   <polygon points="0,0 0,16 16,16 16,0 0,0"/>
-  </object>
-  <object id="231" x="240" y="112">
-   <polygon points="0,0 0,16 16,16 16,0 0,0"/>
-  </object>
-  <object id="233" x="1504" y="112">
-   <polygon points="0,0 0,16 16,16 16,0 0,0"/>
-  </object>
-  <object id="234" x="1632" y="176">
-   <polygon points="0,0 0,16 16,16 16,0 0,0"/>
-  </object>
-  <object id="235" x="1712" y="176">
-   <polygon points="0,0 0,16 16,16 16,0 0,0"/>
-  </object>
-  <object id="236" x="1776" y="176">
-   <polygon points="0,0 0,16 16,16 16,0 0,0"/>
-  </object>
-  <object id="237" x="1776" y="112">
-   <polygon points="0,0 0,16 16,16 16,0 0,0"/>
-  </object>
-  <object id="238" x="1840" y="176">
-   <polygon points="0,0 0,16 16,16 16,0 0,0"/>
-  </object>
-  <object id="239" x="2096" y="96">
-   <polygon points="0,0 0,16 16,16 16,0 0,0"/>
-  </object>
-  <object id="240" x="2112" y="96">
-   <polygon points="0,0 0,16 16,16 16,0 0,0"/>
-  </object>
-  <object id="241" x="2880" y="176">
-   <polygon points="0,0 0,16 16,16 16,0 0,0"/>
-  </object>
  </objectgroup>
  <objectgroup name="ground">
   <object id="67" name="0" x="0" y="240">
@@ -266,9 +227,9 @@
   <object id="199" x="1504" y="176" width="16" height="16"/>
   <object id="200" x="1616" y="176" width="16" height="16"/>
   <object id="201" x="1920" y="176" width="16" height="16"/>
-  <object id="202" x="1968" y="96" width="16" height="16"/>
-  <object id="203" x="1984" y="96" width="16" height="16"/>
-  <object id="204" x="2000" y="96" width="16" height="16"/>
+  <object id="202" x="1968" y="112" width="16" height="16"/>
+  <object id="203" x="1984" y="112" width="16" height="16"/>
+  <object id="204" x="2000" y="112" width="16" height="16"/>
   <object id="206" x="2080" y="96" width="16" height="16"/>
   <object id="207" x="2128" y="96" width="16" height="16"/>
   <object id="208" x="2096" y="176" width="16" height="16"/>
@@ -296,18 +257,32 @@
   <object id="146" name="14" x="2960" y="224" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="coins">
-  <object id="215" x="144" y="176" width="16" height="16"/>
-  <object id="216" x="224" y="176" width="16" height="16"/>
-  <object id="217" x="240" y="112" width="16" height="16"/>
-  <object id="218" x="256" y="176" width="16" height="16"/>
-  <object id="219" x="1504" y="112" width="16" height="16"/>
-  <object id="220" x="1632" y="176" width="16" height="16"/>
-  <object id="221" x="1776" y="176" width="16" height="16"/>
-  <object id="222" x="1776" y="112" width="16" height="16"/>
-  <object id="223" x="1712" y="176" width="16" height="16"/>
-  <object id="224" x="1840" y="176" width="16" height="16"/>
-  <object id="225" x="2096" y="96" width="16" height="16"/>
-  <object id="226" x="2112" y="96" width="16" height="16"/>
-  <object id="227" x="2880" y="176" width="16" height="16"/>
+  <object id="245" x="192" y="224" width="16" height="16"/>
+  <object id="246" x="208" y="240" width="208"/>
+  <object id="247" x="1280" y="64" width="16" height="16"/>
+  <object id="248" x="1328" y="64" width="16" height="16"/>
+  <object id="249" x="1184" y="144" width="16" height="16"/>
+  <object id="251" x="1456" y="96" width="16" height="16"/>
+  <object id="252" x="1488" y="96" width="16" height="16"/>
+  <object id="253" x="1984" y="96" width="16" height="16"/>
+  <object id="254" x="2128" y="80" width="16" height="16"/>
+  <object id="255" x="2080" y="80" width="16" height="16"/>
+  <object id="256" x="2848" y="144" width="16" height="16"/>
+  <object id="257" x="2880" y="144" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup name="boxes">
+  <object id="260" x="144" y="176" width="16" height="16"/>
+  <object id="261" x="224" y="176" width="16" height="16"/>
+  <object id="262" x="256" y="176" width="16" height="16"/>
+  <object id="263" x="240" y="112" width="16" height="16"/>
+  <object id="264" x="1504" y="112" width="16" height="16"/>
+  <object id="265" x="1632" y="176" width="16" height="16"/>
+  <object id="266" x="1712" y="176" width="16" height="16"/>
+  <object id="267" x="1776" y="176" width="16" height="16"/>
+  <object id="268" x="1840" y="176" width="16" height="16"/>
+  <object id="269" x="1776" y="112" width="16" height="16"/>
+  <object id="270" x="2096" y="96" width="16" height="16"/>
+  <object id="271" x="2112" y="96" width="16" height="16"/>
+  <object id="272" x="2880" y="176" width="16" height="16"/>
  </objectgroup>
 </map>

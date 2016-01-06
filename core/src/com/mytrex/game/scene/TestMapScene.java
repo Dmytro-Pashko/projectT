@@ -4,6 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.PolygonMapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
@@ -12,9 +15,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mytrex.game.GameWorld;
 import com.mytrex.game.PlayerInputProcessor;
-import com.mytrex.game.models.Brick;
-import com.mytrex.game.models.Coin;
-import com.mytrex.game.models.OrdinaryMob;
+import com.mytrex.game.models.*;
 
 import static com.mytrex.game.Tools.B2DVars.*;
 
@@ -28,8 +29,13 @@ public class TestMapScene implements Screen {
     private Box2DDebugRenderer debuger;
     private GameWorld gameWorld;
     private float stateTime = 0f;
+    SpriteBatch sb;
+
+
 
     public TestMapScene() {
+
+        sb = new SpriteBatch();
         debuger = new Box2DDebugRenderer(true,true,true,true,true,true);
         map = new TmxMapLoader().load("core/assets/stage1.tmx");
         camera = new OrthographicCamera();
@@ -79,6 +85,11 @@ public class TestMapScene implements Screen {
             gameWorld.setCoin(rectObject.getRectangle().getX() / PPM, rectObject.getRectangle().getY() / PPM);
         }
 
+        for (MapObject object : map.getLayers().get(6).getObjects()) {
+            RectangleMapObject rectObject = (RectangleMapObject)object;
+            gameWorld.setBox(rectObject.getRectangle().getX() / PPM, rectObject.getRectangle().getY() / PPM);
+        }
+
         Gdx.input.setInputProcessor(new PlayerInputProcessor(gameWorld));
     }
 
@@ -125,6 +136,17 @@ public class TestMapScene implements Screen {
         for (Coin coin : listCoins){
             coin.draw(stateTime,coin.getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, coin.getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
         }
+        for (SecretBox secretBox : listSecretBox){
+            secretBox.draw(stateTime,secretBox.getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, secretBox.getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
+        }
+        if (animation.isStart())
+        {
+            sb.begin();
+            animation.setPosition(8,8);
+            animation.effect.draw(sb, delta);
+            sb.end();
+        }
+
     }
 
     @Override

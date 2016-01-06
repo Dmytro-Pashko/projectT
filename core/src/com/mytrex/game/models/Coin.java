@@ -13,31 +13,29 @@ import static com.mytrex.game.Tools.B2DVars.PPM;
  * Created by Antilamer on 06.01.2016.
  */
 public class Coin {
-    Sprite sprite, emtpyCoin;
     SpriteBatch batch;
     Body body;
-    TextureRegion[] walkFrames;
-    Texture walkSheet;
-    Animation walkAnimation;
+    TextureRegion[] frames;
+    Texture sheet;
+    Animation animation;
 
-    public boolean flag = false;
 
     public Coin(Body body)
     {
         batch = new SpriteBatch();
         this.body = body;
-        walkSheet = new Texture("core/assets/coin_1.png");
-        walkFrames = new TextureRegion[3];
+        sheet = new Texture("core/assets/coin_1.png");
+        frames = new TextureRegion[3];
         for (int i = 0; i < 3; i++) {
-            walkFrames[i] = new TextureRegion(walkSheet, 16 * i, 0, 10, 16);
+            frames[i] = new TextureRegion(sheet, 16 * i, 0, 16, 16);
         }
-        walkAnimation = new Animation(0.2f, walkFrames);
+        animation = new Animation(0.2f, frames);
     }
 
     public void draw(float stateTime, float x, float y)
     {
         batch.begin();
-        batch.draw(walkAnimation.getKeyFrame(stateTime, true), x * 2 - PPM, y * 2 - PPM, 32, 32);
+        batch.draw(animation.getKeyFrame(stateTime, true), x * 2 - PPM, y * 2 - PPM, 32, 32);
         batch.end();
     }
 
