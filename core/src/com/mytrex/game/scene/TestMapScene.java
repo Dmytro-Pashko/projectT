@@ -16,6 +16,9 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.mytrex.game.GameWorld;
 import com.mytrex.game.PlayerInputProcessor;
 import com.mytrex.game.models.*;
+import static com.mytrex.game.Tools.B2DVars.cameraPosition;
+
+import java.util.Iterator;
 
 import static com.mytrex.game.Tools.B2DVars.*;
 
@@ -104,6 +107,7 @@ public class TestMapScene implements Screen {
     }
 
     public void cameraUpdate() {
+        cameraPosition = camera.position;
         if (camera.position.x + 2 < gameWorld.getPlayer().getBody().getPosition().x)
             camera.position.set(camera.position.x + 0.1f, camera.position.y, 0);
         if (camera.position.x - 2 > gameWorld.getPlayer().getBody().getPosition().x && camera.position.x >= 8.0)
@@ -139,12 +143,16 @@ public class TestMapScene implements Screen {
         for (SecretBox secretBox : listSecretBox){
             secretBox.draw(stateTime,secretBox.getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, secretBox.getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
         }
-        if (animation.isStart())
-        {
-            sb.begin();
-            animation.setPosition(8,8);
-            animation.effect.draw(sb, delta);
-            sb.end();
+        for (Animation animation : listAnimation){
+            if (!animation.effect.isComplete()) {
+                sb.begin();
+                animation.effect.draw(sb, delta);
+                sb.end();
+            } else
+            {
+                listAnimation.remove(animation);
+                break;
+            }
         }
 
     }

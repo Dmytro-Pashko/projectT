@@ -1,6 +1,7 @@
 package com.mytrex.game.Tools;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.mytrex.game.models.*;
 
 import java.util.ArrayList;
@@ -18,6 +19,8 @@ public class B2DVars {
     public static ArrayList<Brick> listBricks = new ArrayList<>();
     public static ArrayList<Coin> listCoins = new ArrayList<>();
     public static ArrayList<SecretBox> listSecretBox = new ArrayList<>();
-    public static Animation animation = new Animation();
+    public static ArrayList<Animation> listAnimation = new ArrayList<>();
+    public static Vector3 cameraPosition;
+
     //upd
 }

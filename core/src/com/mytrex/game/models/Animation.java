@@ -2,7 +2,6 @@ package com.mytrex.game.models;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import static com.mytrex.game.Tools.B2DVars.PPM;
 
@@ -11,31 +10,24 @@ import static com.mytrex.game.Tools.B2DVars.PPM;
  */
 public class Animation {
     public ParticleEffect effect;
-    boolean start = false;
     public float x;
     public float y;
 
-    public boolean isStart() {
-        return start;
-    }
 
-    public void setStart(boolean start) {
-        this.start = start;
-    }
-
-    public Animation(){
+    public Animation(AnimationType type, float x, float y){
         effect  = new ParticleEffect();
-        effect.load(Gdx.files.internal("core/assets/test.ptf"), Gdx.files.internal("core/assets/"));
-    }
-
-    public void startAnimation(float x, float y)
-    {
-        effect.setPosition(x,y);
+        effect.load(Gdx.files.internal(defineType(type)), Gdx.files.internal("core/assets/"));
+        effect.setPosition(x * 2 - PPM, y * 2 - PPM);
+        effect.scaleEffect(0.9f);
         effect.start();
     }
-    public void setPosition(float camposX,float camposY)
-    {
-        effect.setPosition(250,250);
-        effect.scaleEffect(0.5f);
+
+    private String defineType(AnimationType brick){
+        switch (brick){
+            case Brick:{
+                return "core/assets/brick.ptf";
+            }
+        }
+        return "";
     }
 }

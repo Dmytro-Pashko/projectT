@@ -48,8 +48,8 @@ public class MyContactListener implements ContactListener {
             for (Brick brick : listBricks) {
                 if (brick.getBody() == contact.getFixtureB().getBody())
                 {
-                    animation.startAnimation(contact.getFixtureB().getBody().getPosition().x,contact.getFixtureB().getBody().getPosition().y);
-                    animation.setStart(true);
+                    listAnimation.add(new Animation(AnimationType.Brick, contact.getFixtureB().getBody().getPosition().x * PPM - (cameraPosition.x - 8) * PPM,
+                            contact.getFixtureB().getBody().getPosition().y * PPM - (cameraPosition.y - 8) * PPM));
                     brick.setFlag();
                     listBricks.remove(brick);
                     break;
