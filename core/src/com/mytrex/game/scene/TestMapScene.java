@@ -1,9 +1,12 @@
 package com.mytrex.game.scene;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -13,6 +16,7 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.mytrex.game.GameWorld;
 import com.mytrex.game.PlayerInputProcessor;
 import com.mytrex.game.models.*;
@@ -33,6 +37,7 @@ public class TestMapScene implements Screen {
     private GameWorld gameWorld;
     private float stateTime = 0f;
     SpriteBatch sb;
+    Label scoreLabel;
 
 
 
@@ -46,8 +51,8 @@ public class TestMapScene implements Screen {
         camera.position.set(128 / PPM, 128 / PPM, 0);
         tiledMapRenderer = new OrthogonalTiledMapRenderer(map, 0.0625f);
         gameWorld = new GameWorld();
-        gameWorld.setPlayer(206, 1);
-        camera.position.set(206, 8, 0);
+        gameWorld.setPlayer(1, 1);
+        camera.position.set(8, 8, 0);
 
         //Layer = 1 Земля.Точнее полигоны земли.
         for (MapObject object : map.getLayers().get(2).getObjects()) {
@@ -104,6 +109,11 @@ public class TestMapScene implements Screen {
         }
 
         Gdx.input.setInputProcessor(new PlayerInputProcessor(gameWorld));
+        //якогось хуя майже не видно
+        BitmapFont labelfont= new BitmapFont(Gdx.files.internal("core/assets/defaultfont.fnt"));
+        Label.LabelStyle labelStyle = new Label.LabelStyle(labelfont, Color.BLACK);
+        scoreLabel = new Label(""+score,labelStyle);
+        scoreLabel.setPosition(100,Gdx.graphics.getHeight()-50);
     }
 
 
@@ -165,12 +175,14 @@ public class TestMapScene implements Screen {
             if (!animation.effect.isComplete()) {
                 sb.begin();
                 animation.effect.draw(sb, delta);
+                scoreLabel.draw(sb, delta);
                 sb.end();
             } else {
                 listAnimation.remove(animation);
                 break;
             }
         }
+
 
     }
 

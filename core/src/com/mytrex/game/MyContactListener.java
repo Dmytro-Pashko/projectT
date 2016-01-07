@@ -116,7 +116,7 @@ public class MyContactListener implements ContactListener {
         }
 
         if (contact.getFixtureA().getBody() == player.getBody() && contact.getFixtureB().getBody().getUserData() == "finish") {
-            System.out.println("finish");
+            System.out.println("Level Complete!");
         }
 
     }
