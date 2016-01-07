@@ -46,8 +46,8 @@ public class TestMapScene implements Screen {
         camera.position.set(128 / PPM, 128 / PPM, 0);
         tiledMapRenderer = new OrthogonalTiledMapRenderer(map, 0.0625f);
         gameWorld = new GameWorld();
-        gameWorld.setPlayer(1, 1);
-        camera.position.set(8, 8, 0);
+        gameWorld.setPlayer(206, 1);
+        camera.position.set(206, 8, 0);
 
         //Layer = 1 Земля.Точнее полигоны земли.
         for (MapObject object : map.getLayers().get(2).getObjects()) {
@@ -67,6 +67,16 @@ public class TestMapScene implements Screen {
             Body body = gameWorld.getWorld().createBody(bd);
             body.createFixture(shape,1);
             body.setUserData("obstacle");
+            shape.dispose();//Удаляем шейп.
+        }
+
+        for (MapObject object : map.getLayers().get(7).getObjects()) {
+            Shape shape = getPolygon((PolygonMapObject) object);
+            BodyDef bd = new BodyDef();
+            bd.type = BodyDef.BodyType.StaticBody;
+            Body body = gameWorld.getWorld().createBody(bd);
+            body.createFixture(shape,1);
+            body.setUserData("finish");
             shape.dispose();//Удаляем шейп.
         }
 
@@ -131,25 +141,32 @@ public class TestMapScene implements Screen {
         debuger.render(gameWorld.getWorld(), camera.combined);
         gameWorld.getPlayer().Draw(stateTime, gameWorld.getPlayer().getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, gameWorld.getPlayer().getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
         for (OrdinaryMob mob : listMobs){
-            mob.moving();
-            mob.draw(stateTime, mob.getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, mob.getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
+            if (gameWorld.getPlayer().getBody().getPosition().dst(mob.getBody().getPosition().x, mob.getBody().getPosition().y) < 16f) {
+                mob.moving();
+                mob.draw(stateTime, mob.getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, mob.getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
+            }
         }
         for (Brick brick : listBricks){
-            brick.draw(brick.getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, brick.getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
+            if (gameWorld.getPlayer().getBody().getPosition().dst(brick.getBody().getPosition().x, brick.getBody().getPosition().y) < 20f) {
+                brick.draw(brick.getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, brick.getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
+            }
         }
         for (Coin coin : listCoins){
-            coin.draw(stateTime,coin.getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, coin.getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
+            if (gameWorld.getPlayer().getBody().getPosition().dst(coin.getBody().getPosition().x, coin.getBody().getPosition().y) < 20f) {
+                coin.draw(stateTime, coin.getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, coin.getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
+            }
         }
         for (SecretBox secretBox : listSecretBox){
-            secretBox.draw(stateTime,secretBox.getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, secretBox.getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
+            if (gameWorld.getPlayer().getBody().getPosition().dst(secretBox.getBody().getPosition().x, secretBox.getBody().getPosition().y) < 20f) {
+                secretBox.draw(stateTime, secretBox.getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, secretBox.getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
+            }
         }
         for (Animation animation : listAnimation){
             if (!animation.effect.isComplete()) {
                 sb.begin();
                 animation.effect.draw(sb, delta);
                 sb.end();
-            } else
-            {
+            } else {
                 listAnimation.remove(animation);
                 break;
             }

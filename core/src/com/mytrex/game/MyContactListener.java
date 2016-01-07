@@ -31,7 +31,10 @@ public class MyContactListener implements ContactListener {
             player.setJump(true);
             for (OrdinaryMob mob : listMobs) {
                 if (mob.getBody() == contact.getFixtureB().getBody()){
+                    listAnimation.add(new Animation(AnimationType.MOB, contact.getFixtureB().getBody().getPosition().x * PPM - (cameraPosition.x - 8) * PPM,
+                            contact.getFixtureB().getBody().getPosition().y * PPM - (cameraPosition.y - 8) * PPM));
                     listMobs.remove(mob);
+                    System.out.println(score += 50);
                     break;
                 }
             }
@@ -48,7 +51,7 @@ public class MyContactListener implements ContactListener {
             for (Brick brick : listBricks) {
                 if (brick.getBody() == contact.getFixtureB().getBody())
                 {
-                    listAnimation.add(new Animation(AnimationType.Brick, contact.getFixtureB().getBody().getPosition().x * PPM - (cameraPosition.x - 8) * PPM,
+                    listAnimation.add(new Animation(AnimationType.BRICK, contact.getFixtureB().getBody().getPosition().x * PPM - (cameraPosition.x - 8) * PPM,
                             contact.getFixtureB().getBody().getPosition().y * PPM - (cameraPosition.y - 8) * PPM));
                     brick.setFlag();
                     listBricks.remove(brick);
@@ -62,9 +65,9 @@ public class MyContactListener implements ContactListener {
         if (contact.getFixtureA().getBody() == player.getBody() && contact.getFixtureB().getBody().getUserData() == "coin") {
             contact.getFixtureB().getBody().setUserData("del");
             for (Coin coin : listCoins) {
-                if (coin.getBody() == contact.getFixtureB().getBody())
-                {
+                if (coin.getBody() == contact.getFixtureB().getBody()) {
                     listCoins.remove(coin);
+                    System.out.println(score += 100);
                     break;
                 }
             }
@@ -77,7 +80,10 @@ public class MyContactListener implements ContactListener {
             for (SecretBox box : listSecretBox) {
                 if (box.getBody() == contact.getFixtureB().getBody() && !box.isFlag())
                 {
+                    listAnimation.add(new Animation(AnimationType.COIN, contact.getFixtureB().getBody().getPosition().x * PPM - (cameraPosition.x - 8) * PPM,
+                            contact.getFixtureB().getBody().getPosition().y * PPM - (cameraPosition.y - 8) * PPM + 16));
                     box.setFlag(!box.isFlag());
+                    System.out.println(score += 100);
                     break;
                 }
             }
@@ -92,6 +98,7 @@ public class MyContactListener implements ContactListener {
                 }
             }
         }
+
         if (contact.getFixtureA().getBody().getUserData() == "mob" && contact.getFixtureB().getBody().getUserData() == "mob")
         {
             for (OrdinaryMob mob:listMobs)
@@ -106,6 +113,10 @@ public class MyContactListener implements ContactListener {
                     mob.setFlagMove(!mob.getFlagMove());
                 }
             }
+        }
+
+        if (contact.getFixtureA().getBody() == player.getBody() && contact.getFixtureB().getBody().getUserData() == "finish") {
+            System.out.println("finish");
         }
 
     }

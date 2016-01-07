@@ -2,8 +2,8 @@ Untitled
 - Delay -
 active: false
 - Duration - 
-lowMin: 1000.0
-lowMax: 1000.0
+lowMin: 0.0
+lowMax: 0.0
 - Count - 
 min: 1
 max: 1
@@ -18,19 +18,19 @@ scaling0: 1.0
 timelineCount: 1
 timeline0: 0.0
 - Life - 
-lowMin: 3000.0
-lowMax: 3000.0
-highMin: 3000.0
-highMax: 1000.0
+lowMin: 600.0
+lowMax: 600.0
+highMin: 500.0
+highMax: 500.0
 relative: false
 scalingCount: 3
-scaling0: 1.0
-scaling1: 1.0
-scaling2: 1.0
+scaling0: 0.0
+scaling1: 0.0
+scaling2: 0.0
 timelineCount: 3
 timeline0: 0.0
-timeline1: 0.72602737
-timeline2: 1.0
+timeline1: 0.43150684
+timeline2: 0.67808217
 - Life Offset - 
 active: false
 - X Offset - 
@@ -62,8 +62,8 @@ timeline0: 0.0
 - Scale - 
 lowMin: 0.0
 lowMax: 0.0
-highMin: 46.0
-highMax: 46.0
+highMin: 32.0
+highMax: 32.0
 relative: false
 scalingCount: 1
 scaling0: 0.6666667
@@ -88,15 +88,17 @@ active: false
 active: false
 - Gravity - 
 active: true
-lowMin: -100.0
-lowMax: -100.0
-highMin: -9.0
-highMax: -9.0
+lowMin: 100.0
+lowMax: 100.0
+highMin: 90.0
+highMax: 90.0
 relative: true
-scalingCount: 1
+scalingCount: 2
 scaling0: 0.0
-timelineCount: 1
+scaling1: 0.9019608
+timelineCount: 2
 timeline0: 0.0
+timeline1: 0.47260273
 - Tint - 
 colorsCount: 3
 colors0: 1.0
@@ -130,4 +132,4 @@ additive: false
 behind: false
 premultipliedAlpha: false
 - Image Path -
-mob.png
+coin.png
