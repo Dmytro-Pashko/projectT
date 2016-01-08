@@ -46,10 +46,10 @@ public class Menu implements Screen, InputProcessor
         stage.addActor(scores_button);
         stage.addActor(exit_button);
 
-        play_button.setPosition(150,300);
-        options_button.setPosition(150, 180);
-        scores_button.setPosition(150, 60);
-        exit_button.setPosition(500, 15);
+        play_button.setPosition(100,360);
+        options_button.setPosition(100, 240);
+        scores_button.setPosition(100, 120);
+        exit_button.setPosition(100, 15);
 
         BitmapFont labelfont= new BitmapFont(Gdx.files.internal("core/assets/defaultfont.fnt"));
         Label.LabelStyle labelStyle = new Label.LabelStyle(labelfont, Color.BLACK);
