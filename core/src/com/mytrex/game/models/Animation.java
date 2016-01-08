@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.ParticleEffect;
  * Created by Antilamer on 07.01.2016.
  */
 public class Animation {
-    public ParticleEffect effect;
+    private ParticleEffect effect;
 
     public Animation(AnimationType type, float x, float y) {
         effect = new ParticleEffect();
@@ -31,5 +31,9 @@ public class Animation {
             }
         }
         return "";
+    }
+
+    public ParticleEffect getEffect() {
+        return effect;
     }
 }

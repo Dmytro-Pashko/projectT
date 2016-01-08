@@ -21,6 +21,8 @@ public class B2DVars {
     public static ArrayList<Coin> listCoins = new ArrayList<>();
     public static ArrayList<SecretBox> listSecretBox = new ArrayList<>();
     public static ArrayList<Animation> listAnimation = new ArrayList<>();
+    public static ArrayList<Flower> listFlowers = new ArrayList<>();
+    public static ArrayList<Mashroom> listMashrooms = new ArrayList<>();
     public static Vector3 cameraPosition;
 
     //upd

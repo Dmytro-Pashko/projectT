@@ -96,6 +96,36 @@ public class MyContactListener implements ContactListener {
             }
         }
 
+        //velocity of mashroom
+        if (contact.getFixtureA().getBody().getUserData() == "mashroom")
+        {
+            if (contact.getFixtureB().getUserData()== "obstacle")
+            for (Mashroom mashroom: listMashrooms)
+                if (mashroom.getBody() == contact.getFixtureA().getBody())
+                {
+                    mashroom.setFlagMove(!mashroom.isFlagMove());
+                    break;
+                }
+
+            if (contact.getFixtureB().getUserData() == "mob")
+                for (Mashroom mashroom: listMashrooms)
+                    if (mashroom.getBody() == contact.getFixtureA().getBody())
+                    {
+                        mashroom.setFlagMove(!mashroom.isFlagMove());
+                        break;
+                    }
+
+            if (contact.getFixtureB().getUserData() == "player")
+                for (Mashroom mashroom: listMashrooms)
+                    if (mashroom.getBody() == contact.getFixtureA().getBody())
+                    {
+                        mashroom.getBody().setUserData("del");
+                        break;
+                    }
+
+        }
+
+
         if (contact.getFixtureA().getBody().getUserData() == "mob" && contact.getFixtureB().getBody().getUserData() == "mob") {
             for (OrdinaryMob mob : listMobs) {
                 if (contact.getFixtureB().getBody() == mob.getBody()) {

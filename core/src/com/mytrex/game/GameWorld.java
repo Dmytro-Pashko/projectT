@@ -21,12 +21,22 @@ public class GameWorld {
         world = new World(new Vector2(0, -20f), true);
         listner = new MyContactListener();
         world.setContactListener(listner);
+        setFlower(3,3);
+        setMasroom(5,10);
     }
 
     public void setPlayer(float x, float y) {
 
         player = new Player(initPlayer(x, y));
         listner.setPlayer(player);
+    }
+
+    public void setFlower(float x, float y) {
+        listFlowers.add(new Flower(initBody(x, y, BodyType.StaticBody, "flower")));
+    }
+
+    public void setMasroom(float x, float y) {
+        listMashrooms.add(new Mashroom(initBody(x, y, BodyType.DynamicBody, "mashroom")));
     }
 
     public void setMob(float x, float y) {

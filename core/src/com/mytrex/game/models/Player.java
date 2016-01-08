@@ -10,6 +10,8 @@ import com.badlogic.gdx.physics.box2d.Body;
 import static com.mytrex.game.Tools.B2DVars.PPM;
 
 public class Player {
+
+    private int life = 3;
     private Body body;
     private SpriteBatch batch;
     private Texture walkSheet, spriteStayRight, spriteStayLeft, spriteJumpRigth, spriteJumpLeft;

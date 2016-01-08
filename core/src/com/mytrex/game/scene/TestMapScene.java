@@ -39,11 +39,10 @@ public class TestMapScene implements Screen {
     private float stateTime = 0f;
     SpriteBatch sb;
     Label scoreLabel;
-    private BitmapFont FontRed1;
-    private SpriteBatch batch;
 
 
     public TestMapScene() {
+
         sb = new SpriteBatch();
         debuger = new Box2DDebugRenderer(true, true, true, true, true, true);
         map = new TmxMapLoader().load("core/assets/stage1.tmx");
@@ -107,10 +106,11 @@ public class TestMapScene implements Screen {
         }
 
         Gdx.input.setInputProcessor(new PlayerInputProcessor(gameWorld));
-
-        batch = new SpriteBatch();
-        FontRed1 = new BitmapFont();
-        FontRed1.setColor(Color.BLACK); //Красный
+        //якогось хуя майже не видно
+        BitmapFont labelfont = new BitmapFont(Gdx.files.internal("core/assets/defaultfont.fnt"));
+        Label.LabelStyle labelStyle = new Label.LabelStyle(labelfont, Color.BLACK);
+        scoreLabel = new Label("" + score, labelStyle);
+        scoreLabel.setPosition(100, Gdx.graphics.getHeight() - 50);
     }
 
 
@@ -145,11 +145,22 @@ public class TestMapScene implements Screen {
         tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();
         debuger.render(gameWorld.getWorld(), camera.combined);
-        gameWorld.getPlayer().Draw(stateTime, gameWorld.getPlayer().getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM + 2, gameWorld.getPlayer().getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
+        gameWorld.getPlayer().Draw(stateTime, gameWorld.getPlayer().getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, gameWorld.getPlayer().getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
+
+
+        for (Flower flower : listFlowers)
+            if (gameWorld.getPlayer().getBody().getPosition().dst(flower.getBody().getPosition().x, flower.getBody().getPosition().y) < 16f)
+                flower.draw(stateTime, flower.getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, flower.getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
+
+
+        for (Mashroom mashroom : listMashrooms)
+            if (gameWorld.getPlayer().getBody().getPosition().dst(mashroom.getBody().getPosition().x, mashroom.getBody().getPosition().y) < 16f)
+                mashroom.draw(mashroom.getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, mashroom.getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
+
+
 
         for (OrdinaryMob mob : listMobs) {
             if (gameWorld.getPlayer().getBody().getPosition().dst(mob.getBody().getPosition().x, mob.getBody().getPosition().y) < 16f) {
-                mob.moving();
                 mob.draw(stateTime, mob.getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, mob.getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
             }
         }
@@ -169,18 +180,16 @@ public class TestMapScene implements Screen {
             }
         }
         for (Animation animation : listAnimation) {
-            if (!animation.effect.isComplete()) {
+            if (!animation.getEffect().isComplete()) {
                 sb.begin();
-                animation.effect.draw(sb, delta);
+                animation.getEffect().draw(sb, delta);
+                scoreLabel.draw(sb, delta);
                 sb.end();
             } else {
                 listAnimation.remove(animation);
                 break;
             }
         }
-        batch.begin();
-        FontRed1.draw(batch, "Your score: " + score, 400, 500);
-        batch.end();
     }
 
     @Override
