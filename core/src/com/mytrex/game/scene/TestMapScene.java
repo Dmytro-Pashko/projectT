@@ -149,6 +149,7 @@ public class TestMapScene implements Screen {
 
         for (OrdinaryMob mob : listMobs) {
             if (gameWorld.getPlayer().getBody().getPosition().dst(mob.getBody().getPosition().x, mob.getBody().getPosition().y) < 16f) {
+                mob.moving();
                 mob.draw(stateTime, mob.getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, mob.getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
             }
         }
@@ -167,22 +168,10 @@ public class TestMapScene implements Screen {
                 secretBox.draw(stateTime, secretBox.getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, secretBox.getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
             }
         }
-        for (Flower flower : listFlowers) {
-            if (gameWorld.getPlayer().getBody().getPosition().dst(flower.getBody().getPosition().x, flower.getBody().getPosition().y) < 20f) {
-                flower.draw(stateTime, flower.getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, flower.getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
-            }
-        }
-
-        for (Mashroom mashroom : listMashrooms) {
-            if (gameWorld.getPlayer().getBody().getPosition().dst(mashroom.getBody().getPosition().x, mashroom.getBody().getPosition().y) < 20f) {
-                mashroom.draw(mashroom.getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, mashroom.getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
-            }
-        }
-
         for (Animation animation : listAnimation) {
-            if (!animation.getEffect().isComplete()) {
+            if (!animation.effect.isComplete()) {
                 sb.begin();
-                animation.getEffect().draw(sb, delta);
+                animation.effect.draw(sb, delta);
                 scoreLabel.draw(sb, delta);
                 sb.end();
             } else {

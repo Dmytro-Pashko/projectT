@@ -1,6 +1,8 @@
 package com.mytrex.game.scene;
 
-import com.badlogic.gdx.*;
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -10,33 +12,31 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
-public class Menu implements Screen,InputProcessor
+public class Menu implements Screen
 {
     Stage stage;
     Game game;
     Label poslabel;
     Sprite background;
     float angle = 0f;
-    Image play_button;
 
     public Menu(Game game)
     {
         this.game = game;
         Create();
-        Gdx.input.setInputProcessor(this);
     }
     public void Create()
     {
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
-        background = new Sprite(new Texture("core/assets/background.jpg"));
+        background = new Sprite(new Texture("Textures/background.jpg"));
         background.setCenter(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
         background.setScale(1.53f, 1.53f);
 
-        play_button = new Image(new Texture("core/assets/play_button.png"));
-        Image options_button = new Image(new Texture("core/assets/options_button.png"));
-        Image scores_button = new Image(new Texture("core/assets/scores_button.png"));
-        Image exit_button = new Image(new Texture("core/assets/exit_button.png"));
+        Image play_button = new Image(new Texture("Textures/play_button.png"));
+        Image options_button = new Image(new Texture("Textures/options_button.png"));
+        Image scores_button = new Image(new Texture("Textures/scores_button.png"));
+        Image exit_button = new Image(new Texture("Textures/exit_button.png"));
 
         stage.addActor(play_button);
         stage.addActor(options_button);
@@ -102,49 +102,5 @@ public class Menu implements Screen,InputProcessor
     @Override
     public void dispose() {
 
-    }
-
-    @Override
-    public boolean keyDown(int keycode) {
-        if (keycode == Input.Keys.ENTER)
-        {
-            game.setScreen(new TestMapScene());
-        }
-        return false;
-    }
-
-    @Override
-    public boolean keyUp(int keycode) {
-        return false;
-    }
-
-    @Override
-    public boolean keyTyped(char character) {
-        return false;
-    }
-
-    @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        return false;
-    }
-
-    @Override
-    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        return false;
-    }
-
-    @Override
-    public boolean touchDragged(int screenX, int screenY, int pointer) {
-        return false;
-    }
-
-    @Override
-    public boolean mouseMoved(int screenX, int screenY) {
-        return false;
-    }
-
-    @Override
-    public boolean scrolled(int amount) {
-        return false;
     }
 }
