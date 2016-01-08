@@ -8,29 +8,22 @@ import com.badlogic.gdx.physics.box2d.Body;
 
 import static com.mytrex.game.Tools.B2DVars.PPM;
 
-public class OrdinaryMob {
+public class Mashroom {
     private SpriteBatch batch;
-    private Texture walkSheet;
-    private TextureRegion[] walkFrames;
+    private Texture sprite;
     private Body body;
     private boolean flagMove = false;
-    private Animation walkAnimation;
 
-    public OrdinaryMob(Body body) {
+    public Mashroom(Body body) {
         batch = new SpriteBatch();
         this.body = body;
-        walkSheet = new Texture("core/assets/mob_1.png");
-        walkFrames = new TextureRegion[2];
-        for (int i = 0; i < 2; i++) {
-            walkFrames[i] = new TextureRegion(walkSheet, 16 * i, 0, 16, 16);
-        }
-        walkAnimation = new Animation(0.25f, walkFrames);
+        sprite = new Texture("core/assets/mashroom.png");
     }
 
-    public void draw(float stateTime, float x, float y) {
+    public void draw(float x, float y) {
         batch.begin();
         moving();
-        batch.draw(walkAnimation.getKeyFrame(stateTime, true), x * 2 - PPM, y * 2 - PPM, 32, 32);
+        batch.draw(sprite, x * 2 - PPM, y * 2 - PPM, 32, 32);
         batch.end();
     }
 
