@@ -9,7 +9,7 @@ import com.mytrex.game.scene.Menu;
 
     @Override
     public void create() {
-        //setScreen(new Menu(this));
-        setScreen(new TestMapScene());
+        setScreen(new Menu(this));
+        //setScreen(new TestMapScene());
     }
 }
