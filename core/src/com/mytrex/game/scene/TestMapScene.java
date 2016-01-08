@@ -144,7 +144,7 @@ public class TestMapScene implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();
-        debuger.render(gameWorld.getWorld(), camera.combined);
+        //debuger.render(gameWorld.getWorld(), camera.combined);
         gameWorld.getPlayer().Draw(stateTime, gameWorld.getPlayer().getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, gameWorld.getPlayer().getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
 
 
