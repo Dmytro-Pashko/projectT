@@ -3,15 +3,12 @@ package com.mytrex.game.models;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 
-import static com.mytrex.game.Tools.B2DVars.PPM;
 
 /**
  * Created by Antilamer on 07.01.2016.
  */
 public class Animation {
     public ParticleEffect effect;
-    public float x;
-    public float y;
 
 
     public Animation(AnimationType type, float x, float y){
