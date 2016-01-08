@@ -14,8 +14,6 @@ import static com.mytrex.game.Tools.B2DVars.*;
 public class MyContactListener implements ContactListener {
     private Player player;
     private GameWorld gameWorld;
-    private WorldRunnable runnable;
-
 
     public void setPlayer(Player player) {
         this.player = player;
