@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.badlogic.gdx.utils.Array;
 import com.mytrex.game.Tools.BodyEditorLoader;
 import com.mytrex.game.models.*;
 
@@ -20,9 +19,8 @@ public class GameWorld {
     public GameWorld() {
         world = new World(new Vector2(0, -20f), true);
         listner = new MyContactListener();
+        listner.setGameWorld(this);
         world.setContactListener(listner);
-        setFlower(3,3);
-        setMasroom(5,10);
     }
 
     public void setPlayer(float x, float y) {
@@ -93,22 +91,6 @@ public class GameWorld {
         loader.attachFixture(body, "PlayerBodyUpSensor", new FixtureDef(), 1);
         loader.attachFixture(body, "PlayerBodyDownSensor", new FixtureDef(), 1);
         return body;
-    }
-
-
-    public void update() {
-        player.moving();//Ету хуету нужно сделать в PlayerInputProcessor
-
-        for (int i = 0; i < world.getBodyCount(); i++) {
-            Array<Body> bodies = new Array<>();
-            world.getBodies(bodies);
-            for (Body b : bodies) {
-
-                if (b.getUserData() == "del") world.destroyBody(b); //Если стоит метка на удаление.
-                if (b.getPosition().y < -2) world.destroyBody(b); //Если тело упало под карту.
-
-            }
-        }
     }
 
     public World getWorld() {

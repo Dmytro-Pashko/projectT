@@ -18,6 +18,8 @@ public class MyContactListener implements ContactListener {
     @Override
     public void beginContact(Contact contact) {
 
+        //System.out.println(contact.getFixtureA().getBody().getUserData() + "    " + contact.getFixtureB().getBody().getUserData());
+
         //������� ������ ���������� �� �����.
         if (contact.getFixtureA() == player.getBody().getFixtureList().get(2)) {
             player.setJump(false);
@@ -86,12 +88,26 @@ public class MyContactListener implements ContactListener {
             }
         }
 
+
         //velocity of mob.
-        if (contact.getFixtureB().getBody().getUserData() == "mob" && contact.getFixtureA().getBody().getUserData() == "obstacle") {
-            for (OrdinaryMob mob : listMobs) {
-                if (mob.getBody() == contact.getFixtureB().getBody()) {
-                    mob.setFlagMove(!mob.isFlagMove());
-                    break;
+        if (contact.getFixtureB().getBody().getUserData() == "mob") {
+            if (contact.getFixtureA().getBody().getUserData() == "obstacle") {
+                for (OrdinaryMob mob : listMobs) {
+                    if (mob.getBody() == contact.getFixtureB().getBody()) {
+                        mob.setFlagMove(!mob.isFlagMove());
+                        break;
+                    }
+                }
+            }
+            if (contact.getFixtureA().getBody().getUserData() == "mob") {
+                for (OrdinaryMob mob : listMobs) {
+                    if (contact.getFixtureB().getBody() == mob.getBody()) {
+                        mob.setFlagMove(!mob.isFlagMove());
+                    }
+
+                    if (contact.getFixtureA().getBody() == mob.getBody()) {
+                        mob.setFlagMove(!mob.isFlagMove());
+                    }
                 }
             }
         }
@@ -99,47 +115,49 @@ public class MyContactListener implements ContactListener {
         //velocity of mashroom
         if (contact.getFixtureA().getBody().getUserData() == "mashroom")
         {
-            if (contact.getFixtureB().getUserData()== "obstacle")
-            for (Mashroom mashroom: listMashrooms)
-                if (mashroom.getBody() == contact.getFixtureA().getBody())
-                {
-                    mashroom.setFlagMove(!mashroom.isFlagMove());
-                    break;
+            if (contact.getFixtureB().getBody().getUserData()== "obstacle") {
+                for (Mashroom mashroom : listMashrooms) {
+                    if (mashroom.getBody() == contact.getFixtureA().getBody()) {
+                        mashroom.setFlagMove(!mashroom.isFlagMove());
+                        break;
+                    }
                 }
+            }
 
-            if (contact.getFixtureB().getUserData() == "mob")
-                for (Mashroom mashroom: listMashrooms)
-                    if (mashroom.getBody() == contact.getFixtureA().getBody())
-                    {
+            if (contact.getFixtureB().getBody().getUserData() == "mob") {
+                for (Mashroom mashroom : listMashrooms) {
+                    if (mashroom.getBody() == contact.getFixtureA().getBody()) {
                         mashroom.setFlagMove(!mashroom.isFlagMove());
                         break;
                     }
 
-            if (contact.getFixtureB().getUserData() == "player")
-                for (Mashroom mashroom: listMashrooms)
-                    if (mashroom.getBody() == contact.getFixtureA().getBody())
-                    {
-                        mashroom.getBody().setUserData("del");
+                }
+                for (OrdinaryMob mob : listMobs) {
+                    if (mob.getBody() == contact.getFixtureB().getBody()) {
+                        mob.setFlagMove(!mob.isFlagMove());
                         break;
                     }
-
-        }
-
-
-        if (contact.getFixtureA().getBody().getUserData() == "mob" && contact.getFixtureB().getBody().getUserData() == "mob") {
-            for (OrdinaryMob mob : listMobs) {
-                if (contact.getFixtureB().getBody() == mob.getBody()) {
-                    mob.setFlagMove(!mob.isFlagMove());
-                }
-
-                if (contact.getFixtureA().getBody() == mob.getBody()) {
-                    mob.setFlagMove(!mob.isFlagMove());
                 }
             }
+
+            if (contact.getFixtureB().getBody().getUserData() == "player") {
+                for (Mashroom mashroom : listMashrooms) {
+                    if (mashroom.getBody() == contact.getFixtureA().getBody()) {
+                        listMashrooms.remove(mashroom);
+                        mashroom.getBody().setUserData("del");
+                        System.out.println(score += 1000);
+                        break;
+                    }
+                }
+            }
+
         }
+
+
 
         if (contact.getFixtureA().getBody() == player.getBody() && contact.getFixtureB().getBody().getUserData() == "finish") {
             System.out.println("Level Complete!");
+            complete = true;
         }
 
     }
