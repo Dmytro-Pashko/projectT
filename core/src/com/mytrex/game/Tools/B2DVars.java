@@ -16,6 +16,7 @@ public class B2DVars {
     //pixels per meter
     public static final float PPM = 16f;
     public static int score;
+    public static boolean complete = false;
     public static ArrayList<OrdinaryMob> listMobs = new ArrayList<>();
     public static ArrayList<Brick> listBricks = new ArrayList<>();
     public static ArrayList<Coin> listCoins = new ArrayList<>();

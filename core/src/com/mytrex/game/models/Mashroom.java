@@ -13,6 +13,7 @@ public class Mashroom {
     private Texture sprite;
     private Body body;
     private boolean flagMove = false;
+    private float speed = 5.0f;
 
     public Mashroom(Body body) {
         batch = new SpriteBatch();
@@ -28,8 +29,8 @@ public class Mashroom {
     }
 
     public void moving() {
-        if (!flagMove) body.setLinearVelocity(3, body.getLinearVelocity().y);
-        else body.setLinearVelocity(-3, body.getLinearVelocity().y);
+        if (!flagMove) body.setLinearVelocity(speed, body.getLinearVelocity().y);
+        else body.setLinearVelocity(-speed, body.getLinearVelocity().y);
 
     }
 

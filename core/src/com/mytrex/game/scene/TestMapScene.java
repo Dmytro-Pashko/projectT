@@ -39,10 +39,11 @@ public class TestMapScene implements Screen {
     private float stateTime = 0f;
     SpriteBatch sb;
     Label scoreLabel;
+    Game game;
 
 
-    public TestMapScene() {
-
+    public TestMapScene(Game game) {
+        this.game = game;
         sb = new SpriteBatch();
         debuger = new Box2DDebugRenderer(true, true, true, true, true, true);
         map = new TmxMapLoader().load("core/assets/stage1.tmx");
@@ -189,6 +190,9 @@ public class TestMapScene implements Screen {
                 listAnimation.remove(animation);
                 break;
             }
+        }
+        if (complete){
+            game.setScreen(new Menu(game));
         }
     }
 

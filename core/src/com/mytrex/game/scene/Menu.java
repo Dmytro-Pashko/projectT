@@ -12,7 +12,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.mytrex.game.Trex;
+import static com.mytrex.game.Tools.B2DVars.complete;
 
 public class Menu implements Screen, InputProcessor
 {
@@ -131,7 +131,8 @@ public class Menu implements Screen, InputProcessor
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         if (screenX > 150 && screenX < 465 && screenY > 60 && screenY < 150) {
-            game.setScreen(new TestMapScene());
+            complete = false;
+            game.setScreen(new TestMapScene(game));
         }
         return false;
     }
