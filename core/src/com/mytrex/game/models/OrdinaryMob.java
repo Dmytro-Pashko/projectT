@@ -8,10 +8,15 @@ import com.badlogic.gdx.physics.box2d.Body;
 
 import static com.mytrex.game.Tools.B2DVars.PPM;
 
-public class OrdinaryMob extends GameCreature
-{
-    public OrdinaryMob(Body body)
-    {
+public class OrdinaryMob {
+    private SpriteBatch batch;
+    private Texture walkSheet;
+    private TextureRegion[] walkFrames;
+    private Body body;
+    private boolean flagMove = false;
+    private Animation walkAnimation;
+
+    public OrdinaryMob(Body body) {
         batch = new SpriteBatch();
         this.body = body;
         walkSheet = new Texture("core/assets/mob_1.png");
@@ -22,20 +27,27 @@ public class OrdinaryMob extends GameCreature
         walkAnimation = new Animation(0.25f, walkFrames);
     }
 
-    public void draw(float stateTime, float x, float y)
-    {
+    public void draw(float stateTime, float x, float y) {
         batch.begin();
         batch.draw(walkAnimation.getKeyFrame(stateTime, true), x * 2 - PPM, y * 2 - PPM, 32, 32);
         batch.end();
     }
 
-    public void moving()
-    {
-        if (!flagMove) body.setLinearVelocity(3,  body.getLinearVelocity().y);
+    public void moving() {
+        if (!flagMove) body.setLinearVelocity(3, body.getLinearVelocity().y);
         else body.setLinearVelocity(-3, body.getLinearVelocity().y);
 
     }
 
+    public Body getBody() {
+        return body;
+    }
 
+    public void setFlagMove(boolean flagMove) {
+        this.flagMove = flagMove;
+    }
 
+    public boolean isFlagMove() {
+        return flagMove;
+    }
 }
