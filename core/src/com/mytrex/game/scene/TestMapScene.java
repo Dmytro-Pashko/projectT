@@ -38,8 +38,9 @@ public class TestMapScene implements Screen {
     private GameWorld gameWorld;
     private float stateTime = 0f;
     SpriteBatch sb;
-    Label scoreLabel;
     Game game;
+    private SpriteBatch batch;
+    private BitmapFont FontRed1;
 
 
     public TestMapScene(Game game) {
@@ -107,11 +108,10 @@ public class TestMapScene implements Screen {
         }
 
         Gdx.input.setInputProcessor(new PlayerInputProcessor(gameWorld));
-        //якогось хуя майже не видно
-        BitmapFont labelfont = new BitmapFont(Gdx.files.internal("core/assets/defaultfont.fnt"));
-        Label.LabelStyle labelStyle = new Label.LabelStyle(labelfont, Color.BLACK);
-        scoreLabel = new Label("" + score, labelStyle);
-        scoreLabel.setPosition(100, Gdx.graphics.getHeight() - 50);
+
+        batch = new SpriteBatch();
+        FontRed1 = new BitmapFont();
+        FontRed1.setColor(Color.BLACK);
     }
 
 
@@ -184,7 +184,6 @@ public class TestMapScene implements Screen {
             if (!animation.getEffect().isComplete()) {
                 sb.begin();
                 animation.getEffect().draw(sb, delta);
-                scoreLabel.draw(sb, delta);
                 sb.end();
             } else {
                 listAnimation.remove(animation);
@@ -194,6 +193,10 @@ public class TestMapScene implements Screen {
         if (complete){
             game.setScreen(new Menu(game));
         }
+
+        batch.begin();
+        FontRed1.draw(batch, "Your score: " + score, 380, 500);
+        batch.end();
     }
 
     @Override

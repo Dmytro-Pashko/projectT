@@ -145,6 +145,7 @@ public class MyContactListener implements ContactListener {
                     if (mashroom.getBody() == contact.getFixtureA().getBody()) {
                         listMashrooms.remove(mashroom);
                         mashroom.getBody().setUserData("del");
+                        System.out.println(score += 1000);
                         break;
                     }
                 }
