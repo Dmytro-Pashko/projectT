@@ -43,15 +43,15 @@ public class Player {
         moving();
         batch.begin();
         if ((rightMove) && !(jump))
-            batch.draw(walkAnimationRight.getKeyFrame(stateTime, true), x * 2 - PPM, y * 2 - PPM, 25, 36);
+            batch.draw(walkAnimationRight.getKeyFrame(stateTime, true), x * 2 - PPM + 3, y * 2 - PPM, 25, 36);
         else if ((leftMove) && !(jump))
-            batch.draw(walkAnimationLeft.getKeyFrame(stateTime, true), x * 2 - PPM, y * 2 - PPM, 25, 36);
-        else if (jump && rightMove) batch.draw(spriteJumpRigth, x * 2 - PPM, y * 2 - PPM, 25, 36);
-        else if (jump && leftMove) batch.draw(spriteJumpLeft, x * 2 - PPM, y * 2 - PPM, 25, 36);
-        else if (jump && isLeft) batch.draw(spriteJumpLeft, x * 2 - PPM, y * 2 - PPM, 25, 36);
-        else if (jump && !isLeft) batch.draw(spriteJumpRigth, x * 2 - PPM, y * 2 - PPM, 25, 36);
-        else if (isLeft) batch.draw(spriteStayLeft, x * 2 - PPM, y * 2 - PPM, 25, 36);
-        else if (!isLeft) batch.draw(spriteStayRight, x * 2 - PPM, y * 2 - PPM, 25, 36);
+            batch.draw(walkAnimationLeft.getKeyFrame(stateTime, true), x * 2 - PPM + 5, y * 2 - PPM, 25, 36);
+        else if (jump && rightMove) batch.draw(spriteJumpRigth, x * 2 - PPM + 2, y * 2 - PPM, 25, 36);
+        else if (jump && leftMove) batch.draw(spriteJumpLeft, x * 2 - PPM + 2, y * 2 - PPM, 25, 36);
+        else if (jump && isLeft) batch.draw(spriteJumpLeft, x * 2 - PPM + 2, y * 2 - PPM, 25, 36);
+        else if (jump && !isLeft) batch.draw(spriteJumpRigth, x * 2 - PPM + 2, y * 2 - PPM, 25, 36);
+        else if (isLeft) batch.draw(spriteStayLeft, x * 2 - PPM + 3, y * 2 - PPM, 25, 36);
+        else if (!isLeft) batch.draw(spriteStayRight, x * 2 - PPM + 3, y * 2 - PPM, 25, 36);
         batch.end();
     }
 
