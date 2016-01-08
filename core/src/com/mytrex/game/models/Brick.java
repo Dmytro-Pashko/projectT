@@ -14,26 +14,24 @@ import static com.mytrex.game.Tools.B2DVars.PPM;
  */
 public class Brick {
 
-    Sprite sprite;
-    SpriteBatch batch;
-    Body body;
-    boolean flag = false;
+    private Sprite sprite;
+    private SpriteBatch batch;
+    private Body body;
+    private boolean flag = false;
 
-    public Brick(Body body)
-    {
+    public Brick(Body body) {
         batch = new SpriteBatch();
         this.body = body;
         sprite = new Sprite(new Texture("core/assets/brick_1.png"));
     }
 
-    public void draw(float x, float y)
-    {
+    public void draw(float x, float y) {
         batch.begin();
         batch.draw(sprite, x * 2 - PPM, y * 2 - PPM, 32, 32);
         batch.end();
     }
 
-    public void setFlag(){
+    public void setFlag() {
         flag = true;
     }
 

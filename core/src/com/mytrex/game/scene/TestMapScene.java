@@ -20,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.mytrex.game.GameWorld;
 import com.mytrex.game.PlayerInputProcessor;
 import com.mytrex.game.models.*;
+
 import static com.mytrex.game.Tools.B2DVars.cameraPosition;
 
 import java.util.Iterator;
@@ -40,11 +41,10 @@ public class TestMapScene implements Screen {
     Label scoreLabel;
 
 
-
     public TestMapScene() {
 
         sb = new SpriteBatch();
-        debuger = new Box2DDebugRenderer(true,true,true,true,true,true);
+        debuger = new Box2DDebugRenderer(true, true, true, true, true, true);
         map = new TmxMapLoader().load("core/assets/stage1.tmx");
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Gdx.graphics.getWidth() * 0.5f / PPM, Gdx.graphics.getHeight() * 0.5f / PPM);
@@ -60,7 +60,7 @@ public class TestMapScene implements Screen {
             BodyDef bd = new BodyDef();
             bd.type = BodyDef.BodyType.StaticBody;
             Body body = gameWorld.getWorld().createBody(bd);
-            body.createFixture(shape,1);
+            body.createFixture(shape, 1);
             body.setUserData("ground");
             shape.dispose();//Удаляем шейп.
         }
@@ -70,7 +70,7 @@ public class TestMapScene implements Screen {
             BodyDef bd = new BodyDef();
             bd.type = BodyDef.BodyType.StaticBody;
             Body body = gameWorld.getWorld().createBody(bd);
-            body.createFixture(shape,1);
+            body.createFixture(shape, 1);
             body.setUserData("obstacle");
             shape.dispose();//Удаляем шейп.
         }
@@ -80,44 +80,41 @@ public class TestMapScene implements Screen {
             BodyDef bd = new BodyDef();
             bd.type = BodyDef.BodyType.StaticBody;
             Body body = gameWorld.getWorld().createBody(bd);
-            body.createFixture(shape,1);
+            body.createFixture(shape, 1);
             body.setUserData("finish");
             shape.dispose();//Удаляем шейп.
         }
 
-        for (MapObject object : map.getLayers().get(4).getObjects())
-        {
-            RectangleMapObject rectObject = (RectangleMapObject)object;
-            gameWorld.setMob(rectObject.getRectangle().getX()/PPM,rectObject.getRectangle().getY()/PPM);
+        for (MapObject object : map.getLayers().get(4).getObjects()) {
+            RectangleMapObject rectObject = (RectangleMapObject) object;
+            gameWorld.setMob(rectObject.getRectangle().getX() / PPM, rectObject.getRectangle().getY() / PPM);
         }
 
-        for (MapObject object : map.getLayers().get(3).getObjects())
-        {
-            RectangleMapObject rectObject = (RectangleMapObject)object;
+        for (MapObject object : map.getLayers().get(3).getObjects()) {
+            RectangleMapObject rectObject = (RectangleMapObject) object;
             gameWorld.setBrick(rectObject.getRectangle().getX() / PPM, rectObject.getRectangle().getY() / PPM);
         }
 
-        for (MapObject object : map.getLayers().get(5).getObjects())
-        {
-            RectangleMapObject rectObject = (RectangleMapObject)object;
+        for (MapObject object : map.getLayers().get(5).getObjects()) {
+            RectangleMapObject rectObject = (RectangleMapObject) object;
             gameWorld.setCoin(rectObject.getRectangle().getX() / PPM, rectObject.getRectangle().getY() / PPM);
         }
 
         for (MapObject object : map.getLayers().get(6).getObjects()) {
-            RectangleMapObject rectObject = (RectangleMapObject)object;
+            RectangleMapObject rectObject = (RectangleMapObject) object;
             gameWorld.setBox(rectObject.getRectangle().getX() / PPM, rectObject.getRectangle().getY() / PPM);
         }
 
         Gdx.input.setInputProcessor(new PlayerInputProcessor(gameWorld));
         //якогось хуя майже не видно
-        BitmapFont labelfont= new BitmapFont(Gdx.files.internal("core/assets/defaultfont.fnt"));
+        BitmapFont labelfont = new BitmapFont(Gdx.files.internal("core/assets/defaultfont.fnt"));
         Label.LabelStyle labelStyle = new Label.LabelStyle(labelfont, Color.BLACK);
-        scoreLabel = new Label(""+score,labelStyle);
-        scoreLabel.setPosition(100,Gdx.graphics.getHeight()-50);
+        scoreLabel = new Label("" + score, labelStyle);
+        scoreLabel.setPosition(100, Gdx.graphics.getHeight() - 50);
     }
 
 
-    private  PolygonShape getPolygon(PolygonMapObject polygonObject) {
+    private PolygonShape getPolygon(PolygonMapObject polygonObject) {
         PolygonShape polygon = new PolygonShape();
         float[] vertices = polygonObject.getPolygon().getTransformedVertices();
         float[] worldVertices = new float[vertices.length];
@@ -132,12 +129,11 @@ public class TestMapScene implements Screen {
             camera.position.set(camera.position.x + 0.1f, camera.position.y, 0);
         if (camera.position.x - 2 > gameWorld.getPlayer().getBody().getPosition().x && camera.position.x >= 8.0)
             camera.position.set(camera.position.x - 0.1f, camera.position.y, 0);
-            //camera.position.set(gameWorld.getPlayer().getBody().getPosition().x , camera.position.y, 0);
+        //camera.position.set(gameWorld.getPlayer().getBody().getPosition().x , camera.position.y, 0);
     }
 
     @Override
-    public void render(float delta)
-    {
+    public void render(float delta) {
         gameWorld.getWorld().step(delta, 1, 1);
         gameWorld.update();
         cameraUpdate();
@@ -150,28 +146,29 @@ public class TestMapScene implements Screen {
         tiledMapRenderer.render();
         debuger.render(gameWorld.getWorld(), camera.combined);
         gameWorld.getPlayer().Draw(stateTime, gameWorld.getPlayer().getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, gameWorld.getPlayer().getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
-        for (OrdinaryMob mob : listMobs){
+
+        for (OrdinaryMob mob : listMobs) {
             if (gameWorld.getPlayer().getBody().getPosition().dst(mob.getBody().getPosition().x, mob.getBody().getPosition().y) < 16f) {
                 mob.moving();
                 mob.draw(stateTime, mob.getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, mob.getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
             }
         }
-        for (Brick brick : listBricks){
+        for (Brick brick : listBricks) {
             if (gameWorld.getPlayer().getBody().getPosition().dst(brick.getBody().getPosition().x, brick.getBody().getPosition().y) < 20f) {
                 brick.draw(brick.getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, brick.getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
             }
         }
-        for (Coin coin : listCoins){
+        for (Coin coin : listCoins) {
             if (gameWorld.getPlayer().getBody().getPosition().dst(coin.getBody().getPosition().x, coin.getBody().getPosition().y) < 20f) {
                 coin.draw(stateTime, coin.getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, coin.getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
             }
         }
-        for (SecretBox secretBox : listSecretBox){
+        for (SecretBox secretBox : listSecretBox) {
             if (gameWorld.getPlayer().getBody().getPosition().dst(secretBox.getBody().getPosition().x, secretBox.getBody().getPosition().y) < 20f) {
                 secretBox.draw(stateTime, secretBox.getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, secretBox.getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
             }
         }
-        for (Animation animation : listAnimation){
+        for (Animation animation : listAnimation) {
             if (!animation.effect.isComplete()) {
                 sb.begin();
                 animation.effect.draw(sb, delta);
@@ -182,13 +179,10 @@ public class TestMapScene implements Screen {
                 break;
             }
         }
-
-
     }
 
     @Override
-    public void resize(int width, int height)
-    {
+    public void resize(int width, int height) {
 
     }
 

@@ -3,18 +3,15 @@ package com.mytrex.game;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 
-public class PlayerInputProcessor implements InputProcessor
-{
+public class PlayerInputProcessor implements InputProcessor {
     private GameWorld world;
 
-    public PlayerInputProcessor(GameWorld world)
-    {
+    public PlayerInputProcessor(GameWorld world) {
         this.world = world;
     }
 
     @Override
-    public boolean keyDown(int keycode)
-    {
+    public boolean keyDown(int keycode) {
         if (Input.Keys.LEFT == keycode) {
             world.getPlayer().setLeftMove(true);
             world.getPlayer().setIsLeft(true);
@@ -23,8 +20,7 @@ public class PlayerInputProcessor implements InputProcessor
             world.getPlayer().setRightMove(true);
             world.getPlayer().setIsLeft(false);
         }
-        if (Input.Keys.UP == keycode && (!world.getPlayer().getJump()))
-        {
+        if (Input.Keys.UP == keycode && (!world.getPlayer().isJump())) {
             world.getPlayer().setJump(true);
             world.getPlayer().getBody().applyLinearImpulse(0f, 100f, 0.5f, 0.5f, false);
         }
@@ -32,8 +28,7 @@ public class PlayerInputProcessor implements InputProcessor
     }
 
     @Override
-    public boolean keyUp(int keycode)
-    {
+    public boolean keyUp(int keycode) {
         if (Input.Keys.LEFT == keycode) world.getPlayer().setLeftMove(false);
         if (Input.Keys.RIGHT == keycode) world.getPlayer().setRightMove(false);
         return true;
