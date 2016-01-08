@@ -1,6 +1,9 @@
 package com.mytrex.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.*;
+import com.mytrex.game.Tools.WorldActions;
+import com.mytrex.game.Tools.WorldRunnable;
 import com.mytrex.game.models.*;
 
 import static com.mytrex.game.Tools.B2DVars.*;
@@ -10,6 +13,9 @@ import static com.mytrex.game.Tools.B2DVars.*;
  */
 public class MyContactListener implements ContactListener {
     private Player player;
+    private GameWorld gameWorld;
+    private WorldRunnable runnable;
+
 
     public void setPlayer(Player player) {
         this.player = player;
@@ -28,7 +34,7 @@ public class MyContactListener implements ContactListener {
         //������� ���� �� ���������� �� ���� �� ������ ��� ����� del,���� ����������
         //������� ��� ���� � ���� �����, �� ������ Exception ��� ��� �������� ��� ������ ������.
         if (contact.getFixtureA() == player.getBody().getFixtureList().get(2) && contact.getFixtureB().getBody().getUserData() == "mob") {
-            contact.getFixtureB().getBody().setUserData("del");
+            Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.DESTROY, contact.getFixtureB().getBody()));
             player.getBody().applyLinearImpulse(0f, 150f, 0.0f, 0.0f, true);
             player.setJump(true);
             for (OrdinaryMob mob : listMobs) {
@@ -49,13 +55,13 @@ public class MyContactListener implements ContactListener {
         //bloks destroing
 
         if (contact.getFixtureA() == player.getBody().getFixtureList().get(1) && contact.getFixtureB().getBody().getUserData() == "brick") {
-            contact.getFixtureB().getBody().setUserData("del");
+            Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.DESTROY, contact.getFixtureB().getBody()));
             for (Brick brick : listBricks) {
                 if (brick.getBody() == contact.getFixtureB().getBody()) {
                     listAnimation.add(new Animation(AnimationType.BRICK, contact.getFixtureB().getBody().getPosition().x * PPM - (cameraPosition.x - 8) * PPM,
                             contact.getFixtureB().getBody().getPosition().y * PPM - (cameraPosition.y - 8) * PPM));
                     brick.setFlag();
-                    listBricks.remove(brick);
+                    //listBricks.remove(brick);
                     break;
                 }
             }
@@ -64,7 +70,7 @@ public class MyContactListener implements ContactListener {
         //coins
 
         if (contact.getFixtureA().getBody() == player.getBody() && contact.getFixtureB().getBody().getUserData() == "coin") {
-            contact.getFixtureB().getBody().setUserData("del");
+            Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.DESTROY, contact.getFixtureB().getBody()));
             for (Coin coin : listCoins) {
                 if (coin.getBody() == contact.getFixtureB().getBody()) {
                     listCoins.remove(coin);
@@ -83,6 +89,8 @@ public class MyContactListener implements ContactListener {
                             contact.getFixtureB().getBody().getPosition().y * PPM - (cameraPosition.y - 8) * PPM + 16));
                     box.setFlag(!box.isFlag());
                     System.out.println(score += 100);
+                    Fixture fb = contact.getFixtureB();
+                    Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.FLOWER, contact.getFixtureB().getBody().getPosition().x-0.5f, contact.getFixtureB().getBody().getPosition().y+0.5f));
                     break;
                 }
             }
@@ -143,8 +151,9 @@ public class MyContactListener implements ContactListener {
             if (contact.getFixtureB().getBody().getUserData() == "player") {
                 for (Mashroom mashroom : listMashrooms) {
                     if (mashroom.getBody() == contact.getFixtureA().getBody()) {
+                        Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.DESTROY, contact.getFixtureA().getBody()));
                         listMashrooms.remove(mashroom);
-                        mashroom.getBody().setUserData("del");
+                        //mashroom.getBody().setUserData("del");
                         System.out.println(score += 1000);
                         break;
                     }
@@ -153,6 +162,31 @@ public class MyContactListener implements ContactListener {
 
         }
 
+        //flowers
+
+        if (contact.getFixtureB().getBody() == player.getBody() && contact.getFixtureA().getBody().getUserData() == "flower") {
+            for (Flower flower : listFlowers) {
+                if (flower.getBody() == contact.getFixtureA().getBody()) {
+                    Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.DESTROY, contact.getFixtureA().getBody()));
+                    listFlowers.remove(flower);
+                    System.out.println(score += 100);
+                    break;
+                }
+            }
+        }
+        //flowersG
+        if (contact.getFixtureA().getBody() == player.getBody() && contact.getFixtureB().getBody().getUserData() == "flower") {
+            for (Flower flower : listFlowers) {
+                if (flower.getBody() == contact.getFixtureB().getBody()) {
+                    Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.DESTROY, contact.getFixtureB().getBody()));
+                    listFlowers.remove(flower);
+                    System.out.println(score += 1000);
+                    break;
+                }
+            }
+        }
+
+
 
 
         if (contact.getFixtureA().getBody() == player.getBody() && contact.getFixtureB().getBody().getUserData() == "finish") {
@@ -160,6 +194,10 @@ public class MyContactListener implements ContactListener {
             complete = true;
         }
 
+    }
+
+    public void setGameWorld(GameWorld gameWorld) {
+        this.gameWorld = gameWorld;
     }
 
     @Override

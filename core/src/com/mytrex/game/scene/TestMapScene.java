@@ -136,7 +136,6 @@ public class TestMapScene implements Screen {
     @Override
     public void render(float delta) {
         gameWorld.getWorld().step(delta, 1, 1);
-        gameWorld.update();
         cameraUpdate();
         camera.update();
         stateTime += delta;
@@ -166,8 +165,14 @@ public class TestMapScene implements Screen {
             }
         }
         for (Brick brick : listBricks) {
-            if (gameWorld.getPlayer().getBody().getPosition().dst(brick.getBody().getPosition().x, brick.getBody().getPosition().y) < 20f) {
-                brick.draw(brick.getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, brick.getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
+            if (gameWorld.getPlayer().getBody().getPosition().dst(brick.getBody().getPosition().x,
+                    brick.getBody().getPosition().y) < 20f) {
+                if (brick.getBody() != null) {
+                    brick.draw(brick.getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM,
+                            brick.getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
+                }else {
+                    listBricks.remove(brick);
+                }
             }
         }
         for (Coin coin : listCoins) {

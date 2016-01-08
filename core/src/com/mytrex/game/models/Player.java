@@ -40,6 +40,7 @@ public class Player {
     }
 
     public void Draw(float stateTime, float x, float y) {
+        moving();
         batch.begin();
         if ((rightMove) && !(jump))
             batch.draw(walkAnimationRight.getKeyFrame(stateTime, true), x * 2 - PPM, y * 2 - PPM, 25, 36);

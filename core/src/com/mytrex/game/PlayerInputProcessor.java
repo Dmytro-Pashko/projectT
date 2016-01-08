@@ -2,6 +2,7 @@ package com.mytrex.game;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import static com.mytrex.game.Tools.B2DVars.*;
 
 public class PlayerInputProcessor implements InputProcessor {
     private GameWorld world;
@@ -46,6 +47,10 @@ public class PlayerInputProcessor implements InputProcessor {
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        int x = (int)((screenX/ PPM/2)+(cameraPosition.x-8));
+        int y = (int)(((512-screenY)/ PPM)/2);
+        world.setFlower((float)x,(float)y);
+        System.out.println((((screenX)/ PPM)/2)+(cameraPosition.x-8)+ " " +(((512-screenY)/ PPM)/2));
         return false;
     }
 
