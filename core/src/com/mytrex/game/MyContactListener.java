@@ -29,35 +29,48 @@ public class MyContactListener implements ContactListener {
         Body a = contact.getFixtureA().getBody();
         Body b = contact.getFixtureB().getBody();
         System.out.println(a.getUserData() + "  "+ b.getUserData());
-        //player body
-        if (contact.getFixtureA() == player.getBody().getFixtureList().get(0)) {
-            if (b.getUserData() == "mob") {
-                System.out.println("You Die");
-            } if (b.getUserData() == "flower") {
+
+        //Player all body collision.
+        if (a.getUserData() == "player")
+        {
+            if (b.getUserData() == "flower")
+            {
                 Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.DESTROY, b));
                 b.setUserData("del");
                 score += 1000;
-            } if (b.getUserData() == "coin") {
+            }
+            if (b.getUserData() == "coin")
+            {
                 Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.DESTROY, b));
                 b.setUserData("del");
                 score += 100;
-            } if (b.getUserData() == "mashroom") {
+            }
+            if (b.getUserData() == "mashroom")
+            {
                 Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.DESTROY, b));
                 b.setUserData("del");
                 score += 1000;
-            } if (b.getUserData() == "finish") {
+            }
+            if (b.getUserData() == "finish")
+            {
                 complete = true;
             }
         }
-        //player up sensor.
+        //body
+        if (contact.getFixtureA() == player.getBody().getFixtureList().get(0)) {
+            if (b.getUserData() == "mob") {
+                System.out.println("You Die");
+            }
+        }
+        //Player up sensor collision.
         if (contact.getFixtureA() == player.getBody().getFixtureList().get(1)) {
             if (b.getUserData() == "brick") {
                 Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.DESTROY, b));
                 b.setUserData("del");
                 score += 50;
-
             }
-         if (b.getUserData() == "secretBox") {
+         if (b.getUserData() == "secretBox")
+         {
                 for (SecretBox box : listSecretBox) {
                     if ((box.getBody() == b) && (!box.isFlag())) {
                         Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.FLOWER, b.getPosition().x - 0.5f, b.getPosition().y + 0.5f));
@@ -69,15 +82,8 @@ public class MyContactListener implements ContactListener {
                     }
                 }
             }
-            if (b.getUserData() == "coin")
-            {
-                Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.DESTROY, b));
-                b.setUserData("del");
-                score += 100;
-            }
         }
-
-        //player down sensor.
+        //Player down sensor collision
         if (contact.getFixtureA() == player.getBody().getFixtureList().get(2)) {
             //player on ground
             if (b.getUserData() == "ground" || b.getUserData() == "secretBox" || b.getUserData()=="obstacle" || b.getUserData()=="brick") {
@@ -89,14 +95,8 @@ public class MyContactListener implements ContactListener {
                 player.getBody().applyLinearImpulse(0f, 150f, 0.0f, 0.0f, true);
                 player.setJump(true);
             }
-            if (b.getUserData() == "coin")
-            {
-                Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.DESTROY, b));
-                b.setUserData("del");
-                score += 100;
-            }
         }
-        //mob
+        //Mob collision
         if (a.getUserData() == "mob") {
             if (contact.getFixtureB() == player.getBody().getFixtureList().get(0)) {
                 System.out.println("You Die");
@@ -111,7 +111,6 @@ public class MyContactListener implements ContactListener {
                 player.setJump(true);
                 score += 100;
             }
-
             if (b.getUserData() == "mob" || b.getUserData() == "obstacle" || b.getUserData() == "mashroom") {
                 for (OrdinaryMob mob : listMobs) {
                     if (a == mob.getBody()) {
@@ -121,16 +120,7 @@ public class MyContactListener implements ContactListener {
                 }
             }
         }
-
-        //flower
-        if (a.getUserData() == "flower") {
-            if (contact.getFixtureB() == player.getBody().getFixtureList().get(0)) {
-                Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.DESTROY, a));
-                a.setUserData("del");
-                score += 1000;
-            }
-        }
-        //mashroom
+        //Mashroom collision
         if (a.getUserData() == "mashroom") {
             if (b.getUserData() == "mob" || b.getUserData() == "obstacle") {
                 for (Mashroom mashroom : listMashrooms) {
@@ -140,14 +130,8 @@ public class MyContactListener implements ContactListener {
                     }
                 }
             }
-            if (contact.getFixtureB() == player.getBody().getFixtureList().get(0)) {
-                Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.DESTROY, a));
-                a.setUserData("del");
-                score += 1000;
-            }
-
         }
-
+        //SecretBox collision
         if (a.getUserData() == "secretbox") {
             if (contact.getFixtureB() == player.getBody().getFixtureList().get(1)) {
                 for (SecretBox box : listSecretBox) {
@@ -162,6 +146,7 @@ public class MyContactListener implements ContactListener {
                 }
             }
         }
+        //Obstacle collision
         if (a.getUserData() == "obstacle")
         {
             if (b.getUserData() == "mob")
