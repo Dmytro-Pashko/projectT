@@ -28,7 +28,7 @@ public class MyContactListener implements ContactListener {
 
         Body a = contact.getFixtureA().getBody();
         Body b = contact.getFixtureB().getBody();
-        System.out.println(a.getUserData() + "  "+ b.getUserData());
+        //System.out.println(a.getUserData() + "  "+ b.getUserData());
 
         //Player all body collision.
         if (a.getUserData() == "player")
@@ -71,11 +71,11 @@ public class MyContactListener implements ContactListener {
                 b.setUserData("del");
                 score += 50;
             }
-         if (b.getUserData() == "secretBox")
+         if (b.getUserData() == "coinbox")
          {
-                for (SecretBox box : listSecretBox) {
+                for (CoinBox box : listCoinBoxes) {
                     if ((box.getBody() == b) && (!box.isFlag())) {
-                        Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.FLOWER, b.getPosition().x - 0.5f, b.getPosition().y + 0.5f));
+                        //Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.FLOWER, b.getPosition().x - 0.5f, b.getPosition().y + 0.5f));
                         listAnimation.add(new Animation(AnimationType.COIN, b.getPosition().x * PPM - (cameraPosition.x - 8) * PPM,
                                 b.getPosition().y * PPM - (cameraPosition.y - 8) * PPM + 16));
                         box.setFlag(!box.isFlag());
@@ -88,7 +88,7 @@ public class MyContactListener implements ContactListener {
         //Player down sensor collision
         if (contact.getFixtureA() == player.getBody().getFixtureList().get(2)) {
             //player on ground
-            if (b.getUserData() == "ground" || b.getUserData() == "secretBox" || b.getUserData()=="obstacle" || b.getUserData()=="brick") {
+            if (b.getUserData() == "ground" || b.getUserData() == "coinbox" || b.getUserData()=="obstacle" || b.getUserData()=="brick") {
                 player.setJump(false);
             }
             if (b.getUserData() == "mob") {
@@ -135,12 +135,12 @@ public class MyContactListener implements ContactListener {
                 }
             }
         }
-        //SecretBox collision
-        if (a.getUserData() == "secretbox") {
+        //CoinBox collision
+        if (a.getUserData() == "coinbox") {
             if (contact.getFixtureB() == player.getBody().getFixtureList().get(1)) {
-                for (SecretBox box : listSecretBox) {
+                for (CoinBox box : listCoinBoxes) {
                     if ((box.getBody() == a) && (!box.isFlag())) {
-                        Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.FLOWER, a.getPosition().x - 0.5f, b.getPosition().y + 0.5f));
+                        //Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.FLOWER, a.getPosition().x - 0.5f, b.getPosition().y + 0.5f));
                         listAnimation.add(new Animation(AnimationType.COIN, b.getPosition().x * PPM - (cameraPosition.x - 8) * PPM,
                                 a.getPosition().y * PPM - (cameraPosition.y - 8) * PPM + 16));
                         box.setFlag(!box.isFlag());

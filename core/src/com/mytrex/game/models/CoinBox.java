@@ -11,7 +11,7 @@ import static com.mytrex.game.Tools.B2DVars.PPM;
 /**
  * Created by Antilamer on 06.01.2016.
  */
-public class SecretBox {
+public class CoinBox {
     SpriteBatch batch;
     Body body;
     TextureRegion[] waitFrames;
@@ -19,7 +19,7 @@ public class SecretBox {
     Animation waitAnimation;
     private boolean flag = false;   //open/close
 
-    public SecretBox(Body body) {
+    public CoinBox(Body body) {
         batch = new SpriteBatch();
         this.body = body;
         waitSheet = new Texture("core/assets/SecretBox_1.png");

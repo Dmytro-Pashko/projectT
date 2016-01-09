@@ -21,7 +21,7 @@ public class B2DVars {
     public static ArrayList<OrdinaryMob> listMobs = new ArrayList<>();
     public static ArrayList<Brick> listBricks = new ArrayList<>();
     public static ArrayList<Coin> listCoins = new ArrayList<>();
-    public static ArrayList<SecretBox> listSecretBox = new ArrayList<>();
+    public static ArrayList<CoinBox> listCoinBoxes = new ArrayList<>();
     public static ArrayList<Animation> listAnimation = new ArrayList<>();
     public static ArrayList<Flower> listFlowers = new ArrayList<>();
     public static ArrayList<Mashroom> listMashrooms = new ArrayList<>();

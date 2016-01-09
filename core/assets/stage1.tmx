@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="left-down" width="256" height="16" tilewidth="16" tileheight="16" nextobjectid="317">
+<map version="1.0" orientation="orthogonal" renderorder="left-down" width="256" height="16" tilewidth="16" tileheight="16" nextobjectid="328">
  <tileset firstgid="1" name="tiledmap" tilewidth="16" tileheight="16" spacing="2" tilecount="810">
   <image source="tiledmap.png" trans="ffffff" width="485" height="546"/>
   <tile id="1">
@@ -142,7 +142,6 @@
   <object id="175" x="240" y="176" width="16" height="16"/>
   <object id="176" x="272" y="176" width="16" height="16"/>
   <object id="177" x="1152" y="176" width="16" height="16"/>
-  <object id="178" x="1168" y="176" width="16" height="16"/>
   <object id="180" x="1184" y="176" width="16" height="16"/>
   <object id="181" x="1232" y="112" width="16" height="16"/>
   <object id="182" x="1248" y="112" width="16" height="16"/>
@@ -157,7 +156,6 @@
   <object id="195" x="1456" y="112" width="16" height="16"/>
   <object id="197" x="1472" y="112" width="16" height="16"/>
   <object id="198" x="1488" y="112" width="16" height="16"/>
-  <object id="199" x="1504" y="176" width="16" height="16"/>
   <object id="200" x="1616" y="176" width="16" height="16"/>
   <object id="201" x="1920" y="176" width="16" height="16"/>
   <object id="202" x="1968" y="112" width="16" height="16"/>
@@ -201,22 +199,51 @@
   <object id="256" x="2848" y="144" width="16" height="16"/>
   <object id="257" x="2880" y="144" width="16" height="16"/>
  </objectgroup>
- <objectgroup name="Boxes">
+ <objectgroup name="CoinBoxes">
   <object id="260" x="144" y="176" width="16" height="16"/>
-  <object id="261" x="224" y="176" width="16" height="16"/>
   <object id="262" x="256" y="176" width="16" height="16"/>
   <object id="263" x="240" y="112" width="16" height="16"/>
   <object id="264" x="1504" y="112" width="16" height="16"/>
-  <object id="265" x="1632" y="176" width="16" height="16"/>
   <object id="266" x="1712" y="176" width="16" height="16"/>
   <object id="267" x="1776" y="176" width="16" height="16"/>
   <object id="268" x="1840" y="176" width="16" height="16"/>
-  <object id="269" x="1776" y="112" width="16" height="16"/>
   <object id="270" x="2096" y="96" width="16" height="16"/>
   <object id="271" x="2112" y="96" width="16" height="16"/>
   <object id="272" x="2880" y="176" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="finish">
   <object id="284" x="3440" y="0" width="16" height="224"/>
+ </objectgroup>
+ <objectgroup name="SecretBoxes">
+  <object id="319" name="MashroomBox" x="224" y="176" width="16" height="16">
+   <properties>
+    <property name="MashroomBox" value="1"/>
+   </properties>
+  </object>
+  <object id="320" name="LifeBox" x="992" y="160" width="16" height="16">
+   <properties>
+    <property name="LifeBox" value="1"/>
+   </properties>
+  </object>
+  <object id="321" name="StarBox" x="1632" y="176" width="16" height="16">
+   <properties>
+    <property name="StarBox" value="1"/>
+   </properties>
+  </object>
+  <object id="322" name="MashroomBox" x="1776" y="112" width="16" height="16">
+   <properties>
+    <property name="MashroomBox" value="1"/>
+   </properties>
+  </object>
+  <object id="324" name="MashroomBox" x="1168" y="176" width="16" height="16">
+   <properties>
+    <property name="MashroomBox" value="1"/>
+   </properties>
+  </object>
+  <object id="327" name="CoinsBox" x="1504" y="176" width="16" height="16">
+   <properties>
+    <property name="CoinsBox" value="1"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

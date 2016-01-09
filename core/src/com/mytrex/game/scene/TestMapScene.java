@@ -10,7 +10,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.PolygonMapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -54,10 +53,9 @@ public class TestMapScene implements Screen {
         FontRed1 = new BitmapFont();
         FontRed1.setColor(Color.BLACK);
 
+        long starttime = System.currentTimeMillis();
         for(MapLayer layer : map.getLayers())
         {
-            System.out.println(layer.getName());
-
             if (layer.getName().equals("Obstacles"))
                 for (MapObject object :layer.getObjects())
                 {
@@ -75,7 +73,7 @@ public class TestMapScene implements Screen {
                 for (MapObject object :layer.getObjects())
                 {
                     RectangleMapObject rectObject = (RectangleMapObject) object;
-                    gameWorld.setBrick(rectObject.getRectangle().getX() / PPM, rectObject.getRectangle().getY() / PPM, rectObject.getRectangle().getHeight() / PPM, rectObject.getRectangle().getWidth() /PPM);
+                    gameWorld.setBrick(rectObject.getRectangle().getX() / PPM, rectObject.getRectangle().getY() / PPM, rectObject.getRectangle().getHeight() / PPM, rectObject.getRectangle().getWidth() / PPM);
                 }
             }
             else if (layer.getName().equals("Mobs"))
@@ -94,14 +92,15 @@ public class TestMapScene implements Screen {
                     gameWorld.setCoin(rectObject.getRectangle().getX() / PPM, rectObject.getRectangle().getY() / PPM, rectObject.getRectangle().getHeight() / PPM, rectObject.getRectangle().getWidth() / PPM);
                 }
             }
-            else if (layer.getName().equals("Boxes"))
+            else if (layer.getName().equals("CoinBoxes"))
             {
                 for (MapObject object :layer.getObjects())
                 {
                     RectangleMapObject rectObject = (RectangleMapObject) object;
-                    gameWorld.setBox(rectObject.getRectangle().getX() / PPM, rectObject.getRectangle().getY() / PPM, rectObject.getRectangle().getHeight() / PPM, rectObject.getRectangle().getWidth() / PPM);
+                    gameWorld.setCoinBox(rectObject.getRectangle().getX() / PPM, rectObject.getRectangle().getY() / PPM, rectObject.getRectangle().getHeight() / PPM, rectObject.getRectangle().getWidth() / PPM);
                 }
             }
+
             else if (layer.getName().equals("finish"))
             {
                 for (MapObject object :layer.getObjects())
@@ -110,7 +109,31 @@ public class TestMapScene implements Screen {
                     gameWorld.setFinish(rectObject.getRectangle().getX() / PPM, rectObject.getRectangle().getY() / PPM, rectObject.getRectangle().getHeight() / PPM, rectObject.getRectangle().getWidth() / PPM);
                 }
             }
+            else if (layer.getName().equals("SecretBoxes"))
+            {
+                for (MapObject object :layer.getObjects())
+                {
+                    RectangleMapObject rectObject = (RectangleMapObject) object;
+                    if (object.getProperties().containsKey("MashroomBox"))
+                    {
+                        gameWorld.setSecretMashroomBox(rectObject.getRectangle().getX() / PPM, rectObject.getRectangle().getY() / PPM, rectObject.getRectangle().getHeight() / PPM, rectObject.getRectangle().getWidth() / PPM);
+                    }
+                    if (object.getProperties().containsKey("StarBox"))
+                    {
+                        gameWorld.setSecretStarBox(rectObject.getRectangle().getX() / PPM, rectObject.getRectangle().getY() / PPM, rectObject.getRectangle().getHeight() / PPM, rectObject.getRectangle().getWidth() / PPM);
+                    }
+                    if (object.getProperties().containsKey("CoinsBox"))
+                    {
+                        gameWorld.setSecretCoinsBox(rectObject.getRectangle().getX() / PPM, rectObject.getRectangle().getY() / PPM, rectObject.getRectangle().getHeight() / PPM, rectObject.getRectangle().getWidth() / PPM);
+                    }
+                    if (object.getProperties().containsKey("LifeBox"))
+                    {
+                        gameWorld.setSecretLifeBox(rectObject.getRectangle().getX() / PPM, rectObject.getRectangle().getY() / PPM, rectObject.getRectangle().getHeight() / PPM, rectObject.getRectangle().getWidth() / PPM);
+                    }
+                }
+            }
         }
+        System.out.println(System.currentTimeMillis()-starttime);
     }
 
     public void cameraUpdate() {
@@ -137,15 +160,14 @@ public class TestMapScene implements Screen {
         tiledMapRenderer.render();
         debuger.render(gameWorld.getWorld(), camera.combined);
         drawPlayer();
-        drawBrick();
-        drawSecretBox();
-        drawMob();
-        drawCoin();
-        drawFlower();
-        drawMashroom();
-        drawScore();
-        drawAnimation(delta);
-        drawScore();
+        drawFlowers();
+        drawCoins();
+        drawBricks();
+        drawCoinBoxs();
+        drawMobs();
+        drawMashrooms();
+        drawScores();
+        drawAnimations(delta);
         checkFinish();
     }
 
@@ -154,7 +176,7 @@ public class TestMapScene implements Screen {
     }
 
 
-    private void drawBrick() {
+    private void drawBricks() {
         for (Brick brick : listBricks) {
             if (gameWorld.getPlayer().distToBody(brick.getBody()) < 16f) {
                 if (brick.getBody().getUserData() == "del") {
@@ -168,7 +190,7 @@ public class TestMapScene implements Screen {
         }
     }
 
-    private void drawMob() {
+    private void drawMobs() {
         for (OrdinaryMob mob : listMobs) {
             if (gameWorld.getPlayer().distToBody(mob.getBody()) < 16f) {
                 if (mob.getBody().getUserData() == "del") {
@@ -182,20 +204,20 @@ public class TestMapScene implements Screen {
         }
     }
 
-    private void drawSecretBox() {
-        for (SecretBox secretBox : listSecretBox) {
-            if (gameWorld.getPlayer().distToBody(secretBox.getBody()) < 16f) {
-                if (secretBox.getBody().getUserData() == "del") {
-                    listSecretBox.remove(secretBox);
+    private void drawCoinBoxs() {
+        for (CoinBox coinBox : listCoinBoxes) {
+            if (gameWorld.getPlayer().distToBody(coinBox.getBody()) < 16f) {
+                if (coinBox.getBody().getUserData() == "del") {
+                    listCoinBoxes.remove(coinBox);
                     break;
                 } else {
-                    secretBox.draw(stateTime, secretBox.getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, secretBox.getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
+                    coinBox.draw(stateTime, coinBox.getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, coinBox.getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
                 }
             }
         }
     }
 
-    private void drawFlower()
+    private void drawFlowers()
     {
         for (Flower flower : listFlowers)
         {
@@ -210,7 +232,7 @@ public class TestMapScene implements Screen {
         }
     }
 
-    private void drawMashroom() {
+    private void drawMashrooms() {
         for (Mashroom mashroom : listMashrooms) {
             if (gameWorld.getPlayer().distToBody(mashroom.getBody()) < 16f) {
                 if (mashroom.getBody().getUserData() == "del") {
@@ -223,7 +245,7 @@ public class TestMapScene implements Screen {
         }
     }
 
-    private void drawCoin() {
+    private void drawCoins() {
         for (Coin coin : listCoins) {
             if (gameWorld.getPlayer().getBody().getPosition().dst(coin.getBody().getPosition().x,
                     coin.getBody().getPosition().y) < 20f) {
@@ -240,7 +262,7 @@ public class TestMapScene implements Screen {
         }
     }
 
-    private void drawAnimation(float delta) {
+    private void drawAnimations(float delta) {
 
         for (Animation animation : listAnimation)
         {
@@ -258,7 +280,7 @@ public class TestMapScene implements Screen {
         }
     }
 
-    private void drawScore() {
+    private void drawScores() {
         batch.begin();
         FontRed1.draw(batch, "Your score: " + score, 380, 500);
         batch.end();

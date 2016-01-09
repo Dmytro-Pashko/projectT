@@ -49,8 +49,8 @@ public class GameWorld {
         listCoins.add(new Coin(initBody(x, y, width, height, BodyType.StaticBody, "coin")));
     }
 
-    public void setBox(float x, float y,float height,float width) {
-        listSecretBox.add(new SecretBox(initBody(x, y,  width, height,BodyType.StaticBody, "secretBox")));
+    public void setCoinBox(float x, float y,float height,float width) {
+        listCoinBoxes.add(new CoinBox(initBody(x, y,  width, height,BodyType.StaticBody, "coinbox")));
     }
 
     public void setGround(float x, float y,float height,float width) {
@@ -62,6 +62,23 @@ public class GameWorld {
     }
     public void setFinish(float x, float y,float height,float width) {
         initBody(x, y, width, height, BodyType.StaticBody, "finish");
+    }
+
+    //spawn mashroom or flower
+    public void setSecretMashroomBox(float x, float y,float height,float width) {
+        initBody(x, y, width, height, BodyType.StaticBody, "secretmashroombox");
+    }
+    //spawn star
+    public void setSecretStarBox(float x, float y,float height,float width) {
+        initBody(x, y, width, height, BodyType.StaticBody, "secretstarbox");
+    }
+    //spawn life mashroom
+    public void setSecretLifeBox(float x, float y,float height,float width) {
+        initBody(x, y, width, height, BodyType.StaticBody, "secretlifebox");
+    }
+    //spawn many coin.
+    public void setSecretCoinsBox(float x, float y,float height,float width) {
+        initBody(x, y, width, height, BodyType.StaticBody, "secretcoinsbox");
     }
 
     private Body initBody(float x, float y,float height,float width,BodyType type, String userData) {
