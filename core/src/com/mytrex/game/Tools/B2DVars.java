@@ -26,7 +26,6 @@ public class B2DVars {
     public static ArrayList<Flower> listFlowers = new ArrayList<>();
     public static ArrayList<Mashroom> listMashrooms = new ArrayList<>();
     public static Vector3 cameraPosition;
-    public static Body worldbody;
 
     //upd
 }

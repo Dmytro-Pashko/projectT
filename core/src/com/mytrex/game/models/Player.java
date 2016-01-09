@@ -93,4 +93,9 @@ public class Player {
     public void setRightMove(boolean rightMove) {
         this.rightMove = rightMove;
     }
+
+    public float distToBody(Body body)
+    {
+        return this.body.getPosition().dst(body.getPosition().cpy());
+    }
 }

@@ -49,7 +49,7 @@ public class PlayerInputProcessor implements InputProcessor {
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         int x = (int)((screenX/ PPM/2)+(cameraPosition.x-8));
         int y = (int)(((512-screenY)/ PPM)/2);
-        world.setFlower((float)x,(float)y);
+        world.setFlower((float)x,(float)y,1.0f,1.0f);
         System.out.println((((screenX)/ PPM)/2)+(cameraPosition.x-8)+ " " +(((512-screenY)/ PPM)/2));
         return false;
     }

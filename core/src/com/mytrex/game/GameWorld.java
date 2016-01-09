@@ -29,49 +29,58 @@ public class GameWorld {
         listner.setPlayer(player);
     }
 
-    public void setFlower(float x, float y) {
-        listFlowers.add(new Flower(initBody(x, y, BodyType.StaticBody, "flower")));
+    public void setFlower(float x, float y,float height,float width) {
+        listFlowers.add(new Flower(initBody(x, y, width, height, BodyType.StaticBody, "flower")));
     }
 
-    public void setMasroom(float x, float y) {
-        listMashrooms.add(new Mashroom(initBody(x, y, BodyType.DynamicBody, "mashroom")));
+    public void setMasroom(float x, float y,float height,float width) {
+        listMashrooms.add(new Mashroom(initBody(x, y, width, height, BodyType.DynamicBody, "mashroom")));
     }
 
-    public void setMob(float x, float y) {
-        listMobs.add(new OrdinaryMob(initBody(x, y, BodyType.DynamicBody, "mob")));
+    public void setMob(float x, float y,float height,float width) {
+        listMobs.add(new OrdinaryMob(initBody(x, y,  width, height,BodyType.DynamicBody, "mob")));
     }
 
-    public void setBrick(float x, float y) {
-        listBricks.add(new Brick(initBody(x, y, BodyType.StaticBody, "brick")));
+    public void setBrick(float x, float y,float height,float width) {
+        listBricks.add(new Brick(initBody(x, y, width, height, BodyType.StaticBody, "brick")));
     }
 
-    public void setCoin(float x, float y) {
-        listCoins.add(new Coin(initBody(x, y, BodyType.StaticBody, "coin")));
+    public void setCoin(float x, float y,float height,float width) {
+        listCoins.add(new Coin(initBody(x, y, width, height, BodyType.StaticBody, "coin")));
     }
 
-    public void setBox(float x, float y) {
-        listSecretBox.add(new SecretBox(initBody(x, y, BodyType.StaticBody, "secretBox")));
+    public void setBox(float x, float y,float height,float width) {
+        listSecretBox.add(new SecretBox(initBody(x, y,  width, height,BodyType.StaticBody, "secretBox")));
     }
 
+    public void setGround(float x, float y,float height,float width) {
+        initBody(x, y, width, height, BodyType.StaticBody, "ground");
+    }
 
-    private Body initBody(float x, float y, BodyType type, String userData) {
+    public void setObstacle(float x, float y,float height,float width) {
+        initBody(x, y, width, height, BodyType.StaticBody, "obstacle");
+    }
+    public void setFinish(float x, float y,float height,float width) {
+        initBody(x, y, width, height, BodyType.StaticBody, "finish");
+    }
+
+    private Body initBody(float x, float y,float height,float width,BodyType type, String userData) {
         BodyDef BodyDef = new BodyDef();
         BodyDef.type = type;
         BodyDef.allowSleep = false;
         Body body = world.createBody(BodyDef);
         FixtureDef fixtureDef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(0.5f, 0.5f);
+        shape.setAsBox(height/2, width/2);
         fixtureDef.shape = shape;
         MassData data = new MassData();
         data.mass = 7.5f;
         body.setMassData(data);
         body.setUserData(userData);
-        body.setTransform(x + 0.5f, y + 0.5f, 0);
+        body.setTransform(x + height/2, y + width/2, 0);//Через те що TiledMap виставляє центр.
         body.createFixture(fixtureDef);
         return body;
     }
-
 
     private Body initPlayer(float x, float y) {
         BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("core/assets/PlayerBody.ptb"));

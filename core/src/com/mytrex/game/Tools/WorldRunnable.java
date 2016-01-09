@@ -38,11 +38,11 @@ public class WorldRunnable implements Runnable
                 break;
             }
             case FLOWER:  {
-                world.setFlower(x, y);
+                world.setFlower(x, y,1.0f,1.0f);
                 break;
             }
             case MASHROOM: {
-                world.setMasroom(x, y);
+                world.setMasroom(x, y,1.0f,1.0f);
                 break;
             }
         }

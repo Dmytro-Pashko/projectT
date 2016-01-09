@@ -65,6 +65,8 @@ public class MyContactListener implements ContactListener {
         //Player up sensor collision.
         if (contact.getFixtureA() == player.getBody().getFixtureList().get(1)) {
             if (b.getUserData() == "brick") {
+                listAnimation.add(new Animation(AnimationType.BRICK, b.getPosition().x * PPM - (cameraPosition.x - 8) * PPM,
+                        b.getPosition().y * PPM - (cameraPosition.y - 8) * PPM + 16));
                 Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.DESTROY, b));
                 b.setUserData("del");
                 score += 50;
@@ -90,6 +92,8 @@ public class MyContactListener implements ContactListener {
                 player.setJump(false);
             }
             if (b.getUserData() == "mob") {
+                listAnimation.add(new Animation(AnimationType.MOB, b.getPosition().x * PPM - (cameraPosition.x - 8) * PPM,
+                        b.getPosition().y * PPM - (cameraPosition.y - 8) * PPM + 16));
                 Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.DESTROY, b));
                 b.setUserData("del");
                 player.getBody().applyLinearImpulse(0f, 150f, 0.0f, 0.0f, true);
