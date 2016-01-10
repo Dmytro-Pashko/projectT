@@ -18,6 +18,8 @@ import com.mytrex.game.GameWorld;
 import com.mytrex.game.PlayerInputProcessor;
 import com.mytrex.game.models.*;
 
+import java.util.Iterator;
+
 import static com.mytrex.game.Tools.B2DVars.cameraPosition;
 import static com.mytrex.game.Tools.B2DVars.*;
 
@@ -178,16 +180,15 @@ public class TestMapScene implements Screen {
 
 
     private void drawBricks() {
-        for (Brick brick : listBricks) {
-            if (gameWorld.getPlayer().distToBody(brick.getBody()) < 16f) {
-                if (brick.getBody().getUserData() == "del") {
-                    listBricks.remove(brick);
-                    break;
-                } else {
-                    brick.draw(brick.getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM,
-                            brick.getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
-                }
-            }
+        Iterator<Brick> brickIterator = listBricks.iterator();
+        while (brickIterator.hasNext())
+        {
+            Brick brick = brickIterator.next();
+            if (brick.getBody().getUserData().equals("del"))
+                brickIterator.remove();
+            if ((int)gameWorld.getPlayer().distToBody(brick.getBody())<16 && brick.getBody().getUserData().equals("brick"))
+                brick.draw(brick.getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM,
+                        brick.getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
         }
     }
 
