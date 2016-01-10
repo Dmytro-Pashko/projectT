@@ -30,64 +30,65 @@ public class GameWorld {
     }
 
     public void setFlower(float x, float y,float height,float width) {
-        listFlowers.add(new Flower(initBody(x, y, width, height, BodyType.StaticBody, "flower")));
+        listFlowers.add(new Flower(initBody(x, y, width, height, BodyType.StaticBody, "flower", false)));
     }
 
     public void setMasroom(float x, float y,float height,float width) {
-        listMashrooms.add(new Mashroom(initBody(x, y, width, height, BodyType.DynamicBody, "mashroom")));
+        listMashrooms.add(new Mashroom(initBody(x, y, width, height, BodyType.DynamicBody, "mashroom", false)));
     }
 
     public void setMob(float x, float y,float height,float width) {
-        listMobs.add(new OrdinaryMob(initBody(x, y,  width, height,BodyType.DynamicBody, "mob")));
+        listMobs.add(new OrdinaryMob(initMob(x, y)));
     }
 
     public void setBrick(float x, float y,float height,float width) {
-        listBricks.add(new Brick(initBody(x, y, width, height, BodyType.StaticBody, "brick")));
+        listBricks.add(new Brick(initBody(x, y, width, height, BodyType.StaticBody, "brick", false)));
     }
 
     public void setCoin(float x, float y,float height,float width) {
-        listCoins.add(new Coin(initBody(x, y, width, height, BodyType.StaticBody, "coin")));
+        listCoins.add(new Coin(initBody(x, y, width, height, BodyType.StaticBody, "coin", true)));
     }
 
     public void setCoinBox(float x, float y,float height,float width) {
-        listCoinBoxes.add(new CoinBox(initBody(x, y,  width, height,BodyType.StaticBody, "coinbox")));
+        listCoinBoxes.add(new CoinBox(initBody(x, y,  width, height,BodyType.StaticBody, "coinbox", false)));
     }
 
     public void setGround(float x, float y,float height,float width) {
-        initBody(x, y, width, height, BodyType.StaticBody, "ground");
+        initBody(x, y, width, height, BodyType.StaticBody, "ground", false);
     }
 
     public void setObstacle(float x, float y,float height,float width) {
-        initBody(x, y, width, height, BodyType.StaticBody, "obstacle");
+        initBody(x, y, width, height, BodyType.StaticBody, "obstacle", false);
     }
     public void setFinish(float x, float y,float height,float width) {
-        initBody(x, y, width, height, BodyType.StaticBody, "finish");
+        initBody(x, y, width, height, BodyType.StaticBody, "finish", false);
     }
 
     //spawn mashroom or flower
     public void setSecretMashroomBox(float x, float y,float height,float width) {
-        initBody(x, y, width, height, BodyType.StaticBody, "secretmashroombox");
+        initBody(x, y, width, height, BodyType.StaticBody, "secretmashroombox", false);
     }
     //spawn star
     public void setSecretStarBox(float x, float y,float height,float width) {
-        initBody(x, y, width, height, BodyType.StaticBody, "secretstarbox");
+        initBody(x, y, width, height, BodyType.StaticBody, "secretstarbox", false);
     }
     //spawn life mashroom
     public void setSecretLifeBox(float x, float y,float height,float width) {
-        initBody(x, y, width, height, BodyType.StaticBody, "secretlifebox");
+        initBody(x, y, width, height, BodyType.StaticBody, "secretlifebox", false);
     }
     //spawn many coin.
     public void setSecretCoinsBox(float x, float y,float height,float width) {
-        initBody(x, y, width, height, BodyType.StaticBody, "secretcoinsbox");
+        initBody(x, y, width, height, BodyType.StaticBody, "secretcoinsbox", false);
     }
 
-    private Body initBody(float x, float y,float height,float width,BodyType type, String userData) {
-        BodyDef BodyDef = new BodyDef();
-        BodyDef.type = type;
-        BodyDef.allowSleep = false;
-        Body body = world.createBody(BodyDef);
+    private Body initBody(float x, float y, float height, float width, BodyType type, String userData, boolean sensor) {
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.type = type;
+        bodyDef.allowSleep = false;
+        Body body = world.createBody(bodyDef);
         FixtureDef fixtureDef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
+        if (sensor) fixtureDef.isSensor = true;
         shape.setAsBox(height/2, width/2);
         fixtureDef.shape = shape;
         MassData data = new MassData();
@@ -117,6 +118,22 @@ public class GameWorld {
         loader.attachFixture(body, "PlayerBodyUpSensor", def1, 1);
         loader.attachFixture(body, "PlayerBodyDownSensor", def1, 1);
         loader.attachFixture(body, "PlayerBodyEmpties", def1, 1);
+        return body;
+    }
+
+    private Body initMob(float x, float y) {
+        BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("core/assets/mobbody.p"));
+        BodyDef def = new BodyDef();
+        def.type = BodyType.DynamicBody;
+        Body body = world.createBody(def);
+        FixtureDef def1 = new FixtureDef();
+        def1.friction = 0;
+        MassData data = new MassData();
+        data.mass = 7.5f;
+        body.setMassData(data);
+        body.setUserData("mob");
+        body.setTransform(x, y, 0);
+        loader.attachFixture(body, "mobbody", def1, 1);
         return body;
     }
 

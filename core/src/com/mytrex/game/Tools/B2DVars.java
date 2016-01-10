@@ -12,9 +12,7 @@ import java.util.HashMap;
  * Created by Antilamer on 24.11.2015.
  */
 public class B2DVars {
-    //Клас для того, щоб зберігати змінні.
 
-    //pixels per meter
     public static final float PPM = 16f;
     public static int score;
     public static boolean complete = false;
@@ -27,5 +25,4 @@ public class B2DVars {
     public static ArrayList<Mashroom> listMashrooms = new ArrayList<>();
     public static Vector3 cameraPosition;
 
-    //upd
 }

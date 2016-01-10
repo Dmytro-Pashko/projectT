@@ -17,7 +17,12 @@ public class Player {
     private Texture walkSheet, spriteStayRight, spriteStayLeft, spriteJumpRigth, spriteJumpLeft;
     private TextureRegion[] walkFramesRight, walkFramesLeft;
     private Animation walkAnimationRight, walkAnimationLeft;
-    private boolean rightMove, leftMove, jump, isLeft;
+    private boolean rightMove;
+    private boolean leftMove;
+    private boolean jump;
+    private boolean isLeft;
+
+    private boolean flagFlower;
 
     public Player(Body body) {
         spriteStayRight = new Texture("core/assets/player_stay_right.png");
@@ -68,6 +73,14 @@ public class Player {
             Vector2 vector = body.getLinearVelocity();
             body.setLinearVelocity(0, vector.y);
         }
+    }
+
+    public boolean getFlagFlower() {
+        return flagFlower;
+    }
+
+    public void setFlagFlower(boolean flagFlower) {
+        this.flagFlower = flagFlower;
     }
 
     public Body getBody() {

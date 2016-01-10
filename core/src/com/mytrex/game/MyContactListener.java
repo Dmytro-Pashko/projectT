@@ -28,16 +28,8 @@ public class MyContactListener implements ContactListener {
 
         Body a = contact.getFixtureA().getBody();
         Body b = contact.getFixtureB().getBody();
-//        if (contact.getFixtureA() == player.getBody().getFixtureList().get(0))
-//            System.out.println(a.getUserData()+"[body]  "+ b.getUserData());
-//        else if (contact.getFixtureA() == player.getBody().getFixtureList().get(1))
-//            System.out.println(a.getUserData()+"[up]  "+ b.getUserData());
-         if (contact.getFixtureA() == player.getBody().getFixtureList().get(2))
-            System.out.println(a.getUserData()+"[down]  "+ b.getUserData());
-//        else
-//        {
-//            System.out.println(a.getUserData()+"  "+b.getUserData());
-//        }
+
+
         //Player all body collision.
         if (a.getUserData() == "player")
         {
@@ -57,6 +49,7 @@ public class MyContactListener implements ContactListener {
             {
                 Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.DESTROY, b));
                 b.setUserData("del");
+                player.setFlagFlower(true);
                 score += 1000;
             }
             if (b.getUserData() == "finish")
@@ -199,6 +192,18 @@ public class MyContactListener implements ContactListener {
                         break;
                     }
                 }
+            }
+        }
+
+        //Flowers and mashrooms
+        if (a.getUserData() == "player" && b.getUserData() == "secretmashroombox"){
+            if (!player.getFlagFlower()){
+                Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.MASHROOM, b.getPosition().x - 0.5f, b.getPosition().y + 0.5f));
+                Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.DESTROY, b));
+            }
+            if (player.getFlagFlower()){
+                Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.FLOWER, b.getPosition().x - 0.5f, b.getPosition().y + 0.5f));
+                Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.DESTROY, b));
             }
         }
     }
