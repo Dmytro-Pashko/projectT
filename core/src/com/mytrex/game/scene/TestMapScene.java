@@ -164,7 +164,7 @@ public class TestMapScene implements Screen {
         drawPlayer();
         drawFlowers();
         drawCoins();
-        drawSecretCoinBoxs();
+        drawSecretCoinBoxes();
         drawBricks();
         drawCoinBoxs();
         drawMobs();
@@ -219,7 +219,7 @@ public class TestMapScene implements Screen {
         }
     }
 
-    private void drawSecretCoinBoxs() {
+    private void drawSecretCoinBoxes() {
         for (SecretCoinBox coinBox : listSecretBoxes) {
             if (gameWorld.getPlayer().distToBody(coinBox.getBody()) < 16f) {
                 if (coinBox.getBody().getUserData() == "del") {

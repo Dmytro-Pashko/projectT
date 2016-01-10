@@ -181,8 +181,7 @@ public class MyContactListener implements ContactListener {
         }
 
         //Flowers and mashrooms
-        if (b.getUserData() == "secretmashroombox" && (int) player.getBody().getPosition().x == (int) b.getPosition().x) {
-            System.out.println("asdasdasaa");
+        if (contact.getFixtureA() == player.getBody().getFixtureList().get(1) && b.getUserData() == "secretmashroombox" && (int) player.getBody().getPosition().x == (int) b.getPosition().x) {
             for (SecretCoinBox box : listSecretBoxes) {
                 if ((box.getBody() == b) && (!box.isFlag())) {
 
@@ -196,7 +195,7 @@ public class MyContactListener implements ContactListener {
                     }
 
                     box.setFlag(!box.isFlag());
-                    score += 100;
+                    score += 1000;
                     break;
                 }
             }
