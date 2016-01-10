@@ -34,7 +34,7 @@ public class TestMapScene implements Screen {
     Game game;
     private SpriteBatch batch;
     private BitmapFont FontRed1;
-
+    int oldfps;
 
     public TestMapScene(Game game) {
         this.game = game;
@@ -139,12 +139,9 @@ public class TestMapScene implements Screen {
     public void cameraUpdate() {
         cameraPosition = camera.position;
         if (camera.position.x + 2 < gameWorld.getPlayer().getBody().getPosition().x)
-            camera.translate(0.075f, 0);
-        // camera.position.set(camera.position.x + 0.1f, camera.position.y, 0);
+             camera.position.set(camera.position.x + 0.1f, camera.position.y, 0);
         if (camera.position.x - 2 > gameWorld.getPlayer().getBody().getPosition().x && camera.position.x >= 8.0)
-            // camera.position.set(camera.position.x - 0.1f, camera.position.y, 0);
-            camera.translate(-0.075f, 0);
-        //camera.position.set(gameWorld.getPlayer().getBody().getPosition().x , camera.position.y, 0);
+            camera.position.set(camera.position.x - 0.1f, camera.position.y, 0);
     }
 
     @Override
@@ -166,7 +163,7 @@ public class TestMapScene implements Screen {
         drawCoinBoxs();
         drawMobs();
         drawMashrooms();
-        drawScores();
+        drawScores(delta);
         drawAnimations(delta);
         checkFinish();
     }
@@ -280,8 +277,14 @@ public class TestMapScene implements Screen {
         }
     }
 
-    private void drawScores() {
+    private void drawScores(float delta) {
+        if (oldfps != (int)(1/delta))
+        {
+         oldfps = (int) (1 / delta);
+        }
+
         batch.begin();
+        FontRed1.draw(batch,"FPS: "+oldfps,20,500);
         FontRed1.draw(batch, "Your score: " + score, 380, 500);
         batch.end();
     }

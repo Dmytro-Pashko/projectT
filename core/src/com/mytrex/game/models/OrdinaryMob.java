@@ -13,7 +13,7 @@ public class OrdinaryMob {
     private Texture walkSheet;
     private TextureRegion[] walkFrames;
     private Body body;
-    private boolean flagMove = false;
+    private boolean flagMove = true;
     private Animation walkAnimation;
 
     public OrdinaryMob(Body body) {

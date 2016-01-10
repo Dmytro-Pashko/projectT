@@ -28,16 +28,16 @@ public class MyContactListener implements ContactListener {
 
         Body a = contact.getFixtureA().getBody();
         Body b = contact.getFixtureB().getBody();
-        if (contact.getFixtureA() == player.getBody().getFixtureList().get(0))
-            System.out.println(a.getUserData()+"[body]  "+ b.getUserData());
-        else if (contact.getFixtureA() == player.getBody().getFixtureList().get(1))
-            System.out.println(a.getUserData()+"[up]  "+ b.getUserData());
-        else if (contact.getFixtureA() == player.getBody().getFixtureList().get(2))
+//        if (contact.getFixtureA() == player.getBody().getFixtureList().get(0))
+//            System.out.println(a.getUserData()+"[body]  "+ b.getUserData());
+//        else if (contact.getFixtureA() == player.getBody().getFixtureList().get(1))
+//            System.out.println(a.getUserData()+"[up]  "+ b.getUserData());
+         if (contact.getFixtureA() == player.getBody().getFixtureList().get(2))
             System.out.println(a.getUserData()+"[down]  "+ b.getUserData());
-        else
-        {
-            System.out.println(a.getUserData()+"  "+b.getUserData());
-        }
+//        else
+//        {
+//            System.out.println(a.getUserData()+"  "+b.getUserData());
+//        }
         //Player all body collision.
         if (a.getUserData() == "player")
         {
@@ -101,7 +101,8 @@ public class MyContactListener implements ContactListener {
                     b.getUserData()=="secretlifebox" || b.getUserData()=="secretcoinsbox") {
                 player.setJump(false);
             }
-            if (b.getUserData() == "mob" && (int)player.getBody().getPosition().x == (int)b.getPosition().x) {
+            if (b.getUserData() == "mob") {
+                System.out.println(contact);
                 listAnimation.add(new Animation(AnimationType.MOB, b.getPosition().x * PPM - (cameraPosition.x - 8) * PPM,
                         b.getPosition().y * PPM - (cameraPosition.y - 8) * PPM + 16));
                 Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.DESTROY, b));
