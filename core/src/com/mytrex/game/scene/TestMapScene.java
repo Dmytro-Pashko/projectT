@@ -152,6 +152,7 @@ public class TestMapScene implements Screen {
         float timeStep = 1.0f / 60.f;
         int iterationCount = 10;
         gameWorld.getWorld().step(timeStep, iterationCount, 10);
+        gameWorld.getWorld().clearForces();
         camera.update();
         cameraUpdate();
         stateTime += delta;
@@ -185,7 +186,9 @@ public class TestMapScene implements Screen {
         {
             Brick brick = brickIterator.next();
             if (brick.getBody().getUserData().equals("del"))
+            {
                 brickIterator.remove();
+            }
             if ((int)gameWorld.getPlayer().distToBody(brick.getBody())<16 && brick.getBody().getUserData().equals("brick"))
                 brick.draw(brick.getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM,
                         brick.getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
