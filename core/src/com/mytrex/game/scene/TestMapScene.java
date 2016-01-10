@@ -146,7 +146,10 @@ public class TestMapScene implements Screen {
 
     @Override
     public void render(float delta) {
-        gameWorld.getWorld().step(delta, 5, 5);
+        float timeStep = 1.0f / 60.f;
+        int iterationCount = 10;
+        gameWorld.getWorld().step(timeStep, iterationCount, 10);
+        //gameWorld.getWorld().step(delta, 5, 5);
         camera.update();
         cameraUpdate();
         stateTime += delta;
@@ -278,9 +281,8 @@ public class TestMapScene implements Screen {
     }
 
     private void drawScores(float delta) {
-        if (oldfps != (int)(1/delta))
-        {
-         oldfps = (int) (1 / delta);
+        if (oldfps != (int)(1/delta)) {
+            oldfps = (int) (1 / delta);
         }
 
         batch.begin();

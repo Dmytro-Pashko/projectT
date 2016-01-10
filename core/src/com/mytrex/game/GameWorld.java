@@ -114,8 +114,9 @@ public class GameWorld {
         body.setUserData("player");
         body.setTransform(x, y, 0);
         loader.attachFixture(body, "PlayerBodyBox", def1, 1);
-        loader.attachFixture(body, "PlayerBodyUpSensor", new FixtureDef(), 1);
-        loader.attachFixture(body, "PlayerBodyDownSensor", new FixtureDef(), 1);
+        loader.attachFixture(body, "PlayerBodyUpSensor", def1, 1);
+        loader.attachFixture(body, "PlayerBodyDownSensor", def1, 1);
+        loader.attachFixture(body, "PlayerBodyEmpties", def1, 1);
         return body;
     }
 

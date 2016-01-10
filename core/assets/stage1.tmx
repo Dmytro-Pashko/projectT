@@ -94,7 +94,7 @@
  </tileset>
  <layer name="all" width="256" height="16">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <objectgroup name="Obstacles">
@@ -215,7 +215,7 @@
   <object id="284" name="Flag" x="3440" y="0" width="16" height="224"/>
  </objectgroup>
  <objectgroup name="SecretBoxes">
-  <object id="319" name="MashroomBox" type="SecretBox" x="224" y="176" width="16" height="16">
+  <object id="319" name="MashroomBox" type="SecretBox" x="176" y="112" width="16" height="16">
    <properties>
     <property name="MashroomBox" value="1"/>
    </properties>
