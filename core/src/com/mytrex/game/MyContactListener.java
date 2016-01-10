@@ -31,29 +31,24 @@ public class MyContactListener implements ContactListener {
 
 
         //Player all body collision.
-        if (a.getUserData() == "player")
-        {
-            if (b.getUserData() == "flower")
-            {
+        if (a.getUserData() == "player") {
+            if (b.getUserData() == "flower") {
                 Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.DESTROY, b));
                 b.setUserData("del");
                 score += 1000;
             }
-            if (b.getUserData() == "coin")
-            {
+            if (b.getUserData() == "coin") {
                 Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.DESTROY, b));
                 b.setUserData("del");
                 score += 100;
             }
-            if (b.getUserData() == "mashroom")
-            {
+            if (b.getUserData() == "mashroom") {
                 Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.DESTROY, b));
                 b.setUserData("del");
                 player.setFlagFlower(true);
                 score += 1000;
             }
-            if (b.getUserData() == "finish")
-            {
+            if (b.getUserData() == "finish") {
                 complete = true;
             }
         }
@@ -89,9 +84,9 @@ public class MyContactListener implements ContactListener {
         if (contact.getFixtureA() == player.getBody().getFixtureList().get(2)) {
             //player on ground
             if (b.getUserData() == "ground" || b.getUserData() == "coinbox" ||
-                    b.getUserData()=="obstacle" || b.getUserData()=="brick" ||
-                    b.getUserData()=="secretmashroombox" || b.getUserData()=="secretstarbox" ||
-                    b.getUserData()=="secretlifebox" || b.getUserData()=="secretcoinsbox") {
+                    b.getUserData() == "obstacle" || b.getUserData() == "brick" ||
+                    b.getUserData() == "secretmashroombox" || b.getUserData() == "secretstarbox" ||
+                    b.getUserData() == "secretlifebox" || b.getUserData() == "secretcoinsbox") {
                 player.setJump(false);
             }
             if (b.getUserData() == "mob") {
@@ -102,7 +97,7 @@ public class MyContactListener implements ContactListener {
                 b.setUserData("del");
                 player.getBody().applyLinearImpulse(0f, 150f, 0.0f, 0.0f, true);
                 player.setJump(true);
-                score+=50;
+                score += 50;
             }
         }
         //Mob collision
@@ -113,7 +108,7 @@ public class MyContactListener implements ContactListener {
             if (contact.getFixtureB() == player.getBody().getFixtureList().get(1)) {
                 System.out.println("You Die");
             }
-            if (contact.getFixtureB() == player.getBody().getFixtureList().get(2) && ((int)a.getPosition().x == (int)b.getPosition().x)) {
+            if (contact.getFixtureB() == player.getBody().getFixtureList().get(2) && ((int) a.getPosition().x == (int) b.getPosition().x)) {
                 Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.DESTROY, a));
                 a.setUserData("del");
                 player.getBody().applyLinearImpulse(0f, 150f, 0.0f, 0.0f, true);
@@ -130,10 +125,8 @@ public class MyContactListener implements ContactListener {
             }
         }
         //its fix for two mobs hookin
-        if (b.getUserData() == "mob")
-        {
-            if (a.getUserData()=="mob")
-            {
+        if (b.getUserData() == "mob") {
+            if (a.getUserData() == "mob") {
                 for (OrdinaryMob mob : listMobs) {
                     if (a == mob.getBody()) {
                         mob.setFlagMove(!mob.isFlagMove());
@@ -154,15 +147,10 @@ public class MyContactListener implements ContactListener {
             }
         }
         //CoinBox collision
-        if (a.getUserData() == "coinbox")
-        {
-            if (contact.getFixtureB() == player.getBody().getFixtureList().get(1) && (int) player.getBody().getPosition().x == (int) a.getPosition().x)
-            {
-                for (CoinBox box : listCoinBoxes)
-                {
-                    if ((box.getBody() == a) && (!box.isFlag()))
-                    {
-                        //Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.FLOWER, a.getPosition().x - 0.5f, b.getPosition().y + 0.5f));
+        if (a.getUserData() == "coinbox") {
+            if (contact.getFixtureB() == player.getBody().getFixtureList().get(1) && (int) player.getBody().getPosition().x == (int) a.getPosition().x) {
+                for (CoinBox box : listCoinBoxes) {
+                    if ((box.getBody() == a) && (!box.isFlag())) {
                         listAnimation.add(new Animation(AnimationType.COIN, b.getPosition().x * PPM - (cameraPosition.x - 8) * PPM,
                                 a.getPosition().y * PPM - (cameraPosition.y - 8) * PPM + 16));
                         box.setFlag(!box.isFlag());
@@ -173,10 +161,8 @@ public class MyContactListener implements ContactListener {
             }
         }
         //Obstacle collision
-        if (a.getUserData() == "obstacle")
-        {
-            if (b.getUserData() == "mob")
-            {
+        if (a.getUserData() == "obstacle") {
+            if (b.getUserData() == "mob") {
                 for (OrdinaryMob mob : listMobs) {
                     if (b == mob.getBody()) {
                         mob.setFlagMove(!mob.isFlagMove());
@@ -184,8 +170,7 @@ public class MyContactListener implements ContactListener {
                     }
                 }
             }
-            if (b.getUserData() == "mashroom")
-            {
+            if (b.getUserData() == "mashroom") {
                 for (Mashroom mashroom : listMashrooms) {
                     if (b == mashroom.getBody()) {
                         mashroom.setFlagMove(!mashroom.isFlagMove());
@@ -196,14 +181,24 @@ public class MyContactListener implements ContactListener {
         }
 
         //Flowers and mashrooms
-        if (a.getUserData() == "player" && b.getUserData() == "secretmashroombox"){
-            if (!player.getFlagFlower()){
-                Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.MASHROOM, b.getPosition().x - 0.5f, b.getPosition().y + 0.5f));
-                Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.DESTROY, b));
-            }
-            if (player.getFlagFlower()){
-                Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.FLOWER, b.getPosition().x - 0.5f, b.getPosition().y + 0.5f));
-                Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.DESTROY, b));
+        if (b.getUserData() == "secretmashroombox" && (int) player.getBody().getPosition().x == (int) b.getPosition().x) {
+            System.out.println("asdasdasaa");
+            for (SecretCoinBox box : listSecretBoxes) {
+                if ((box.getBody() == b) && (!box.isFlag())) {
+
+                    if (!player.getFlagFlower()) {
+                        Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.MASHROOM, b.getPosition().x - 0.5f, b.getPosition().y + 0.5f));
+                        Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.DESTROY, b));
+                    }
+                    if (player.getFlagFlower()) {
+                        Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.FLOWER, b.getPosition().x - 0.5f, b.getPosition().y + 0.5f));
+                        Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.DESTROY, b));
+                    }
+
+                    box.setFlag(!box.isFlag());
+                    score += 100;
+                    break;
+                }
             }
         }
     }

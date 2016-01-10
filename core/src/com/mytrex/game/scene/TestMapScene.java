@@ -133,7 +133,6 @@ public class TestMapScene implements Screen {
                 }
             }
         }
-        System.out.println(System.currentTimeMillis()-starttime);
     }
 
     public void cameraUpdate() {
@@ -151,7 +150,6 @@ public class TestMapScene implements Screen {
         float timeStep = 1.0f / 60.f;
         int iterationCount = 10;
         gameWorld.getWorld().step(timeStep, iterationCount, 10);
-        //gameWorld.getWorld().step(delta, 5, 5);
         camera.update();
         cameraUpdate();
         stateTime += delta;
@@ -164,6 +162,7 @@ public class TestMapScene implements Screen {
         drawPlayer();
         drawFlowers();
         drawCoins();
+        drawSecretCoinBoxs();
         drawBricks();
         drawCoinBoxs();
         drawMobs();
@@ -208,6 +207,19 @@ public class TestMapScene implements Screen {
 
     private void drawCoinBoxs() {
         for (CoinBox coinBox : listCoinBoxes) {
+            if (gameWorld.getPlayer().distToBody(coinBox.getBody()) < 16f) {
+                if (coinBox.getBody().getUserData() == "del") {
+                    listCoinBoxes.remove(coinBox);
+                    break;
+                } else {
+                    coinBox.draw(stateTime, coinBox.getBody().getPosition().x * PPM - (camera.position.x - 8) * PPM, coinBox.getBody().getPosition().y * PPM - (camera.position.y - 8) * PPM);
+                }
+            }
+        }
+    }
+
+    private void drawSecretCoinBoxs() {
+        for (SecretCoinBox coinBox : listSecretBoxes) {
             if (gameWorld.getPlayer().distToBody(coinBox.getBody()) < 16f) {
                 if (coinBox.getBody().getUserData() == "del") {
                     listCoinBoxes.remove(coinBox);

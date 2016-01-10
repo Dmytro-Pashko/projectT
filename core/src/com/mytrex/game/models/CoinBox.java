@@ -11,13 +11,7 @@ import static com.mytrex.game.Tools.B2DVars.PPM;
 /**
  * Created by Antilamer on 06.01.2016.
  */
-public class CoinBox {
-    SpriteBatch batch;
-    Body body;
-    TextureRegion[] waitFrames;
-    Texture waitSheet, openTexture;
-    Animation waitAnimation;
-    private boolean flag = false;   //open/close
+public class CoinBox extends Box{
 
     public CoinBox(Body body) {
         batch = new SpriteBatch();
@@ -30,26 +24,5 @@ public class CoinBox {
             waitFrames[i] = new TextureRegion(waitSheet, 16 * i, 0, 16, 16);
         }
         waitAnimation = new Animation(0.2f, waitFrames);
-    }
-
-    public void draw(float stateTime, float x, float y) {
-        batch.begin();
-        if (!flag) batch.draw(waitAnimation.getKeyFrame(stateTime, true), x * 2 - PPM, y * 2 - PPM, 32, 32);
-        else
-            batch.draw(openTexture, x * 2 - PPM, y * 2 - PPM, 32, 32);
-        batch.end();
-    }
-
-    public Body getBody() {
-        return body;
-    }
-
-    public void setFlag(boolean flag) {
-        this.flag = flag;
-    }
-
-    public boolean isFlag() {
-
-        return flag;
     }
 }

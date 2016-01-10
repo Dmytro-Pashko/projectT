@@ -66,7 +66,7 @@ public class GameWorld {
 
     //spawn mashroom or flower
     public void setSecretMashroomBox(float x, float y,float height,float width) {
-        initBody(x, y, width, height, BodyType.StaticBody, "secretmashroombox", false);
+        listSecretBoxes.add(new SecretCoinBox(initBody(x, y, width, height, BodyType.StaticBody, "secretmashroombox", false)));
     }
     //spawn star
     public void setSecretStarBox(float x, float y,float height,float width) {
