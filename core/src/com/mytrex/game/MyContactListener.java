@@ -28,8 +28,16 @@ public class MyContactListener implements ContactListener {
 
         Body a = contact.getFixtureA().getBody();
         Body b = contact.getFixtureB().getBody();
-        //System.out.println(a.getUserData() + "  "+ b.getUserData());
-
+        if (contact.getFixtureA() == player.getBody().getFixtureList().get(0))
+            System.out.println(a.getUserData()+"[body]  "+ b.getUserData());
+        else if (contact.getFixtureA() == player.getBody().getFixtureList().get(1))
+            System.out.println(a.getUserData()+"[up]  "+ b.getUserData());
+        else if (contact.getFixtureA() == player.getBody().getFixtureList().get(2))
+            System.out.println(a.getUserData()+"[down]  "+ b.getUserData());
+        else
+        {
+            System.out.println(a.getUserData()+"  "+b.getUserData());
+        }
         //Player all body collision.
         if (a.getUserData() == "player")
         {
@@ -64,15 +72,14 @@ public class MyContactListener implements ContactListener {
         }
         //Player up sensor collision.
         if (contact.getFixtureA() == player.getBody().getFixtureList().get(1)) {
-            if (b.getUserData() == "brick") {
+            if (b.getUserData() == "brick" && ((int) player.getBody().getPosition().x == (int) b.getPosition().x)) {
                 listAnimation.add(new Animation(AnimationType.BRICK, b.getPosition().x * PPM - (cameraPosition.x - 8) * PPM,
                         b.getPosition().y * PPM - (cameraPosition.y - 8) * PPM + 16));
                 Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.DESTROY, b));
                 b.setUserData("del");
                 score += 50;
             }
-         if (b.getUserData() == "coinbox")
-         {
+            if (b.getUserData() == "coinbox" && (int) player.getBody().getPosition().x == (int) b.getPosition().x) {
                 for (CoinBox box : listCoinBoxes) {
                     if ((box.getBody() == b) && (!box.isFlag())) {
                         //Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.FLOWER, b.getPosition().x - 0.5f, b.getPosition().y + 0.5f));
@@ -88,16 +95,20 @@ public class MyContactListener implements ContactListener {
         //Player down sensor collision
         if (contact.getFixtureA() == player.getBody().getFixtureList().get(2)) {
             //player on ground
-            if (b.getUserData() == "ground" || b.getUserData() == "coinbox" || b.getUserData()=="obstacle" || b.getUserData()=="brick") {
+            if (b.getUserData() == "ground" || b.getUserData() == "coinbox" ||
+                    b.getUserData()=="obstacle" || b.getUserData()=="brick" ||
+                    b.getUserData()=="secretmashroombox" || b.getUserData()=="secretstarbox" ||
+                    b.getUserData()=="secretlifebox" || b.getUserData()=="secretcoinsbox") {
                 player.setJump(false);
             }
-            if (b.getUserData() == "mob") {
+            if (b.getUserData() == "mob" && (int)player.getBody().getPosition().x == (int)b.getPosition().x) {
                 listAnimation.add(new Animation(AnimationType.MOB, b.getPosition().x * PPM - (cameraPosition.x - 8) * PPM,
                         b.getPosition().y * PPM - (cameraPosition.y - 8) * PPM + 16));
                 Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.DESTROY, b));
                 b.setUserData("del");
                 player.getBody().applyLinearImpulse(0f, 150f, 0.0f, 0.0f, true);
                 player.setJump(true);
+                score+=50;
             }
         }
         //Mob collision
@@ -108,7 +119,7 @@ public class MyContactListener implements ContactListener {
             if (contact.getFixtureB() == player.getBody().getFixtureList().get(1)) {
                 System.out.println("You Die");
             }
-            if (contact.getFixtureB() == player.getBody().getFixtureList().get(2)) {
+            if (contact.getFixtureB() == player.getBody().getFixtureList().get(2) && ((int)a.getPosition().x == (int)b.getPosition().x)) {
                 Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.DESTROY, a));
                 a.setUserData("del");
                 player.getBody().applyLinearImpulse(0f, 150f, 0.0f, 0.0f, true);
@@ -116,6 +127,19 @@ public class MyContactListener implements ContactListener {
                 score += 100;
             }
             if (b.getUserData() == "mob" || b.getUserData() == "obstacle" || b.getUserData() == "mashroom") {
+                for (OrdinaryMob mob : listMobs) {
+                    if (b == mob.getBody()) {
+                        mob.setFlagMove(!mob.isFlagMove());
+                        break;
+                    }
+                }
+            }
+        }
+        //its fix for two mobs hookin
+        if (b.getUserData() == "mob")
+        {
+            if (a.getUserData()=="mob")
+            {
                 for (OrdinaryMob mob : listMobs) {
                     if (a == mob.getBody()) {
                         mob.setFlagMove(!mob.isFlagMove());
@@ -136,10 +160,14 @@ public class MyContactListener implements ContactListener {
             }
         }
         //CoinBox collision
-        if (a.getUserData() == "coinbox") {
-            if (contact.getFixtureB() == player.getBody().getFixtureList().get(1)) {
-                for (CoinBox box : listCoinBoxes) {
-                    if ((box.getBody() == a) && (!box.isFlag())) {
+        if (a.getUserData() == "coinbox")
+        {
+            if (contact.getFixtureB() == player.getBody().getFixtureList().get(1) && (int) player.getBody().getPosition().x == (int) a.getPosition().x)
+            {
+                for (CoinBox box : listCoinBoxes)
+                {
+                    if ((box.getBody() == a) && (!box.isFlag()))
+                    {
                         //Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.FLOWER, a.getPosition().x - 0.5f, b.getPosition().y + 0.5f));
                         listAnimation.add(new Animation(AnimationType.COIN, b.getPosition().x * PPM - (cameraPosition.x - 8) * PPM,
                                 a.getPosition().y * PPM - (cameraPosition.y - 8) * PPM + 16));
