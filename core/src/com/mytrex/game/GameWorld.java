@@ -106,6 +106,7 @@ public class GameWorld {
         def.type = BodyType.DynamicBody;
         def.allowSleep = false;
         Body body = world.createBody(def);
+        FixtureDef def0 = new FixtureDef();
         FixtureDef def1 = new FixtureDef();
         def1.friction = 0;
         MassData data = new MassData();
@@ -115,9 +116,9 @@ public class GameWorld {
         body.setUserData("player");
         body.setTransform(x, y, 0);
         loader.attachFixture(body, "PlayerBodyBox", def1, 1);
-        loader.attachFixture(body, "PlayerBodyUpSensor", def1, 1);
-        loader.attachFixture(body, "PlayerBodyDownSensor", def1, 1);
-        loader.attachFixture(body, "PlayerBodyEmpties", def1, 1);
+        loader.attachFixture(body, "PlayerBodyUpSensor", def0, 1);
+        loader.attachFixture(body, "PlayerBodyDownSensor", def0, 1);
+        //loader.attachFixture(body, "PlayerBodyEmpties", def1, 1);
         return body;
     }
 
