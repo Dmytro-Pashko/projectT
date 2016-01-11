@@ -122,4 +122,8 @@ public class Player {
     {
         return this.body.getPosition().dst(body.getPosition().cpy());
     }
+
+    public void setBody(Body body) {
+        this.body = body;
+    }
 }

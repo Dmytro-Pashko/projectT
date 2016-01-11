@@ -45,6 +45,10 @@ public class WorldRunnable implements Runnable
                 world.setMasroom(x, y,1.0f,1.0f);
                 break;
             }
+            case GROOVING: {
+                world.setPlayer(x, y);
+                break;
+            }
         }
 
     }

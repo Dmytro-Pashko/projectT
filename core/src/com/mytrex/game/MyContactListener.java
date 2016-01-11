@@ -43,6 +43,8 @@ public class MyContactListener implements ContactListener {
                 score += 100;
             }
             if (b.getUserData() == "mashroom") {
+                bigPlayer = true;
+                Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.GROOVING, b.getPosition().x - 0.5f, b.getPosition().y + 0.5f));
                 Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.DESTROY, b));
                 b.setUserData("del");
                 player.setFlagFlower(true);
@@ -190,6 +192,8 @@ public class MyContactListener implements ContactListener {
 
                     if (!player.getFlagFlower()) {
                         Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.MASHROOM, b.getPosition().x - 0.5f, b.getPosition().y + 0.5f));
+//                        bigPlayer = true;
+//                        Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.GROOVING, b.getPosition().x - 0.5f, b.getPosition().y + 0.5f));
                         Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.DESTROY, b));
                     }
                     if (player.getFlagFlower()) {

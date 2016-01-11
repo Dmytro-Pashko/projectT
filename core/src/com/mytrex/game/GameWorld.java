@@ -25,7 +25,9 @@ public class GameWorld {
     }
 
     public void setPlayer(float x, float y) {
-
+        if (player != null){
+            world.destroyBody(player.getBody());
+        }
         player = new Player(initPlayer(x, y));
         listner.setPlayer(player);
     }
@@ -101,8 +103,13 @@ public class GameWorld {
         return body;
     }
 
-    private Body initPlayer(float x, float y) {
-        BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("core/assets/PlayerBody.ptb"));
+    public Body initPlayer(float x, float y) {
+        BodyEditorLoader loader;
+        if (bigPlayer){
+            loader = new BodyEditorLoader(Gdx.files.internal("core/assets/PlayerBodyBig.ptb"));
+        } else {
+            loader = new BodyEditorLoader(Gdx.files.internal("core/assets/PlayerBody.ptb"));
+        }
         BodyDef def = new BodyDef();
         def.type = BodyType.DynamicBody;
         def.allowSleep = false;
