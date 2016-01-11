@@ -8,10 +8,11 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 
 import static com.mytrex.game.Tools.B2DVars.PPM;
+import static com.mytrex.game.Tools.B2DVars.complete;
 
 public class Player {
 
-    private int life = 3;
+    private int life = 0;
     private Body body;
     private SpriteBatch batch;
     private Texture walkSheet, spriteStayRight, spriteStayLeft, spriteJumpRigth, spriteJumpLeft;
@@ -61,13 +62,14 @@ public class Player {
     }
 
     public void moving() {
+        if (body.getLinearVelocity().y > 13) body.setLinearVelocity(body.getLinearVelocity().x, 13); // fix, більше не взлітає
         if (leftMove) {
-            Vector2 vector = body.getLinearVelocity();//Получаем вектор линейной скорости.
-            body.setLinearVelocity(-5, vector.y);//Изменяем вектор линейной скорости по X на -5.
+            Vector2 vector = body.getLinearVelocity();
+            body.setLinearVelocity(-5, vector.y);
         }
         if (rightMove) {
-            Vector2 vector = body.getLinearVelocity();//Получаем вектор линейной скорости.
-            body.setLinearVelocity(5, vector.y);//Изменяем вектор линейной скорости по X на +5.
+            Vector2 vector = body.getLinearVelocity();
+            body.setLinearVelocity(5, vector.y);
         }
         if (!leftMove && !rightMove) {
             Vector2 vector = body.getLinearVelocity();
@@ -77,6 +79,15 @@ public class Player {
 
     public boolean getFlagFlower() {
         return flagFlower;
+    }
+
+    public void playerDying(){
+        if (life > 0) life--;
+        else complete = true;
+    }
+
+    public void playerLife(){
+        life++;
     }
 
     public void setFlagFlower(boolean flagFlower) {

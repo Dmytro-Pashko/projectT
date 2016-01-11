@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="left-down" width="256" height="16" tilewidth="16" tileheight="16" nextobjectid="344">
+<map version="1.0" orientation="orthogonal" renderorder="left-down" width="256" height="16" tilewidth="16" tileheight="16" nextobjectid="345">
  <tileset firstgid="1" name="tiledmap" tilewidth="16" tileheight="16" spacing="2" tilecount="810">
   <image source="tiledmap.png" trans="ffffff" width="485" height="546"/>
   <tile id="1">
@@ -139,6 +139,7 @@
   <object id="341" type="ground" x="1776" y="112" width="16" height="16"/>
   <object id="342" type="ground" x="1168" y="176" width="16" height="16"/>
   <object id="343" type="ground" x="224" y="176" width="16" height="16"/>
+  <object id="344" name="ground_4" type="ground" x="16" y="-16" width="3424" height="16"/>
  </objectgroup>
  <objectgroup name="Blocks">
   <object id="174" x="208" y="176" width="16" height="16"/>

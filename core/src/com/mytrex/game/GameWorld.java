@@ -17,6 +17,7 @@ public class GameWorld {
 
 
     public GameWorld() {
+        clearLists();
         world = new World(new Vector2(0, -20f), true);
         listner = new MyContactListener();
         listner.setGameWorld(this);
@@ -107,6 +108,7 @@ public class GameWorld {
         def.allowSleep = false;
         Body body = world.createBody(def);
         FixtureDef def0 = new FixtureDef();
+        def0.isSensor = true;
         FixtureDef def1 = new FixtureDef();
         def1.friction = 0;
         MassData data = new MassData();
@@ -118,15 +120,16 @@ public class GameWorld {
         loader.attachFixture(body, "PlayerBodyBox", def1, 1);
         loader.attachFixture(body, "PlayerBodyUpSensor", def0, 1);
         loader.attachFixture(body, "PlayerBodyDownSensor", def0, 1);
-        //loader.attachFixture(body, "PlayerBodyEmpties", def1, 1);
         return body;
     }
 
     private Body initMob(float x, float y) {
-        BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("core/assets/mobbody.p"));
+        BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("core/assets/MobBody.ptb"));
         BodyDef def = new BodyDef();
         def.type = BodyType.DynamicBody;
         Body body = world.createBody(def);
+        FixtureDef def0 = new FixtureDef();
+        def0.isSensor = true;
         FixtureDef def1 = new FixtureDef();
         def1.friction = 0;
         MassData data = new MassData();
@@ -134,7 +137,8 @@ public class GameWorld {
         body.setMassData(data);
         body.setUserData("mob");
         body.setTransform(x, y, 0);
-        loader.attachFixture(body, "mobbody", def1, 1);
+        loader.attachFixture(body, "MobBodyBox", def1, 1);
+        loader.attachFixture(body, "MobBodyEmpties", def0, 1);
         return body;
     }
 
@@ -145,4 +149,5 @@ public class GameWorld {
     public Player getPlayer() {
         return player;
     }
+
 }

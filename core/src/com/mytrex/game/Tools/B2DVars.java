@@ -26,4 +26,15 @@ public class B2DVars {
     public static ArrayList<SecretCoinBox> listSecretBoxes = new ArrayList<>();
     public static Vector3 cameraPosition;
 
+    public static void clearLists(){
+        listMobs = new ArrayList<>();
+        listBricks = new ArrayList<>();
+        listCoins = new ArrayList<>();
+        listCoinBoxes = new ArrayList<>();
+        listAnimation = new ArrayList<>();
+        listFlowers = new ArrayList<>();
+        listMashrooms = new ArrayList<>();
+        listSecretBoxes = new ArrayList<>();
+        score = 0;
+    }
 }

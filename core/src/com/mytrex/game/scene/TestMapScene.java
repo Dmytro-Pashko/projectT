@@ -139,7 +139,7 @@ public class TestMapScene implements Screen {
 
     public void cameraUpdate() {
         cameraPosition = camera.position;
-//        if (camera.position.x + 2 < gameWorld.getPlayer().getBody().getPosition().x)
+//      if (camera.position.x + 2 < gameWorld.getPlayer().getBody().getPosition().x)
 //             //camera.position.set(camera.position.x + 0.1f, camera.position.y, 0);
  camera.position.set(gameWorld.getPlayer().getBody().getPosition().x, camera.position.y, 0);
 //        if (camera.position.x - 2 > gameWorld.getPlayer().getBody().getPosition().x && camera.position.x >= 8.0)

@@ -55,6 +55,7 @@ public class MyContactListener implements ContactListener {
         //body
         if (contact.getFixtureA() == player.getBody().getFixtureList().get(0)) {
             if (b.getUserData() == "mob") {
+                player.playerDying();
                 System.out.println("You Die");
             }
         }
@@ -89,15 +90,17 @@ public class MyContactListener implements ContactListener {
                     b.getUserData() == "secretlifebox" || b.getUserData() == "secretcoinsbox") {
                 player.setJump(false);
             }
-            if (b.getUserData() == "mob") {
-                System.out.println(contact);
-                listAnimation.add(new Animation(AnimationType.MOB, b.getPosition().x * PPM - (cameraPosition.x - 8) * PPM,
-                        b.getPosition().y * PPM - (cameraPosition.y - 8) * PPM + 16));
-                Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.DESTROY, b));
-                b.setUserData("del");
-                player.getBody().applyLinearImpulse(0f, 150f, 0.0f, 0.0f, true);
-                player.setJump(true);
-                score += 50;
+            for (OrdinaryMob mob : listMobs) {
+                if (contact.getFixtureB() == mob.getBody().getFixtureList().get(1)) {
+                    System.out.println(contact);
+                    listAnimation.add(new Animation(AnimationType.MOB, b.getPosition().x * PPM - (cameraPosition.x - 8) * PPM,
+                            b.getPosition().y * PPM - (cameraPosition.y - 8) * PPM + 16));
+                    Gdx.app.postRunnable(new WorldRunnable(gameWorld, WorldActions.DESTROY, b));
+                    b.setUserData("del");
+                    player.getBody().applyLinearImpulse(0f, 150f, 0.0f, 0.0f, true);
+                    player.setJump(true);
+                    score += 50;
+                }
             }
         }
         //Mob collision
@@ -195,6 +198,7 @@ public class MyContactListener implements ContactListener {
                     }
 
                     box.setFlag(!box.isFlag());
+                    player.playerLife();
                     score += 1000;
                     break;
                 }
